@@ -7,7 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class LoginController {
-
+    private String url = "http://localhost/phpmyadmin/index.php?route=/database/structure&db=checkmate";
+    private String db_username = "root";
+    private String db_password = "";
+    //private  Connection connection = null;
     @FXML
     private Button loginButton;
 
@@ -17,9 +20,13 @@ public class LoginController {
     @FXML
     private TextField username;
 
+    void connectToDB(String username, String password, String url){
+
+    }
     @FXML
     void login(ActionEvent event) {
-    System.out.println("qqq");
+        String sql = "SELECT * FROM emplooyees WHERE login = "+this.username;
+//        String result = jbdcTemqueryForObject
     }
 
     @FXML
