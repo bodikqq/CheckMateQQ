@@ -5,8 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-
 public class LoginController {
+    public static void main(String[] args) {
+    }
     private String url = "http://localhost/phpmyadmin/index.php?route=/database/structure&db=checkmate";
     private String db_username = "root";
     private String db_password = "";
