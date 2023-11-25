@@ -1,4 +1,4 @@
-package com.example.checkmateqq;
+package com.example.checkmateqq.triedy;
 
 import java.util.Date;
 

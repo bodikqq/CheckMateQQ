@@ -7,24 +7,36 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class LoginController {
+public class RegisterController {
 
     @FXML
-    private Button loginButton;
+    private PasswordField confirmPassword;
+
+    @FXML
+    private TextField email;
+
+    @FXML
+    private TextField firstName;
+
+    @FXML
+    private TextField lastName;
 
     @FXML
     private PasswordField password;
 
     @FXML
+    private Button registerButton;
+
+    @FXML
     private TextField username;
 
     @FXML
-    void login(ActionEvent event) {
-        System.out.print("qq");
+    void register(ActionEvent event) {
+
     }
 
     @FXML
-    void showRegisterStage(MouseEvent event) {
+    void showLoginStage(MouseEvent event) {
 
     }
 
