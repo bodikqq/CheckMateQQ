@@ -35,9 +35,9 @@ public class LoginController {
     @FXML
     void showRegisterStage(MouseEvent event) {
         RegisterController rc = new RegisterController();
-        openSubjectEditWindow(rc);
+        goToRegistration(rc);
     }
-    private void openSubjectEditWindow(RegisterController controller) {
+    private void goToRegistration(RegisterController controller) {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("RegisterView.fxml"));
