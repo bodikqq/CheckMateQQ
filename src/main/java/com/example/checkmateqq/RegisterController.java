@@ -43,7 +43,6 @@ public class RegisterController {
 
     @FXML
     void showLoginStage(MouseEvent event) {
-        // Create an instance of the LoginController
         LoginController loginController = new LoginController();
 
         // Call the goToLogin method with the current stage and the LoginController
