@@ -4,6 +4,7 @@ module com.example.checkmateqq {
 
     requires org.kordamp.bootstrapfx.core;
     requires spring.jdbc;
+    requires java.naming;
     requires mysql.connector.j;
     requires java.sql;
 
