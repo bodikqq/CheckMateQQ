@@ -3,6 +3,9 @@ module com.example.checkmateqq {
     requires javafx.fxml;
 
     requires org.kordamp.bootstrapfx.core;
+    requires spring.jdbc;
+    requires mysql.connector.j;
+    requires java.sql;
 
     opens com.example.checkmateqq to javafx.fxml;
     exports com.example.checkmateqq;

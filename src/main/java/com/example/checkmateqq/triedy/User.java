@@ -1,6 +1,8 @@
 package com.example.checkmateqq.triedy;
 
-public class user {
+public class User {
+
+    int id;
     String name;
     String surname;
 
@@ -8,13 +10,27 @@ public class user {
     String password;
     boolean isEmployee = false;
     boolean isAdmin = false;
-    public user(String name, String surname, String login, String password, boolean isEmployee, boolean isAdmin) {
+
+
+
+    public User(int id, String name, String surname, String login, String password, boolean isEmployee, boolean isAdmin) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.login = login;
         this.password = password;
         this.isEmployee = isEmployee;
         this.isAdmin = isAdmin;
+    }
+
+    public static User clone(User u) {return new User(u.id, u.name, u.surname,u.login,u.password,u.isEmployee,u.isAdmin);
+    }
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
     public String getName() {
         return name;
