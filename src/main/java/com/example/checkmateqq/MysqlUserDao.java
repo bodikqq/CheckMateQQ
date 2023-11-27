@@ -43,20 +43,19 @@ public class MysqlUserDao implements UserDao {
 
     @Override
     public User getById(int id) throws EntityNotFoundException {
-        String sql = "SELECT id, name, surname FROM student"
-                + " WHERE id = " + id;
-        System.out.println();
+        String sql = "SELECT id, name, surname, login, password, isEmployee, isAdmin FROM user WHERE id = " + id;
         return jdbcTemplate.queryForObject(sql, userRM());
     }
 
 
 
+
     @Override
-    public User save(User user, int subjectId) throws EntityNotFoundException {
+    public User save(User user) throws EntityNotFoundException {
         Objects.requireNonNull(user, "Student cannot be null");
         Objects.requireNonNull(user.getSurname(),"Surname cannot be null");
         //INSERT
-            String query = "INSERT INTO student (name, surname, login, password, isEmployee, isAdmin) "
+            String query = "INSERT INTO user (name, surname, login, password, isEmployee, isAdmin) "
                     + "VALUES (?,?,?,?,?,?)";
             GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
             jdbcTemplate.update(new PreparedStatementCreator() {
