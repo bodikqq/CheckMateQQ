@@ -100,8 +100,12 @@ public class RegisterController {
         User user = new User(firstName.getText(),lastName.getText(),username.getText(),password.getText(),false,false);
         userDao.save(user);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Successes");
+        alert.setContentText("Successes, please log in now");
         alert.show();
+
+        LoginController loginController = new LoginController();
+        Stage stage = (Stage) registerButton.getScene().getWindow();
+        goToLogin(stage, loginController);
     }
 
     @FXML
