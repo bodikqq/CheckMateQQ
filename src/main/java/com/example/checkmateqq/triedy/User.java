@@ -22,6 +22,14 @@ public class User {
         this.isEmployee = isEmployee;
         this.isAdmin = isAdmin;
     }
+    public User( String name, String surname, String login, String password, boolean isEmployee, boolean isAdmin) {
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.password = password;
+        this.isEmployee = isEmployee;
+        this.isAdmin = isAdmin;
+    }
 
     public static User clone(User u) {return new User(u.id, u.name, u.surname,u.login,u.password,u.isEmployee,u.isAdmin);
     }

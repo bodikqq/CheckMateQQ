@@ -1,5 +1,6 @@
 package com.example.checkmateqq;
 
+
 import javafx.event.ActionEvent;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -19,14 +20,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
+import com.example.checkmateqq.triedy.User;
 import java.io.IOException;
 
 public class RegisterController {
 
 
 
-
+    static private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
     @FXML
     private PasswordField confirmPassword;
 
@@ -65,7 +66,7 @@ public class RegisterController {
         lastName.setTextFormatter(lastNameFormatter);
     }
     @FXML
-    void register(ActionEvent event) {
+    void register(ActionEvent event) throws EntityNotFoundException {
         if(firstName.getText().length() <= 1){
             Alert alert= new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("First name must contain at least 2 characters");
@@ -90,7 +91,15 @@ public class RegisterController {
             alert.show();
             return;
         }
-        Alert alert= new Alert(Alert.AlertType.INFORMATION);
+        if(userDao.checkIfLoginExist(username.getText())){
+            Alert alert= new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("this login already exist, please choose another one");
+            alert.show();
+            return;
+        }
+        User user = new User(firstName.getText(),lastName.getText(),username.getText(),password.getText(),false,false);
+        userDao.save(user);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("Successes");
         alert.show();
     }

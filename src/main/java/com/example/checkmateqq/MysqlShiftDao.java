@@ -28,7 +28,13 @@ public class MysqlShiftDao implements UserDao {
     }
 
     @Override
-    public User save(User user) throws EntityNotFoundException {
-        return null;
+    public void save(User user) throws EntityNotFoundException {
+        //return null;
+    }
+
+    @Override
+    public boolean checkIfLoginExist(String login) throws EntityNotFoundException {
+
+        return true;
     }
 }

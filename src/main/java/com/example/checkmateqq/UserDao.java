@@ -6,5 +6,6 @@ public interface UserDao {
 
     User getById(int id) throws EntityNotFoundException;
 
-    User save(User user) throws EntityNotFoundException;
+    void save(User user) throws EntityNotFoundException;
+    boolean checkIfLoginExist(String login)throws EntityNotFoundException;
 }

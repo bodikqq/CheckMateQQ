@@ -51,7 +51,7 @@ public class MysqlUserDao implements UserDao {
 
 
     @Override
-    public User save(User user) throws EntityNotFoundException {
+    public void save(User user) throws EntityNotFoundException {
         Objects.requireNonNull(user, "Student cannot be null");
         Objects.requireNonNull(user.getSurname(),"Surname cannot be null");
         //INSERT
@@ -75,20 +75,18 @@ public class MysqlUserDao implements UserDao {
             int id = keyHolder.getKey().intValue();
             User saved = User.clone(user);
             saved.setId(id);
-            return saved;
-//         else {	//UPDATE
-//            String query = "UPDATE student SET first_name=?, surname=?, subject_id=? "
-//                    + "WHERE id = ?";
-//            int count = jdbcTemplate.update(query, student.getFirstName(),
-//                    student.getSurname(),
-//                    subjectId,
-//                    student.getId());
-//            if (count == 0) {
-//                throw new EntityNotFoundException(
-//                        "Student with id " + student.getId() + " not found");
-//            }
-//            return student;
-//        }
+            //return saved;
+    }
+    @Override
+    public boolean checkIfLoginExist(String login){
+        String sql = "SELECT COUNT(*) FROM user WHERE login = ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, login);
+
+        if (count > 0) {
+            System.out.println("User with login '" + login + "' already exists.");
+            return true;
+        }
+        return false;
     }
 //    @Override
 //    public void delete(long id) throws EntityNotFoundException {
