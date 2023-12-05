@@ -8,6 +8,6 @@ public interface UserDao {
 
     void save(User user) throws EntityNotFoundException;
     boolean checkIfLoginExist(String login)throws EntityNotFoundException;
-
     boolean checkIfWorkerCodeIsReal(String code) throws EntityNotFoundException;
+    boolean checkIfUserExists(String login, String password) throws EntityNotFoundException;
 }

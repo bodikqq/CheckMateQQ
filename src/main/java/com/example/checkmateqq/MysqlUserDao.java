@@ -108,4 +108,10 @@ public class MysqlUserDao implements UserDao {
 //                    "Student with id " + id + " not found");
 //        }
 //    }
+public boolean checkIfUserExists(String login, String password) {
+    String sql = "SELECT COUNT(*) FROM user WHERE login = ? AND password = ?";
+    int count = jdbcTemplate.queryForObject(sql, Integer.class, login, password);
+
+    return count > 0;
+}
 }
