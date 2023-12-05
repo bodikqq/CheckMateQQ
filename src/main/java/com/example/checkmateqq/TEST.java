@@ -33,7 +33,9 @@ public class TEST {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EntityNotFoundException {
         testGetById();
+        System.out.println(userDao.checkIfLoginExist("vangel"));
+        System.out.println(userDao.checkIfUserExists("ahoj","nic"));
     }
 }
