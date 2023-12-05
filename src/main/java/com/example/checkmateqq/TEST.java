@@ -4,22 +4,18 @@ import com.example.checkmateqq.triedy.User;
 public class TEST {
     static private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
     static public void testGetById() {
-        // Create an instance of your MysqlUserDao with the test JdbcTemplate
-        //MysqlUserDao userDao = new MysqlUserDao(testJdbcTemplate);
-
-        // Assuming there is an existing user with ID 1 in your test database
         int existingUserId = 10;
 
         try {
-            User user  = userDao.getById(2);
-            try {
-                System.out.println(userDao.checkIfLoginExist("john.doe"));
-                //System.out.println(user.getLogin());
-            }catch (Exception e){
-                System.out.println("error: " + e + "    probably user with this id doesnt exist");
-            }
+            System.out.println( userDao.checkIfWorkerCodeIsReal("12qwert"));
+//            try {
+//                System.out.println(userDao.checkIfLoginExist("john.doe"));
+//                //System.out.println(user.getLogin());
+//            }catch (Exception e){
+//                System.out.println("error: " + e + "    probably user with this id doesnt exist");
+//            }
 
-            userDao.save(user);
+         //   userDao.save(user);
             // Assert that the returned user is not null
             //assertNotNull(user);
 
@@ -28,6 +24,7 @@ public class TEST {
             // Add more assertions for other user properties
 
         } catch (Exception e) {
+            System.out.println(e);
             // If the user is not found, fail the test
            // fail("User with ID " + existingUserId + " not found");
         }

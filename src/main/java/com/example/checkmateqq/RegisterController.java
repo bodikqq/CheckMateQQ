@@ -2,10 +2,9 @@ package com.example.checkmateqq;
 
 
 import javafx.event.ActionEvent;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,13 +12,10 @@ import javafx.scene.Parent;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import javafx.scene.control.TextFormatter;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import com.example.checkmateqq.triedy.User;
 import java.io.IOException;
 
@@ -32,14 +28,15 @@ public class RegisterController {
     private PasswordField confirmPassword;
 
     @FXML
-    private TextField email;
+    private TextField workerCode;
 
     @FXML
     private TextField firstName;
 
     @FXML
     private TextField lastName;
-
+    @FXML
+    private Text qq;
     @FXML
     private PasswordField password;
 
@@ -97,6 +94,10 @@ public class RegisterController {
             alert.show();
             return;
         }
+        if(workerCode.getText().length() != 0){
+
+            System.out.println("qqq");
+        }
         User user = new User(firstName.getText(),lastName.getText(),username.getText(),password.getText(),false,false);
         userDao.save(user);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -107,7 +108,12 @@ public class RegisterController {
         Stage stage = (Stage) registerButton.getScene().getWindow();
         goToLogin(stage, loginController);
     }
+    @FXML
+    void showCodeField(MouseEvent event) {
+        workerCode.setVisible(true);
+        qq.setVisible(false);
 
+    }
     @FXML
     void showLoginStage(MouseEvent event) {
         // Create an instance of the LoginController

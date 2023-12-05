@@ -34,7 +34,11 @@ public class MysqlShiftDao implements UserDao {
 
     @Override
     public boolean checkIfLoginExist(String login) throws EntityNotFoundException {
-
         return true;
+    }
+
+    @Override
+    public boolean checkIfWorkerCodeIsReal(String code) throws EntityNotFoundException {
+        return false;
     }
 }

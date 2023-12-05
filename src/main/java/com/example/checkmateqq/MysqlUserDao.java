@@ -88,6 +88,17 @@ public class MysqlUserDao implements UserDao {
         }
         return false;
     }
+    @Override
+    public boolean checkIfWorkerCodeIsReal(String code) throws EntityNotFoundException {
+        String sql = "select count(*) from worker_codes where workercode = ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, code);
+
+        if (count == 0) {
+            System.out.println("code '" + code + "' doesnt exist.");
+            return false;
+        }
+        return true;
+    }
 //    @Override
 //    public void delete(long id) throws EntityNotFoundException {
 //        String query = "DELETE FROM student WHERE id = ?";
