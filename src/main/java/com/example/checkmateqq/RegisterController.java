@@ -94,11 +94,13 @@ public class RegisterController {
             alert.show();
             return;
         }
+        boolean isEmployee = false;
         if(workerCode.getText().length() != 0){
-
-            System.out.println("qqq");
+            if(userDao.checkIfWorkerCodeIsReal(workerCode.getText())){
+                   isEmployee = true;
+            }
         }
-        User user = new User(firstName.getText(),lastName.getText(),username.getText(),password.getText(),false,false);
+        User user = new User(firstName.getText(),lastName.getText(),username.getText(),password.getText(),isEmployee,false);
         userDao.save(user);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("Successes, please log in now");

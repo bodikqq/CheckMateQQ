@@ -2,6 +2,7 @@ package com.example.checkmateqq;
 
 import com.example.checkmateqq.triedy.User;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 import javafx.stage.Stage;
@@ -31,6 +34,46 @@ public class LoginController {
 
     private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
 
+    public void initialize() {
+        loginButton.setDefaultButton(true);
+        username.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    password.requestFocus();
+                }
+            }
+
+        });
+        loginButton.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    System.out.println("qqqq");
+                    loginButton.fire();
+                }
+            }
+        });
+
+        username.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.DOWN) {
+                    password.requestFocus();
+                }
+            }
+
+        });
+
+        password.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.UP) {
+                    username.requestFocus();
+                }
+            }
+        });
+    }
     @FXML
     void login(ActionEvent event) throws EntityNotFoundException{
         String enteredUsername = username.getText();
@@ -95,5 +138,6 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
 
 }
