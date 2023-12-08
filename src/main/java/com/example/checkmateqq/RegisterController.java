@@ -49,9 +49,9 @@ public class RegisterController {
     UnaryOperator<TextFormatter.Change> filter = change -> {
         String newText = change.getControlNewText();
         if (Pattern.matches("[^0-9]*", newText)) {
-            return change; // Accept the change
+            return change;
         } else {
-            return null; // Reject the change
+            return null;
         }
     };
 

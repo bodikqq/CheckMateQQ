@@ -1,13 +1,20 @@
 package com.example.checkmateqq;
-import com.example.checkmateqq.triedy.User;
+
+import com.example.checkmateqq.triedy.Test;
+
+import java.util.List;
 
 public class TEST {
     static private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
+    static private TestDao testDao = DaoFactory.INSTANCE.getTestDao();
     static public void testGetById() {
         int existingUserId = 10;
 
         try {
-            System.out.println( userDao.checkIfWorkerCodeIsReal("12qwert"));
+            List<Test> tests = testDao.getAllUserTests(12);
+            for (Test test: tests) {
+                System.out.println(test.getDate());
+            }
 //            try {
 //                System.out.println(userDao.checkIfLoginExist("john.doe"));
 //                //System.out.println(user.getLogin());
@@ -32,7 +39,7 @@ public class TEST {
 
     public static void main(String[] args) throws EntityNotFoundException {
         testGetById();
-        System.out.println(userDao.checkIfLoginExist("vangel"));
-        System.out.println(userDao.checkIfUserExists("ahoj","nic"));
+//        System.out.println(userDao.checkIfLoginExist("vangel"));
+//        System.out.println(userDao.checkIfUserExists("ahoj","nic"));
     }
 }

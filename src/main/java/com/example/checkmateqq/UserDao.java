@@ -10,4 +10,6 @@ public interface UserDao {
     boolean checkIfLoginExist(String login)throws EntityNotFoundException;
     boolean checkIfWorkerCodeIsReal(String code) throws EntityNotFoundException;
     boolean checkIfUserExists(String login, String password) throws EntityNotFoundException;
+
+    User getUserByLoginAndPassword(String login, String password);
 }

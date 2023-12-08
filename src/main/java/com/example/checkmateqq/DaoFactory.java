@@ -10,6 +10,7 @@ public enum DaoFactory {
     private UserDao userDao;
     private TestDao testDao;
     private ShiftDao shiftDao;
+    private StationDao stationDao;
     private JdbcTemplate jdbcTemplate;
 
     private JdbcTemplate getJdbcTemplate() {
@@ -29,16 +30,21 @@ public enum DaoFactory {
         return userDao;
     }
 
-    public ShiftDao getSubjectDao() {
+    public ShiftDao getShiftDao() {
         if (shiftDao == null)
             shiftDao = (ShiftDao) new MysqlShiftDao(getJdbcTemplate());
         return shiftDao;
     }
 
-    public TestDao getAttendanceDao() {
+    public TestDao getTestDao() {
         if (testDao == null)
             testDao = (TestDao) new MysqlTestDao(getJdbcTemplate());
         return testDao;
+    }
+    public StationDao getStationDao() {
+        if (stationDao == null)
+            stationDao = (StationDao) new MysqlStationDao(getJdbcTemplate());
+        return stationDao;
     }
 
 }

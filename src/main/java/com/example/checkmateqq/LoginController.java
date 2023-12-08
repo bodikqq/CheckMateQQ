@@ -31,6 +31,7 @@ public class LoginController {
 
     @FXML
     private TextField username;
+    private User user = null;
 
     private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
 
@@ -79,11 +80,12 @@ public class LoginController {
         String enteredUsername = username.getText();
         String enteredPassword = password.getText();
         System.out.println("ahoj");
-
-        if (userDao.checkIfUserExists(enteredUsername, enteredPassword)) {
+        User user = userDao.getUserByLoginAndPassword(enteredUsername, enteredPassword);
+        if (user != null) {
 //            Alert alert = new Alert(Alert.AlertType.INFORMATION);
 //            alert.setContentText("Login successfull");
 //            alert.show();
+            this.user = user;
             openKlientScene();
         }
         else{
@@ -91,6 +93,7 @@ public class LoginController {
             alert.setContentText("Wrong login or password");
             alert.show();
         }
+
     }
 
     @FXML
@@ -126,9 +129,10 @@ public class LoginController {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("KlientView.fxml"));
             KlientViewController klientController = new KlientViewController();
+            klientController.setUserId(user);
             loader.setController(klientController);
             stage.setScene(new Scene(loader.load()));
-            stage.setTitle("Klient View");
+            stage.setTitle("Client View");
             stage.show();
 
             // Zatvorenie aktuálnej scény (prihlasovacej)

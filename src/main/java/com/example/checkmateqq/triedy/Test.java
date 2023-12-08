@@ -1,15 +1,47 @@
 package com.example.checkmateqq.triedy;
 
+import java.sql.Time;
+import java.util.Date;
+
 public class Test {
     int id;
 
     int result;
-
-    String testcol;
+    Date date;
 
     int patient_id;
 
     int shift_id;
+    Time time;
+    int test_type;
+
+    public int getTest_type() {
+        return test_type;
+    }
+
+    public void setTest_type(int test_type) {
+        this.test_type = test_type;
+    }
+
+    public Test(int id, int result, Date date, int patient_id, int shift_id, Time time, int test_type) {
+        this.id = id;
+        this.result = result;
+        this.date = date;
+        this.patient_id = patient_id;
+        this.shift_id = shift_id;
+        this.time = time;
+        this.test_type = test_type;
+    }
+
+    public Date getDate() {
+        return this.date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+
 
     public int getId() {
         return id;
@@ -27,13 +59,6 @@ public class Test {
         this.result = result;
     }
 
-    public String getTestcol() {
-        return testcol;
-    }
-
-    public void setTestcol(String testcol) {
-        this.testcol = testcol;
-    }
 
     public int getPatient_id() {
         return patient_id;
@@ -51,11 +76,5 @@ public class Test {
         this.shift_id = shift_id;
     }
 
-    public Test(int id, int result, String testcol, int patient_id, int shift_id) {
-        this.id = id;
-        this.result = result;
-        this.testcol = testcol;
-        this.patient_id = patient_id;
-        this.shift_id = shift_id;
-    }
+
 }
