@@ -80,6 +80,7 @@ public class LoginController {
         String enteredUsername = username.getText();
         String enteredPassword = password.getText();
         System.out.println("ahoj");
+
         User user = userDao.getUserByLoginAndPassword(enteredUsername, enteredPassword);
         if (user != null) {
 //            Alert alert = new Alert(Alert.AlertType.INFORMATION);

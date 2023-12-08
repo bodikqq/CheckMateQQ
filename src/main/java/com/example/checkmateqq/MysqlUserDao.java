@@ -116,13 +116,11 @@ public boolean checkIfUserExists(String login, String password) {
 }
     @Override
     public User getUserByLoginAndPassword(String login, String password) {
-        String sql = "SELECT id, name, surname, login, password, isEmployee, isAdmin FROM user WHERE login = ? AND password = ?";
-        try {
-            return jdbcTemplate.queryForObject(sql, userRM(), login, password);
-        } catch (Error e) {
-            // No user found with the given login and password
+        if(!checkIfUserExists(login,password)){
             return null;
         }
+        String sql = "SELECT id, name, surname, login, password, isEmployee, isAdmin FROM user WHERE login = ? AND password = ?";
+            return jdbcTemplate.queryForObject(sql, userRM(), login, password);
     }
 
 }

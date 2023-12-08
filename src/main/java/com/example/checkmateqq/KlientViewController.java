@@ -1,5 +1,6 @@
 package com.example.checkmateqq;
 
+import com.example.checkmateqq.biznis.HourMinutes;
 import com.example.checkmateqq.triedy.Station;
 import com.example.checkmateqq.triedy.Test;
 import com.example.checkmateqq.triedy.User;
@@ -55,6 +56,9 @@ import java.util.ResourceBundle;
 public class KlientViewController {
     @FXML
     private Label UserNameOnTopBar;
+
+    @FXML
+    private TableView<HourMinutes> timeTable;
     @FXML
     private DatePicker date;
 
@@ -87,8 +91,11 @@ public class KlientViewController {
         this.user = user;
     }
     public void initialize() throws EntityNotFoundException {
+        station.setValue("Choose the station");
+        station.getItems().setAll(stationsToString());
        // System.out.println(user.get);
         UserNameOnTopBar.setText(user.getName());
+
         TableColumn<ForTestTable, Date> testDateColumn = new TableColumn<ForTestTable, Date> ("Date");
         testDateColumn.setCellValueFactory(new PropertyValueFactory<ForTestTable, Date>("date"));
 
@@ -116,6 +123,54 @@ public class KlientViewController {
             testTable.getItems().add(qq);
         }
         System.out.println("woohoo");
+        List<HourMinutes> listOfHourMinutes = new ArrayList<>(12);
+        for (int i = 7; i < 19; i++) {
+                String HourMinuteString = "0" + i + ":" + 0 + "0";
+                String HourMinuteString1 = "0" + i + ":" + 1 + "0";
+                String HourMinuteString2 = "0" + i + ":" + 2 + "0";
+                String HourMinuteString3 = "0" + i + ":" + 3 + "0";
+                String HourMinuteString4 = "0" + i + ":" + 4 + "0";
+                String HourMinuteString5 = "0" + i + ":" + 5 + "0";
+            if(i>=10){
+                HourMinuteString = i+":"+0+"0";
+                 HourMinuteString1 = i+":"+1+"0";
+                 HourMinuteString2 =i+":"+2+"0";
+                 HourMinuteString3 = i+":"+3+"0";
+                 HourMinuteString4 = i+":"+4+"0";
+                 HourMinuteString5 = i+":"+5+"0";
+            }
+            HourMinutes hourminutes = new HourMinutes(HourMinuteString,HourMinuteString1,HourMinuteString2,HourMinuteString3,HourMinuteString4,HourMinuteString5);
+            System.out.println(hourminutes.toString());
+            listOfHourMinutes.add(hourminutes);
+        }
+        TableColumn<HourMinutes, String> time0 = new TableColumn<HourMinutes, String>();
+        time0.setCellValueFactory(new PropertyValueFactory<HourMinutes, String>("time0"));
+
+        TableColumn<HourMinutes, String> time1 = new TableColumn<HourMinutes, String>();
+        time1.setCellValueFactory(new PropertyValueFactory<HourMinutes, String>("time1"));
+
+        TableColumn<HourMinutes, String> time2 = new TableColumn<HourMinutes, String>();
+        time2.setCellValueFactory(new PropertyValueFactory<HourMinutes, String>("time2"));
+
+        TableColumn<HourMinutes, String> time3 = new TableColumn<HourMinutes, String>();
+        time3.setCellValueFactory(new PropertyValueFactory<HourMinutes, String>("time3"));
+
+        TableColumn<HourMinutes, String> time4 = new TableColumn<HourMinutes, String>();
+        time4.setCellValueFactory(new PropertyValueFactory<HourMinutes, String>("time4"));
+
+        TableColumn<HourMinutes, String> time5 = new TableColumn<HourMinutes, String>();
+        time5.setCellValueFactory(new PropertyValueFactory<HourMinutes, String>("time5"));
+
+
+
+        timeTable.getColumns().addAll(time0,time1,time2,time3,time4,time5);
+
+//
+//        timeTable.lookup(".column-header-background").setVisible(false);
+//        timeTable.lookup(".show-hide-columns-button").setVisible(false);
+        timeTable.getSelectionModel().setCellSelectionEnabled(true);
+
+
     }
 
     // Other methods

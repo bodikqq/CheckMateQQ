@@ -4,24 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60839104-69e3-4b87-8810-6a6d5f32398b" name="Changes" comment="version 2">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/ForTestTable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlStationDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/StationDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/Station.java" afterDir="false" />
+    <list default="true" id="60839104-69e3-4b87-8810-6a6d5f32398b" name="Changes" comment="timeTable trosku">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/biznis/HourMinutes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/DaoFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/KlientViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/KlientViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlShiftDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlShiftDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlTestDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlTestDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/TEST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/TEST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/TestDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/TestDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/KlientView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/KlientView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +23,6 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -46,9 +35,6 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
-  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -58,41 +44,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;qq&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/bohdan/java drivers/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "preBohdana",
+    "jdk.selected.JAVA_MODULE": "openjdk-21",
+    "last_opened_file_path": "C:/Users/bohdan/java drivers/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.example.checkmateqq" />
-    </key>
-    <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="com.example.checkmateqq" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -196,8 +179,7 @@
       <workItem from="1700947187707" duration="62000" />
       <workItem from="1700947280608" duration="7315000" />
       <workItem from="1701806906116" duration="111000" />
-      <workItem from="1701807818257" duration="15389000" />
-      <workItem from="1701990417404" duration="15224000" />
+      <workItem from="1701807818257" duration="8227000" />
     </task>
     <task id="LOCAL-00001" summary="version 2">
       <option name="closed" value="true" />
@@ -247,15 +229,7 @@
       <option name="project" value="LOCAL" />
       <updated>1701174161616</updated>
     </task>
-    <task id="LOCAL-00007" summary="version 2">
-      <option name="closed" value="true" />
-      <created>1701867374031</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1701867374031</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,11 +241,6 @@
         <entry key="Branch">
           <value>
             <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="origin/qq" />
-                </option>
-              </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="origin/debug" />
@@ -294,22 +263,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="with MainScene" />
-    <MESSAGE value="fixup! funguje klientView" />
     <MESSAGE value="version 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 2" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.ExceptionInInitializerError" package="java.lang" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.RuntimeException" package="java.lang" />
-          <option name="timeStamp" value="3" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="fixup! funguje klientView" />
+    <MESSAGE value="timeTable trosku" />
+    <option name="LAST_COMMIT_MESSAGE" value="timeTable trosku" />
   </component>
 </project>
