@@ -47,5 +47,6 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
+      <ChoiceBox fx:id="typeOfTestChoiceBox" layoutX="253.0" layoutY="92.0" prefWidth="150.0" />
     </children>
 </AnchorPane>

@@ -5,11 +5,16 @@ import java.util.Date;
 
 public class Test {
     int id;
-
     int result;
     Date date;
-
     int patient_id;
+
+    public Test(Date date, int patient_id, Time time, int test_type) {
+        this.date = date;
+        this.patient_id = patient_id;
+        this.time = time;
+        this.test_type = test_type;
+    }
 
     int shift_id;
     Time time;
@@ -33,8 +38,8 @@ public class Test {
         this.test_type = test_type;
     }
 
-    public Date getDate() {
-        return this.date;
+    public java.sql.Date getDate() {
+        return (java.sql.Date) this.date;
     }
 
     public void setDate(Date date) {
@@ -77,4 +82,11 @@ public class Test {
     }
 
 
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
 }
