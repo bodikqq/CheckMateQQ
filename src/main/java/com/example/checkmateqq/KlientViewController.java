@@ -1,12 +1,8 @@
 package com.example.checkmateqq;
 
-import com.example.checkmateqq.biznis.HourMinutes;
 import com.example.checkmateqq.triedy.Station;
 import com.example.checkmateqq.triedy.Test;
 import com.example.checkmateqq.triedy.User;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,12 +14,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.ResourceBundle;
 
 // class ForTestTable{
 //     public Date getDate() {
@@ -123,26 +116,7 @@ public class KlientViewController {
             testTable.getItems().add(qq);
         }
         System.out.println("woohoo");
-        List<HourMinutes> listOfHourMinutes = new ArrayList<>(12);
-        for (int i = 7; i < 19; i++) {
-                String HourMinuteString = "0" + i + ":" + 0 + "0";
-                String HourMinuteString1 = "0" + i + ":" + 1 + "0";
-                String HourMinuteString2 = "0" + i + ":" + 2 + "0";
-                String HourMinuteString3 = "0" + i + ":" + 3 + "0";
-                String HourMinuteString4 = "0" + i + ":" + 4 + "0";
-                String HourMinuteString5 = "0" + i + ":" + 5 + "0";
-            if(i>=10){
-                HourMinuteString = i+":"+0+"0";
-                 HourMinuteString1 = i+":"+1+"0";
-                 HourMinuteString2 =i+":"+2+"0";
-                 HourMinuteString3 = i+":"+3+"0";
-                 HourMinuteString4 = i+":"+4+"0";
-                 HourMinuteString5 = i+":"+5+"0";
-            }
-            HourMinutes hourminutes = new HourMinutes(HourMinuteString,HourMinuteString1,HourMinuteString2,HourMinuteString3,HourMinuteString4,HourMinuteString5);
-            System.out.println(hourminutes.toString());
-            listOfHourMinutes.add(hourminutes);
-        }
+
         TableColumn<HourMinutes, String> time0 = new TableColumn<HourMinutes, String>();
         time0.setCellValueFactory(new PropertyValueFactory<HourMinutes, String>("time0"));
 
@@ -161,9 +135,28 @@ public class KlientViewController {
         TableColumn<HourMinutes, String> time5 = new TableColumn<HourMinutes, String>();
         time5.setCellValueFactory(new PropertyValueFactory<HourMinutes, String>("time5"));
 
-
-
         timeTable.getColumns().addAll(time0,time1,time2,time3,time4,time5);
+
+        for (int i = 7; i < 19; i++) {
+            String HourMinuteString = "0" + i + ":" + 0 + "0";
+            String HourMinuteString1 = "0" + i + ":" + 1 + "0";
+            String HourMinuteString2 = "0" + i + ":" + 2 + "0";
+            String HourMinuteString3 = "0" + i + ":" + 3 + "0";
+            String HourMinuteString4 = "0" + i + ":" + 4 + "0";
+            String HourMinuteString5 = "0" + i + ":" + 5 + "0";
+            if(i>=10){
+                HourMinuteString = i+":"+0+"0";
+                HourMinuteString1 = i+":"+1+"0";
+                HourMinuteString2 =i+":"+2+"0";
+                HourMinuteString3 = i+":"+3+"0";
+                HourMinuteString4 = i+":"+4+"0";
+                HourMinuteString5 = i+":"+5+"0";
+            }
+            HourMinutes hourminutes = new HourMinutes(HourMinuteString,HourMinuteString1,HourMinuteString2,HourMinuteString3,HourMinuteString4,HourMinuteString5);
+            System.out.println(hourminutes.toString());
+            timeTable.getItems().add(hourminutes);
+        }
+
 
 //
 //        timeTable.lookup(".column-header-background").setVisible(false);

@@ -1,4 +1,4 @@
-package com.example.checkmateqq.biznis;
+package com.example.checkmateqq;
 
 import java.sql.Time;
 
@@ -8,6 +8,30 @@ public class HourMinutes {
     String time2;
     String time3;
     String time4;
+
+    public void setTime0(String time0) {
+        this.time0 = time0;
+    }
+
+    public void setTime1(String time1) {
+        this.time1 = time1;
+    }
+
+    public void setTime2(String time2) {
+        this.time2 = time2;
+    }
+
+    public void setTime3(String time3) {
+        this.time3 = time3;
+    }
+
+    public void setTime4(String time4) {
+        this.time4 = time4;
+    }
+
+    public void setTime5(String time5) {
+        this.time5 = time5;
+    }
 
     @Override
     public String toString() {

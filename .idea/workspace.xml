@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60839104-69e3-4b87-8810-6a6d5f32398b" name="Changes" comment="timeTable trosku">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/biznis/HourMinutes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/DaoFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/KlientViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/KlientViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/KlientView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/KlientView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/biznis/HourMinutes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/HourMinutes.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +224,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701174161616</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="timeTable trosku">
+      <option name="closed" value="true" />
+      <created>1702069904655</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1702069904655</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,6 +244,11 @@
         <entry key="Branch">
           <value>
             <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/preBohdana" />
+                </option>
+              </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="origin/debug" />
