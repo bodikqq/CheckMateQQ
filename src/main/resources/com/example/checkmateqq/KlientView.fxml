@@ -36,8 +36,8 @@
             </Text>
             </children></AnchorPane>
         <Label layoutX="54.0" layoutY="68.0" text="Pick the station" />
-        <TableView fx:id="testTable" layoutX="498.0" layoutY="181.0" prefHeight="154.0" prefWidth="210.0" />
-        <Label layoutX="578.0" layoutY="145.0" text="Test results" />
+        <TableView fx:id="testTable" layoutX="488.0" layoutY="189.0" prefHeight="154.0" prefWidth="254.0" />
+        <Label layoutX="585.0" layoutY="167.0" text="Test results" />
         <Button fx:id="selectTerm" layoutX="181.0" layoutY="521.0" mnemonicParsing="false" onAction="#saveTestTerm" prefHeight="33.0" prefWidth="101.0" text="Select term">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -48,5 +48,6 @@
             </columnResizePolicy>
         </TableView>
       <Label layoutX="54.0" layoutY="128.0" text="Pick the date" />
+        <ChoiceBox fx:id="typeOfTestChoiceBox" layoutX="253.0" layoutY="92.0" prefWidth="150.0" />
     </children>
 </AnchorPane>

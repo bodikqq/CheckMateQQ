@@ -93,15 +93,14 @@ public class KlientViewController {
     public void initialize() throws EntityNotFoundException {
         station.setValue("Choose the station");
         station.getItems().setAll(stationsToString());
-       // System.out.println(user.get);
         chosenStation = station.getValue();
 
         UserNameOnTopBar.setText(user.getName());
 
-//        typeOfTestChoiceBox.setValue("Test type");
-//        typeOfTestChoiceBox.getItems().setAll("PCR","NAATs");
-//        String testType = typeOfTestChoiceBox.getValue();
-//        if(testType.equals("PCR")){chosenTestType = 0;}else{chosenTestType=1;}
+        typeOfTestChoiceBox.setValue("Test type");
+        typeOfTestChoiceBox.getItems().setAll("PCR","NAATs");
+        String testType = typeOfTestChoiceBox.getValue();
+        if(testType.equals("PCR")){chosenTestType = 0;}else{chosenTestType=1;}
 
 
         TableColumn<ForTestTable, Date> testDateColumn = new TableColumn<ForTestTable, Date> ("Date");
