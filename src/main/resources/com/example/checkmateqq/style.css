@@ -22,3 +22,6 @@ and open the template in the editor.
 .box {
     
 }
+.table-cell:selected {
+    -fx-background-color: #404040;
+}

@@ -132,7 +132,9 @@ public class LoginController {
             KlientViewController klientController = new KlientViewController();
             klientController.setUserId(user);
             loader.setController(klientController);
-            stage.setScene(new Scene(loader.load()));
+            Scene scene = new Scene(loader.load());
+            scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            stage.setScene(scene);
             stage.setTitle("Client View");
             stage.show();
 

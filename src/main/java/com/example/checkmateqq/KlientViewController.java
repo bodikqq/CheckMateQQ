@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -167,7 +168,7 @@ public class KlientViewController {
                 HourMinuteString5 = i+":"+5+"0";
             }
             HourMinutes hourminutes = new HourMinutes(HourMinuteString,HourMinuteString1,HourMinuteString2,HourMinuteString3,HourMinuteString4,HourMinuteString5);
-            System.out.println(hourminutes.toString());
+            //System.out.println(hourminutes.toString());
             timeTable.getItems().add(hourminutes);
         }
 //        timeTable.lookup(".column-header-background").setVisible(false);
@@ -236,7 +237,7 @@ public class KlientViewController {
         Date utilDate = java.sql.Date.valueOf(pickedDate);
         Time utilTime = java.sql.Time.valueOf(localTime);
         Test test = new Test(utilDate, user.getId(),utilTime,0);
-        test.setShift_id(2);
+        test.setShift_id(1);
         testDao.save(test);
     }
 }

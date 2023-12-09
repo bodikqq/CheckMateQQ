@@ -10,43 +10,43 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="516.0" prefWidth="720.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="598.0" prefWidth="778.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <DatePicker fx:id="date" layoutX="54.0" layoutY="128.0" onAction="#pickDate" />
+        <DatePicker fx:id="date" layoutX="54.0" layoutY="150.0" onAction="#pickDate" />
         <ChoiceBox fx:id="station" accessibleText="qq" layoutX="54.0" layoutY="92.0" prefWidth="150.0" />
-        <AnchorPane accessibleRole="CONTEXT_MENU" layoutX="-6.0" layoutY="-6.0" prefHeight="58.0" prefWidth="751.0" style="-fx-background-color: #404040;" styleClass="border">
+        <AnchorPane accessibleRole="CONTEXT_MENU" prefHeight="58.0" prefWidth="785.0" style="-fx-background-color: #404040;" styleClass="border">
             <children>
-                <Label layoutX="14.0" layoutY="12.0" text="CheckMate" textFill="WHITE">
+                <Label layoutX="14.0" layoutY="9.0" text="CheckMate" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="27.0" />
                     </font>
                 </Label>
-            <Label fx:id="UserNameOnTopBar" layoutX="342.0" layoutY="19.0" prefHeight="26.0" prefWidth="277.0" textAlignment="RIGHT" textFill="WHITE">
+            <Label fx:id="UserNameOnTopBar" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="447.0" layoutY="15.0" prefHeight="26.0" prefWidth="175.0" text="sss" textAlignment="RIGHT" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Text fill="WHITE" fontSmoothingType="LCD" layoutX="677.0" layoutY="36.0" onMouseClicked="#logOut" strokeType="OUTSIDE" strokeWidth="0.0" text="log out" wrappingWidth="44.14794921875">
+            <Text fill="WHITE" fontSmoothingType="LCD" layoutX="671.0" layoutY="34.0" onMouseClicked="#logOut" strokeType="OUTSIDE" strokeWidth="0.0" text="log out" wrappingWidth="60.0">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Text>
             </children></AnchorPane>
-        <Label layoutX="60.0" layoutY="62.0" text="Pick the station" />
-        <TableView fx:id="testTable" layoutX="499.0" layoutY="181.0" prefHeight="154.0" prefWidth="217.0" />
+        <Label layoutX="54.0" layoutY="68.0" text="Pick the station" />
+        <TableView fx:id="testTable" layoutX="498.0" layoutY="181.0" prefHeight="154.0" prefWidth="210.0" />
         <Label layoutX="578.0" layoutY="145.0" text="Test results" />
-        <Button fx:id="selectTerm" layoutX="181.0" layoutY="460.0" mnemonicParsing="false" onAction="#saveTestTerm" prefHeight="33.0" prefWidth="101.0" text="Select term">
+        <Button fx:id="selectTerm" layoutX="181.0" layoutY="521.0" mnemonicParsing="false" onAction="#saveTestTerm" prefHeight="33.0" prefWidth="101.0" text="Select term">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-        <TableView fx:id="timeTable" layoutX="54.0" layoutY="195.0" prefHeight="252.0" prefWidth="356.0">
+        <TableView fx:id="timeTable" layoutX="54.0" layoutY="189.0" prefHeight="314.0" prefWidth="356.0">
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-      <ChoiceBox fx:id="typeOfTestChoiceBox" layoutX="253.0" layoutY="92.0" prefWidth="150.0" />
+      <Label layoutX="54.0" layoutY="128.0" text="Pick the date" />
     </children>
 </AnchorPane>
