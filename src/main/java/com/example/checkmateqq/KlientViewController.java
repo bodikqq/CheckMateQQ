@@ -75,8 +75,7 @@ public class KlientViewController {
     private List<Station> stations = stationDao.getAll();
     String cellData;
     LocalDate pickedDate;
-    String chosenStation;
-    int chosenTestType;
+
     @FXML
     void logOut(MouseEvent event) {
         LoginController loginController = new LoginController();
@@ -93,14 +92,20 @@ public class KlientViewController {
     public void initialize() throws EntityNotFoundException {
         station.setValue("Choose the station");
         station.getItems().setAll(stationsToString());
-        chosenStation = station.getValue();
+       // System.out.println(user.get);
+
 
         UserNameOnTopBar.setText(user.getName());
 
         typeOfTestChoiceBox.setValue("Test type");
         typeOfTestChoiceBox.getItems().setAll("PCR","NAATs");
-        String testType = typeOfTestChoiceBox.getValue();
-        if(testType.equals("PCR")){chosenTestType = 0;}else{chosenTestType=1;}
+
+        changeColorBack(station);
+        changeColorBack(typeOfTestChoiceBox);
+        dateColorBack(date);
+
+        timeTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        testTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 
         TableColumn<ForTestTable, Date> testDateColumn = new TableColumn<ForTestTable, Date> ("Date");
@@ -115,12 +120,18 @@ public class KlientViewController {
         testTable.getColumns().add(testDateColumn);
         testTable.getColumns().add(testTypeColumn);
         testTable.getColumns().add(testResultColumn);
+
+        for(TableColumn tableColumn: testTable.getColumns()){
+            tableColumn.setReorderable(false);
+            tableColumn.setSortable(false);
+//            tableColumn.setResizable(false);
+        }
         List<Test> tests = getTestData(user.getId());
         for (Test test:tests
              ) {
-            String result = "negative";
+            String result = "Not ready yet";
             if (test.getResult() == 1) result = "positive";
-            else if (test.getResult() == 2) result = "Not ready yet";
+            else if (test.getResult() == 2) result = "negative";
             String type = "PCR";
 
             int test_type = test.getTest_type();
@@ -150,6 +161,11 @@ public class KlientViewController {
         time5.setCellValueFactory(new PropertyValueFactory<HourMinutes, String>("time5"));
 
         timeTable.getColumns().addAll(time0,time1,time2,time3,time4,time5);
+        for (TableColumn tableColumn: timeTable.getColumns()) {
+            tableColumn.setReorderable(false);
+            tableColumn.setSortable(false);
+          //  tableColumn.setResizable(false);
+        }
 
         for (int i = 7; i < 19; i++) {
             String HourMinuteString = "0" + i + ":" + 0 + "0";
@@ -199,7 +215,33 @@ public class KlientViewController {
 
     @FXML
     void saveTestTerm(ActionEvent event) throws EntityNotFoundException {
-        saveTest();
+        String testType = typeOfTestChoiceBox.getValue();
+        Integer chosenTestType = null;
+        if(testType.equals("PCR")){chosenTestType = 0;}else if(testType.equals("NAATs")){chosenTestType=1;}
+        System.out.println(cellData + pickedDate + chosenTestType + station.getValue());
+        if (cellData == null || pickedDate == null || station.getValue() == "Choose the station" || chosenTestType==null) {
+            // Set error styles for controls that are not selected
+            if (cellData == null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Select time of the test");
+                alert.show();
+            }
+
+            if (pickedDate == null) {
+                date.getStyleClass().add("error-date-picker");
+            }
+            System.out.println(station.getValue());
+            if (station.getValue().equals("Choose the station")) {
+                station.getStyleClass().add("error-choice-box");
+            }
+
+            if (chosenTestType == null) {
+                typeOfTestChoiceBox.getStyleClass().add("error-choice-box");
+            }
+
+        } else {
+            saveTest();
+        }
     }
     private void goToLogin(Stage currentStage, LoginController controller) {
         try {
@@ -235,8 +277,30 @@ public class KlientViewController {
         LocalTime localTime = LocalTime.parse(cellData, formatter);
         Date utilDate = java.sql.Date.valueOf(pickedDate);
         Time utilTime = java.sql.Time.valueOf(localTime);
-        Test test = new Test(utilDate, user.getId(),utilTime,0);
-        test.setShift_id(1);
+        String testType = typeOfTestChoiceBox.getValue();
+        Integer chosenTestType = null;
+        if(testType.equals("PCR")){chosenTestType = 0;}else if(testType.equals("NAATs")){chosenTestType=1;}
+        Test test = new Test(utilDate, user.getId(),utilTime,chosenTestType);
+        test.setShift_id(2);
         testDao.save(test);
+    }
+    private void changeColorBack(ChoiceBox choiceBox){
+        choiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (!"Choose the station".equals(newValue)) {
+                choiceBox.getStyleClass().remove("error-choice-box");
+                choiceBox.getStyleClass().add("normal-choice-box");
+            }
+        });
+    }
+    private void dateColorBack(DatePicker datePicker){
+//        datePicker.setPromptText("Choose the date");
+
+        // Add a listener to the DatePicker to detect changes in the selected date
+        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                datePicker.getStyleClass().remove("error-date-picker");
+                datePicker.getStyleClass().add("normal-date-picker");
+            }
+        });
     }
 }

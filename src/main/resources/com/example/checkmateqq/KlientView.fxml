@@ -10,10 +10,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="598.0" prefWidth="778.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="598.0" prefWidth="778.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
+        <ChoiceBox fx:id="station" accessibleText="qq" layoutX="54.0" layoutY="92.0" prefWidth="150.0" styleClass="normal-choice-box" />
         <DatePicker fx:id="date" layoutX="54.0" layoutY="150.0" onAction="#pickDate" />
-        <ChoiceBox fx:id="station" accessibleText="qq" layoutX="54.0" layoutY="92.0" prefWidth="150.0" />
         <AnchorPane accessibleRole="CONTEXT_MENU" prefHeight="58.0" prefWidth="785.0" style="-fx-background-color: #404040;" styleClass="border">
             <children>
                 <Label layoutX="14.0" layoutY="9.0" text="CheckMate" textFill="WHITE">
@@ -35,10 +35,9 @@
                </cursor>
             </Text>
             </children></AnchorPane>
-        <Label layoutX="54.0" layoutY="68.0" text="Pick the station" />
         <TableView fx:id="testTable" layoutX="488.0" layoutY="189.0" prefHeight="154.0" prefWidth="254.0" />
         <Label layoutX="585.0" layoutY="167.0" text="Test results" />
-        <Button fx:id="selectTerm" layoutX="181.0" layoutY="521.0" mnemonicParsing="false" onAction="#saveTestTerm" prefHeight="33.0" prefWidth="101.0" text="Select term">
+        <Button fx:id="selectTerm" layoutX="181.0" layoutY="521.0" mnemonicParsing="false" onAction="#saveTestTerm" prefHeight="33.0" prefWidth="101.0" styleClass="button-bottom" text="Select term">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
@@ -48,6 +47,6 @@
             </columnResizePolicy>
         </TableView>
       <Label layoutX="54.0" layoutY="128.0" text="Pick the date" />
-        <ChoiceBox fx:id="typeOfTestChoiceBox" layoutX="253.0" layoutY="92.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="typeOfTestChoiceBox" layoutX="253.0" layoutY="92.0" prefWidth="150.0" styleClass="normal-choice-box" />
     </children>
 </AnchorPane>

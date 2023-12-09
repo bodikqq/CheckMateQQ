@@ -25,3 +25,38 @@ and open the template in the editor.
 .table-cell:selected {
     -fx-background-color: #404040;
 }
+/* Normal state styles */
+.normal-choice-box {
+    -fx-background-color: white;
+}
+
+.normal-date-picker {
+    -fx-background-color: white;
+}
+
+.normal-table {
+    -fx-background-color: white;
+}
+
+/* Error state styles */
+.error-choice-box {
+    -fx-background-color: white;
+    -fx-border-color: #DC143C;
+    -fx-border-radius: 3px;
+}
+
+.error-date-picker {
+    -fx-background-color: #DC143C;
+}
+
+.error-table {
+    -fx-background-color: #97233F;
+}
+.button-bottom {
+    -fx-background-color:  #fff;
+    -fx-border-width: 1px;
+    -fx-border-color: #404040;
+    -fx-border-radius: 3px;
+    /*-fx-text-fill: #f0f0f0;*/
+}
+
