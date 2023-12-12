@@ -4,6 +4,7 @@ import com.example.checkmateqq.triedy.Shift;
 import com.example.checkmateqq.triedy.Station;
 import com.example.checkmateqq.triedy.Test;
 import com.example.checkmateqq.triedy.User;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -17,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -49,6 +51,7 @@ public class KlientViewController {
     private int selectedStationID = -1;
     private TestDao testDao = DaoFactory.INSTANCE.getTestDao();
     private ShiftDao shiftDao = DaoFactory.INSTANCE.getShiftDao();
+    private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
     private StationDao stationDao = DaoFactory.INSTANCE.getStationDao();
     //static private StationDao stationDao = DaoFactory.INSTANCE.getStationDao();
     private List<Station> stations = stationDao.getAll();
@@ -64,6 +67,37 @@ public class KlientViewController {
     @FXML
     void pickDate(ActionEvent event) {
         pickedDate = date.getValue();
+        if(selectedStationID == -1)return;
+        for(TableColumn column : timeTable.getColumns()){
+           columnCellFactory(column);
+//            column.setCellFactory(col -> new TableCell<HourMinutes, String>() {
+//                @Override
+//                protected void updateItem(String item, boolean empty) {
+//                    super.updateItem(item, empty);
+//
+//                    if (empty || item == null) {
+//                        setDisable(false);
+//                        setText("");
+//                    } else {
+//                        // Your condition check based on the picked date
+//                        Date utilDate = java.sql.Date.valueOf(pickedDate);
+//                        LocalTime localTime = LocalTime.parse(item);
+//
+//                        boolean is_first = localTime.isBefore(LocalTime.of(13, 0));
+//
+//                        // Customize the appearance of the disabled cell based on your condition
+//                        if (testDao.testsOnTime(time, utilDate) == userDao.workersOnTime(utilDate, selectedStationID, is_first)) {
+//                            setDisable(true);
+//                            setTextFill(Color.GRAY); // Set text color to gray for disabled cells
+//                            // You can also set background color, font, or any other styling as needed
+//                        } else {
+//                            setDisable(false);
+//                            setText(item.toString()); // Set the text normally for non-disabled cells
+//                        }
+//                    }
+//                }
+//            });
+        }
     }
     public void setUserId(User user) {
         this.user = user;
@@ -243,6 +277,10 @@ public class KlientViewController {
 
         } else {
             saveTest();
+            for(TableColumn column : timeTable.getColumns()){
+                columnCellFactory(column);
+            }
+            timeTable.getSelectionModel().select(-1);
         }
     }
     private void goToLogin(Stage currentStage, LoginController controller) {
@@ -313,8 +351,8 @@ public class KlientViewController {
             // Iterate through columns
             for (int colIndex = 0; colIndex < timeTable.getColumns().size(); colIndex++) {
                 TableColumn<HourMinutes, String> column = (TableColumn<HourMinutes, String>) timeTable.getColumns().get(colIndex);
-                String cell = column.getCellObservableValue(rowIndex).getValue();
-
+                ObservableValue<String> cellm = column.getCellObservableValue(rowIndex);
+                String cell = cellm.getValue();
                 // Now you have access to the cell, and you can perform any actions you need
                 // For example, you can check the data in the cell
                 Time time = convertStringToTime(cell);
@@ -322,10 +360,11 @@ public class KlientViewController {
                 Date utilDate = java.sql.Date.valueOf(pickedDate);
                 boolean  is_first = false;
                 if (localTime.isBefore(LocalTime.of(13, 0))) {
-                    System.out.println("qq");
                     is_first = true;
                 }
-                //if(testDao.testsOnTime(time, utilDate)=userDao.workersOnTime(utilDate,))
+                if(testDao.testsOnTime(time, utilDate)==userDao.workersOnTime(utilDate,selectedStationID,is_first)){
+                    /////
+                }
 
                 System.out.println(time);
             }
@@ -349,5 +388,38 @@ public class KlientViewController {
                 setStyle("-fx-background-color: #eeeeee;"); // Change the background color for disabled dates
             }
         }
+    }
+    private void columnCellFactory(TableColumn column){
+        column.setCellFactory(tc -> new TableCell<HourMinutes, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setDisable(false);
+                    setText("");
+                } else {
+                    // Perform your condition check here
+                    Time time = convertStringToTime(item);
+                    LocalTime localTime = time.toLocalTime();
+                    Date utilDate = java.sql.Date.valueOf(pickedDate);
+                    boolean is_first = false;
+                    if (localTime.isBefore(LocalTime.of(13, 0))) {
+                        is_first = true;
+                    }
+                    if (testDao.testsOnTime(time, utilDate) >= userDao.workersOnTime(utilDate, selectedStationID, is_first)) {
+                        setDisable(true);
+                        setText(item);
+                        // Customize the appearance of the disabled cell if needed
+                        setTextFill(Color.web("#b9b9b9"));
+                        setStyle("-fx-background-color: #eeeeee;");
+                        // You can also set background color, font, or any other styling as needed
+                    } else {
+                        setDisable(false);
+                        setText(item); // Set the text normally for non-disabled cells
+                    }
+                }
+            }
+        });
     }
 }
