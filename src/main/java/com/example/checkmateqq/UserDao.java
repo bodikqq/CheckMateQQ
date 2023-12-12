@@ -2,6 +2,8 @@ package com.example.checkmateqq;
 
 import com.example.checkmateqq.triedy.User;
 
+import java.util.Date;
+
 public interface UserDao {
 
     User getById(int id) throws EntityNotFoundException;
@@ -12,4 +14,7 @@ public interface UserDao {
     boolean checkIfUserExists(String login, String password) throws EntityNotFoundException;
 
     User getUserByLoginAndPassword(String login, String password);
+
+    int workersOnTime(Date date,int stationId, boolean isFirst);
+
 }

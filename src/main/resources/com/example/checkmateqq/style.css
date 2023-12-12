@@ -75,4 +75,7 @@ and open the template in the editor.
     -fx-border-radius: 3px;
     /*-fx-text-fill: #f0f0f0;*/
 }
+.table-cell:disabled {
+    -fx-background-color: #DC143C;
+}
 

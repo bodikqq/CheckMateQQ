@@ -1,28 +1,20 @@
 package com.example.checkmateqq;
 
-import com.example.checkmateqq.triedy.Shift;
 import com.example.checkmateqq.triedy.Test;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class TEST {
     static private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
     static private TestDao testDao = DaoFactory.INSTANCE.getTestDao();
-    static private ShiftDao shiftDao = DaoFactory.INSTANCE.getShiftDao();
     static public void testGetById() {
         int existingUserId = 10;
 
         try {
-            String dateString = "2023-12-09";
-                // Define the date format of your input string
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-                // Parse the string and convert it to a java.util.Date object
-                Date utilDate = dateFormat.parse(dateString);
-            System.out.println(shiftDao.getShiftByDate(utilDate).getId());
-            System.out.println("mmm");
+            List<Test> tests = testDao.getAllUserTests(12);
+            for (Test test: tests) {
+                System.out.println(test.getDate());
+            }
 //            try {
 //                System.out.println(userDao.checkIfLoginExist("john.doe"));
 //                //System.out.println(user.getLogin());

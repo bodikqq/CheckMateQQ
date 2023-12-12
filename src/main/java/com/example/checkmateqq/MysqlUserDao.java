@@ -1,10 +1,7 @@
 package com.example.checkmateqq;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.Date;
 import java.util.Objects;
 
 import com.example.checkmateqq.triedy.User;
@@ -118,6 +115,13 @@ public boolean checkIfUserExists(String login, String password) {
         }
         String sql = "SELECT id, name, surname, login, password, isEmployee, isAdmin FROM user WHERE login = ? AND password = ?";
             return jdbcTemplate.queryForObject(sql, userRM(), login, password);
+    }
+    @Override
+    public int workersOnTime(Date date, int stationId, boolean isFirst) {
+        String sql = "SELECT COUNT(DISTINCT u.id) AS number_of_workers FROM `checkmate`.`user` u JOIN `checkmate`.`user_has_shift` uhs ON u.id = uhs.user_id JOIN `checkmate`.`shift` s ON uhs.shift_id = s.id WHERE s.station_id = ? AND s.date = ? AND is_first = ?";
+
+        int qq = jdbcTemplate.queryForObject(sql, Integer.class, stationId,date, isFirst);
+        return qq;
     }
 
 }

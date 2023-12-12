@@ -17,7 +17,7 @@ public enum DaoFactory {
         if (jdbcTemplate == null) {
             MysqlDataSource dataSource = new MysqlDataSource();
             dataSource.setUser("root");
-            dataSource.setPassword("qq");
+            dataSource.setPassword("heslo");
             dataSource.setUrl("jdbc:mysql://localhost:3306/checkmate");
             jdbcTemplate = new JdbcTemplate(dataSource);
         }

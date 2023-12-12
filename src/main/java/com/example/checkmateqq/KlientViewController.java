@@ -1,10 +1,8 @@
 package com.example.checkmateqq;
 
-import com.example.checkmateqq.triedy.Shift;
 import com.example.checkmateqq.triedy.Station;
 import com.example.checkmateqq.triedy.Test;
 import com.example.checkmateqq.triedy.User;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,8 +21,37 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+// class ForTestTable{
+//     public Date getDate() {
+//         return date;
+//     }
+//
+//     // Setter for 'date'
+//     public void setDate(Date date) {
+//         this.date = date;
+//     }
+//
+//     public String getTestResult() {
+//         return testResult;
+//     }
+//
+//     public void setTestResult(String testResult) {
+//         this.testResult = testResult;
+//     }
+//
+//     ForTestTable(Date date, String testResult){
+//         this.date = date;
+//         this.testResult = testResult;
+//     }
+//    private Date date;
+//    private String testResult;
+//
+//}
+
 
 public class KlientViewController {
     @FXML
@@ -44,11 +70,9 @@ public class KlientViewController {
     private ChoiceBox<String> typeOfTestChoiceBox;
 
     private User user;
-    private int selectedStationID = -1;
     private TestDao testDao = DaoFactory.INSTANCE.getTestDao();
-    private StationDao stationDao = DaoFactory.INSTANCE.getStationDao();
-
     private ShiftDao shiftDao = DaoFactory.INSTANCE.getShiftDao();
+    static private StationDao stationDao = DaoFactory.INSTANCE.getStationDao();
     private List<Station> stations = stationDao.getAll();
     String cellData;
     LocalDate pickedDate;
@@ -66,30 +90,10 @@ public class KlientViewController {
     public void setUserId(User user) {
         this.user = user;
     }
-    private int getKeyByValue(Map<Integer, String> map, String value) {
-        for (Map.Entry<Integer, String> entry : map.entrySet()) {
-            if (entry.getValue().equals(value)) {
-                return entry.getKey();
-            }
-        }
-        return -1; // Return a default value or handle the case when the value is not found
-    }
-
     public void initialize() throws EntityNotFoundException {
-        date.setDayCellFactory(picker -> new DisabledPastDatesCalendar.DisabledPastDateCell());
         station.setValue("Choose the station");
-        Map<Integer, String> ourStations = stationsToMap();
-        System.out.println("Map Contents: " + ourStations.values());
-
-        List<String> qqq = ourStations.values().stream().collect(Collectors.toList());
-        station.getItems().addAll(qqq);
-        station.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                // Get the corresponding key from the map based on the selected value
-                selectedStationID = getKeyByValue(ourStations, newValue);
-                //System.out.println("Selected Key: " + selectedKey);
-            }
-        });
+        station.getItems().setAll(stationsToString());
+       // System.out.println(user.get);
 
 
         UserNameOnTopBar.setText(user.getName());
@@ -124,8 +128,6 @@ public class KlientViewController {
 //            tableColumn.setResizable(false);
         }
         List<Test> tests = getTestData(user.getId());
-        Test testForSortHaha = new Test();
-        tests = testForSortHaha.sortByTime(tests);
         for (Test test:tests
              ) {
             String result = "Not ready yet";
@@ -140,7 +142,7 @@ public class KlientViewController {
             testTable.getItems().add(qq);
         }
         System.out.println("woohoo");
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         TableColumn<HourMinutes, String> time0 = new TableColumn<HourMinutes, String>();
         time0.setCellValueFactory(new PropertyValueFactory<HourMinutes, String>("time0"));
 
@@ -185,17 +187,20 @@ public class KlientViewController {
             //System.out.println(hourminutes.toString());
             timeTable.getItems().add(hourminutes);
         }
+//        timeTable.lookup(".column-header-background").setVisible(false);
+//        timeTable.lookup(".show-hide-columns-button").setVisible(false);
         timeTable.getSelectionModel().setCellSelectionEnabled(true);
 
         ObservableList<TablePosition> selectedCells = timeTable.getSelectionModel().getSelectedCells();
-        timeTable.getStyleClass().add("noheader");
-
         selectedCells.addListener((ListChangeListener.Change<? extends TablePosition> change) -> {
             if (selectedCells.size() > 0) {
                 TablePosition selectedCell = selectedCells.get(0);
                 TableColumn<HourMinutes, String> column = (TableColumn<HourMinutes, String>) selectedCell.getTableColumn();
                 int rowIndex = selectedCell.getRow();
                 cellData = column.getCellObservableValue(rowIndex).getValue();
+
+                // You can now use 'data' which represents the value in the selected cell
+
             }
         });
 
@@ -215,7 +220,7 @@ public class KlientViewController {
         Integer chosenTestType = null;
         if(testType.equals("PCR")){chosenTestType = 0;}else if(testType.equals("NAATs")){chosenTestType=1;}
         System.out.println(cellData + pickedDate + chosenTestType + station.getValue());
-        if (cellData == null || pickedDate == null || selectedStationID == -1 || chosenTestType==null) {
+        if (cellData == null || pickedDate == null || station.getValue() == "Choose the station" || chosenTestType==null) {
             // Set error styles for controls that are not selected
             if (cellData == null) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -226,8 +231,8 @@ public class KlientViewController {
             if (pickedDate == null) {
                 date.getStyleClass().add("error-date-picker");
             }
-            //System.out.println(station.getValue());
-            if (selectedStationID == -1) {
+            System.out.println(station.getValue());
+            if (station.getValue().equals("Choose the station")) {
                 station.getStyleClass().add("error-choice-box");
             }
 
@@ -259,14 +264,14 @@ public class KlientViewController {
             e.printStackTrace();
         }
     }
-    private Map<Integer,String> stationsToMap(){
-        Map<Integer,String> stationsToMap = new HashMap<Integer,String>();
+    private List<String> stationsToString(){
+        List<String> stationsToString = new ArrayList<>(stations.size());
         for(Station station: stations){
             String town = station.getTown();
             String address = station.getAddress();
-            stationsToMap.put(station.getId(),town + ", " + address);
+            stationsToString.add(town + ", " + address);
         }
-        return stationsToMap;
+        return stationsToString;
     }
     private void saveTest() throws EntityNotFoundException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -277,9 +282,7 @@ public class KlientViewController {
         Integer chosenTestType = null;
         if(testType.equals("PCR")){chosenTestType = 0;}else if(testType.equals("NAATs")){chosenTestType=1;}
         Test test = new Test(utilDate, user.getId(),utilTime,chosenTestType);
-        shiftDao.createShiftIfItDoesentExist(selectedStationID,utilDate);
-        Shift shift = shiftDao.getShiftByDate(utilDate);
-        test.setShift_id(shift.getId());
+        test.setShift_id(2);
         testDao.save(test);
     }
     private void changeColorBack(ChoiceBox choiceBox){
@@ -301,15 +304,35 @@ public class KlientViewController {
             }
         });
     }
-    private static class DisabledPastDateCell extends DateCell {
-        @Override
-        public void updateItem(LocalDate item, boolean empty) {
-            super.updateItem(item, empty);
+    private void cellIteration() {
+        for (int rowIndex = 0; rowIndex < timeTable.getItems().size(); rowIndex++) {
+            // Iterate through columns
+            for (int colIndex = 0; colIndex < timeTable.getColumns().size(); colIndex++) {
+                TableColumn<HourMinutes, String> column = (TableColumn<HourMinutes, String>) timeTable.getColumns().get(colIndex);
+                String cell = column.getCellObservableValue(rowIndex).getValue();
 
-            if (item.isBefore(LocalDate.now())) {
-                setDisable(true);
-                setStyle("-fx-background-color: #eeeeee;"); // Change the background color for disabled dates
+                // Now you have access to the cell, and you can perform any actions you need
+                // For example, you can check the data in the cell
+                Time time = convertStringToTime(cell);
+                LocalTime localTime = time.toLocalTime();
+                Date utilDate = java.sql.Date.valueOf(pickedDate);
+                boolean  is_first = false;
+                if (localTime.isBefore(LocalTime.of(13, 0))) {
+                    System.out.println("qq");
+                    is_first = true;
+                }
+                //if(testDao.testsOnTime(time, utilDate)=userDao.workersOnTime(utilDate,))
+
+                System.out.println(time);
             }
         }
     }
+    private Time convertStringToTime(String timeString) {
+        // Parse the string representation of time to LocalTime
+        LocalTime localTime = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm"));
+
+        // Convert LocalTime to Time
+        return Time.valueOf(localTime);
+    }
+
 }

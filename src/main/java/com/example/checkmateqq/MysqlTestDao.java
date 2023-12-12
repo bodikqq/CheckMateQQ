@@ -62,5 +62,10 @@ public class MysqlTestDao implements TestDao{
         String sql = "SELECT * FROM test WHERE pacient_id = " + user_id;
         return jdbcTemplate.query(sql, testRM());
     }
+    @Override
+    public int testsOnTime(Time time, Date date) {
+        String sql = "SELECT COUNT(*) FROM test WHERE time = ? AND date = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, time, date);
+}
 
 }
