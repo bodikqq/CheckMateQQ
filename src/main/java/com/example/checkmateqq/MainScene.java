@@ -18,7 +18,7 @@ public class MainScene extends Application {
         Scene scene = new Scene(parent);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Attender");
+        primaryStage.setTitle("CheckMate");
         primaryStage.show();
     }
 

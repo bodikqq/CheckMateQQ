@@ -72,9 +72,6 @@ public class MysqlUserDao implements UserDao {
                     return statement;
                 }
             }, keyHolder);
-            int id = keyHolder.getKey().intValue();
-            User saved = User.clone(user);
-            saved.setId(id);
             //return saved;
     }
     @Override

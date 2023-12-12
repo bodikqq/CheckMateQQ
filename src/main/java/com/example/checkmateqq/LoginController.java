@@ -16,6 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -90,9 +91,17 @@ public class LoginController {
             openKlientScene();
         }
         else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
             alert.setContentText("Wrong login or password");
-            alert.show();
+
+            // Create a custom style class for the alert
+            alert.getDialogPane().getStyleClass().add("bootstrap-alert");
+
+            // Set the alert size to fit content
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.showAndWait();
+          //  alert.getStyle;
         }
 
     }

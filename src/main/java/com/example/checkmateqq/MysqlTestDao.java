@@ -48,7 +48,6 @@ public class MysqlTestDao implements TestDao{
                 statement.setDate(3, test.getDate());
                 statement.setInt(4, test.getTest_type());
                 statement.setInt(5, test.getShift_id());
-                //statement.setInt(5, test.getShift_id());
 
                 return statement;
             }

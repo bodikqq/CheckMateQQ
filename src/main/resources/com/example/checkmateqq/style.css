@@ -22,9 +22,20 @@ and open the template in the editor.
 .box {
     
 }
+.table-cell {
+    -fx-alignment: CENTER;
+}
 .table-cell:selected {
     -fx-background-color: #404040;
+    -fx-text-fill: white;
 }
+.bootstrap-alert {
+    -fx-background-color: #fcf8e3; /* Bootstrap warning background color */
+    -fx-border-color: #faebcc; /* Bootstrap warning border color */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
+
 /* Normal state styles */
 .normal-choice-box {
     -fx-background-color: white;
@@ -47,6 +58,11 @@ and open the template in the editor.
 
 .error-date-picker {
     -fx-background-color: #DC143C;
+}
+.noheader .column-header-background {
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+    -fx-min-height: 0;
 }
 
 .error-table {

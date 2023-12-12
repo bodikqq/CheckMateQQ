@@ -1,7 +1,10 @@
 package com.example.checkmateqq.triedy;
 
 import java.sql.Time;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 public class Test {
     int id;
@@ -88,5 +91,14 @@ public class Test {
 
     public void setTime(Time time) {
         this.time = time;
+    }
+
+    public Test() {
+    }
+
+    public List<Test> sortByTime(List<Test> tests){
+        Collections.sort(tests, Comparator.comparing(Test::getDate));
+        Collections.reverse(tests);
+        return tests;
     }
 }
