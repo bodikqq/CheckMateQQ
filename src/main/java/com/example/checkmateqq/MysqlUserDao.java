@@ -123,5 +123,12 @@ public boolean checkIfUserExists(String login, String password) {
         int qq = jdbcTemplate.queryForObject(sql, Integer.class, stationId,date, isFirst);
         return qq;
     }
+    @Override
+    public boolean isUserEmployee(int userId) {
+        String sql = "SELECT isEmployee FROM user WHERE id = ?";
+        Boolean isEmployee = jdbcTemplate.queryForObject(sql, Boolean.class, userId);
+
+        return isEmployee != null && isEmployee;
+    }
 
 }

@@ -76,21 +76,23 @@ public class LoginController {
             }
         });
     }
+
     @FXML
-    void login(ActionEvent event) throws EntityNotFoundException{
+    void login(ActionEvent event) throws EntityNotFoundException {
         String enteredUsername = username.getText();
         String enteredPassword = password.getText();
         System.out.println("ahoj");
 
         User user = userDao.getUserByLoginAndPassword(enteredUsername, enteredPassword);
-        if (user != null) {
+        if (user != null && user.isEmployee()) {
+            openWorkerScene();
+        } else if (user != null) {
 //            Alert alert = new Alert(Alert.AlertType.INFORMATION);
 //            alert.setContentText("Login successfull");
 //            alert.show();
             this.user = user;
             openKlientScene();
-        }
-        else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText(null);
             alert.setContentText("Wrong login or password");
@@ -101,59 +103,81 @@ public class LoginController {
             // Set the alert size to fit content
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.showAndWait();
-          //  alert.getStyle;
+            //  alert.getStyle;
         }
 
     }
 
-    @FXML
-    void showRegisterStage(MouseEvent event) {
-        RegisterController rc = new RegisterController();
-        goToRegistration(rc);
-    }
-    private void goToRegistration(RegisterController controller) {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("RegisterView.fxml"));
-            loader.setController(controller);
-            Parent parent = loader.load();
 
-            // Get the current stage
-            Stage stage = (Stage) loginButton.getScene().getWindow();
+        @FXML
+        void showRegisterStage (MouseEvent event){
+            RegisterController rc = new RegisterController();
+            goToRegistration(rc);
+        }
+        private void goToRegistration (RegisterController controller){
+            try {
+                FXMLLoader loader = new FXMLLoader(
+                        getClass().getResource("RegisterView.fxml"));
+                loader.setController(controller);
+                Parent parent = loader.load();
 
-            // Set the new content in the current stage
-            Scene scene = new Scene(parent);
-            stage.setScene(scene);
+                // Get the current stage
+                Stage stage = (Stage) loginButton.getScene().getWindow();
 
-            // Set the title (if needed)
-            stage.setTitle("qq");
+                // Set the new content in the current stage
+                Scene scene = new Scene(parent);
+                stage.setScene(scene);
 
-            // Optionally, show the stage (if it's not already showing)
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+                // Set the title (if needed)
+                stage.setTitle("qq");
+
+                // Optionally, show the stage (if it's not already showing)
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        private void openKlientScene () {
+            try {
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("KlientView.fxml"));
+                KlientViewController klientController = new KlientViewController();
+                klientController.setUserId(user);
+                loader.setController(klientController);
+                Scene scene = new Scene(loader.load());
+                scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+                stage.setScene(scene);
+                stage.setTitle("Client View");
+                stage.show();
+
+                // Zatvorenie aktuálnej scény (prihlasovacej)
+                Stage currentStage = (Stage) loginButton.getScene().getWindow();
+                currentStage.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        private void openWorkerScene () {
+            try {
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("WorkerView.fxml"));
+                WorkerViewController workerController = new WorkerViewController();
+                workerController.setUserId(user);
+                loader.setController(workerController);
+                Scene scene = new Scene(loader.load());
+                scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+                stage.setScene(scene);
+                stage.setTitle("Worker View");
+                stage.show();
+
+                // Zatvorenie aktuálnej scény (prihlasovacej)
+                Stage currentStage = (Stage) loginButton.getScene().getWindow();
+                currentStage.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
-    private void openKlientScene() {
-        try {
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("KlientView.fxml"));
-            KlientViewController klientController = new KlientViewController();
-            klientController.setUserId(user);
-            loader.setController(klientController);
-            Scene scene = new Scene(loader.load());
-            scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-            stage.setScene(scene);
-            stage.setTitle("Client View");
-            stage.show();
-
-            // Zatvorenie aktuálnej scény (prihlasovacej)
-            Stage currentStage = (Stage) loginButton.getScene().getWindow();
-            currentStage.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 
-}
+

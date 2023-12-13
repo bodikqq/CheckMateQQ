@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="598.0" prefWidth="778.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane accessibleRole="CONTEXT_MENU" prefHeight="58.0" prefWidth="785.0" style="-fx-background-color: #404040;" styleClass="border">
+            <children>
+                <Label layoutX="14.0" layoutY="9.0" text="CheckMate" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="27.0" />
+                    </font>
+                </Label>
+            <Label fx:id="UserNameOnTopBar" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="447.0" layoutY="15.0" prefHeight="26.0" prefWidth="175.0" text="sss" textAlignment="RIGHT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Text fx:id="logoutButton" fill="WHITE" fontSmoothingType="LCD" layoutX="671.0" layoutY="34.0" onMouseClicked="#logOut" strokeType="OUTSIDE" strokeWidth="0.0" text="log out" wrappingWidth="60.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
+            </children></AnchorPane>
+      <ChoiceBox fx:id="stationChoiceBox" layoutX="42.0" layoutY="103.0" prefWidth="150.0" />
+      <DatePicker fx:id="datePicker" layoutX="42.0" layoutY="148.0" onAction="#onDatePicked" prefHeight="21.0" prefWidth="150.0" />
+      <TableView fx:id="isFirstTable" layoutX="42.0" layoutY="199.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label layoutX="418.0" layoutY="107.0" text="Upcoming shifts:" />
+      <TableView fx:id="shiftsTable" layoutX="418.0" layoutY="148.0" prefHeight="115.0" prefWidth="281.0" />
+      <Label layoutX="42.0" layoutY="75.0" text="Choose a shift:" />
+      <Label layoutX="42.0" layoutY="447.0" text="Hours worked in month:" />
+      <ChoiceBox fx:id="monthsWorkedBox" layoutX="42.0" layoutY="472.0" prefWidth="150.0" />
+      <Label fx:id="hoursWorkedShow" layoutX="42.0" layoutY="511.0" text="Label" />
+      <Button fx:id="confirmButton" layoutX="183.0" layoutY="413.0" mnemonicParsing="false" text="Confirm" />
+      <Label layoutX="418.0" layoutY="364.0" text="Look up a test" />
+      <Button layoutX="519.0" layoutY="360.0" mnemonicParsing="false" text="Button" />
+      <TextArea layoutX="408.0" layoutY="412.0" prefHeight="126.0" prefWidth="185.0" />
+    </children>
+</AnchorPane>

@@ -17,4 +17,5 @@ public interface UserDao {
 
     int workersOnTime(Date date,int stationId, boolean isFirst);
 
+    boolean isUserEmployee(int userId);
 }

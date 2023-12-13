@@ -9,6 +9,12 @@ public class Shift {
 
     Date date;
 
+    boolean isFirst;
+
+    public boolean isFirst() {
+        return isFirst;
+    }
+
     public int getId() {
         return id;
     }
