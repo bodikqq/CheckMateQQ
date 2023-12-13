@@ -294,10 +294,10 @@ public class KlientViewController {
         Integer chosenTestType = null;
         if(testType.equals("PCR")){chosenTestType = 0;}else if(testType.equals("NAATs")){chosenTestType=1;}
         Test test = new Test(utilDate, user.getId(),utilTime,chosenTestType);
-        shiftDao.createShiftIfItDoesentExist(selectedStationID,utilDate);
-        Shift shift;
-        shift = shiftDao.getShiftByDate(utilDate);
-        test.setShift_id(shift.getId());
+//        shiftDao.createShiftIfItDoesentExist(selectedStationID,utilDate);
+//        Shift shift;
+//        shift = shiftDao.getShiftByDate(utilDate);
+//        test.setShift_id(shift.getId());
         testDao.save(test);
     }
     private void changeColorBack(ChoiceBox choiceBox){
@@ -318,30 +318,6 @@ public class KlientViewController {
                 datePicker.getStyleClass().add("normal-date-picker");
             }
         });
-    }
-    private void cellIteration() {
-        for (int rowIndex = 0; rowIndex < timeTable.getItems().size(); rowIndex++) {
-            // Iterate through columns
-            for (int colIndex = 0; colIndex < timeTable.getColumns().size(); colIndex++) {
-                TableColumn<HourMinutes, String> column = (TableColumn<HourMinutes, String>) timeTable.getColumns().get(colIndex);
-                ObservableValue<String> cellm = column.getCellObservableValue(rowIndex);
-                String cell = cellm.getValue();
-                // Now you have access to the cell, and you can perform any actions you need
-                // For example, you can check the data in the cell
-                Time time = convertStringToTime(cell);
-                LocalTime localTime = time.toLocalTime();
-                Date utilDate = java.sql.Date.valueOf(pickedDate);
-                boolean  is_first = false;
-                if (localTime.isBefore(LocalTime.of(13, 0))) {
-                    is_first = true;
-                }
-                if(testDao.testsOnTime(time, utilDate)==userDao.workersOnTime(utilDate,selectedStationID,is_first)){
-                    /////
-                }
-
-                System.out.println(time);
-            }
-        }
     }
     private Time convertStringToTime(String timeString) {
         // Parse the string representation of time to LocalTime

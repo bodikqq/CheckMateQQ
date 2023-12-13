@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ShiftDao {
 
-    void createShiftIfItDoesentExist(int ShiftID, Date date);
-      Shift getShiftByDate(Date date);
+    void createShiftIfItDoesentExist(int ShiftID, Date date, boolean isFirst);
+      Shift getShiftByDateAndIsFirst(Date date, boolean isFirst);
 }

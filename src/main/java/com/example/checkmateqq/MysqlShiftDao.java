@@ -26,19 +26,20 @@ public class MysqlShiftDao implements ShiftDao {
                 int station_id = rs.getInt("station_id");
 
                 Date date = rs.getDate("date");
+                boolean isFirst = rs.getBoolean("is_first");
 
 
-                Shift shift = new Shift(id, station_id,date);
+                Shift shift = new Shift(id, station_id,date,isFirst);
                 return shift;
             }
         };
     }
     @Override
-    public void createShiftIfItDoesentExist(int ShiftID, Date date){
-        String sql1 = "select count(*) from shift where date = ?";
-        int result = jdbcTemplate.queryForObject(sql1,Integer.class,date);
+    public void createShiftIfItDoesentExist(int ShiftID, Date date, boolean isFirst){
+        String sql1 = "select count(*) from shift where date = ? and is_first = ?";
+        int result = jdbcTemplate.queryForObject(sql1,Integer.class,date,isFirst);
         if(result >= 1) return;
-        String sql = "insert into shift values(null,?,?)";
+        String sql = "insert into shift values(null,?,?,?)";
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         jdbcTemplate.update(new PreparedStatementCreator() {
 
@@ -47,6 +48,7 @@ public class MysqlShiftDao implements ShiftDao {
                 PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 statement.setInt(1, ShiftID);
                 statement.setDate(2, sqlDate);
+                statement.setBoolean(3,isFirst);
                 return statement;
             }
         });
@@ -56,9 +58,9 @@ public class MysqlShiftDao implements ShiftDao {
 
 
     @Override
-    public Shift getShiftByDate(Date date) {
-        String sql = "SELECT * FROM shift WHERE date = ?";
-        List<Shift> shifts = jdbcTemplate.query(sql, shiftRM(), date);
+    public Shift getShiftByDateAndIsFirst(Date date, boolean isFirst) {
+        String sql = "SELECT * FROM shift WHERE date = ? AND is_first = ?";
+        List<Shift> shifts = jdbcTemplate.query(sql, shiftRM(), date, isFirst);
         if(shifts.size() == 0)return null;
         return shifts.get(0);
     }

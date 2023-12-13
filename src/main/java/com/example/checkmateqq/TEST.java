@@ -2,12 +2,16 @@ package com.example.checkmateqq;
 
 import com.example.checkmateqq.triedy.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class TEST {
     static private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
     static private TestDao testDao = DaoFactory.INSTANCE.getTestDao();
+    static private ShiftDao shiftDao = DaoFactory.INSTANCE.getShiftDao();
     static public void testGetById() {
+
         int existingUserId = 10;
 
         try {
@@ -41,5 +45,8 @@ public class TEST {
         testGetById();
 //        System.out.println(userDao.checkIfLoginExist("vangel"));
 //        System.out.println(userDao.checkIfUserExists("ahoj","nic"));
+
     }
 }
+
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="433.0" prefWidth="571.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TableView fx:id="timeTable" layoutX="54.0" layoutY="75.0" prefHeight="345.0" prefWidth="455.0">
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+        <TextField fx:id="TestIdField" layoutX="54.0" layoutY="25.0" onInputMethodTextChanged="#change" prefHeight="30.0" prefWidth="149.0" promptText="Enter test id" />
+        <ImageView fx:id="IconSearch" fitHeight="30.0" fitWidth="30.0" layoutX="203.0" layoutY="25.0" onMouseClicked="#searchForTestByID" pickOnBounds="true" preserveRatio="true" />
+    </children>
+</AnchorPane>

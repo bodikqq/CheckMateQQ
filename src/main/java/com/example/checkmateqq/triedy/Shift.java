@@ -9,6 +9,17 @@ public class Shift {
 
     Date date;
 
+    public Shift(int id, int station_id, Date date, boolean isFirst) {
+        this.id = id;
+        this.station_id = station_id;
+        this.date = date;
+        this.isFirst = isFirst;
+    }
+
+    public void setFirst(boolean first) {
+        isFirst = first;
+    }
+
     boolean isFirst;
 
     public boolean isFirst() {

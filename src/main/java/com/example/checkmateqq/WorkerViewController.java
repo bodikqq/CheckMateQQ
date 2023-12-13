@@ -132,9 +132,24 @@ public class WorkerViewController {
             int tableRowNumber = isFirstTable.getSelectionModel().getSelectedIndex();
             //int stationId = getKeyByValue()
             Date utilDate = java.sql.Date.valueOf(pickedDate);
-            shiftDao.createShiftIfItDoesentExist(selectedStationID,utilDate);
-            Shift shift = shiftDao.getShiftByDate(utilDate);
-            uhsDao.createUhsIfDoesntExist(user.getId(),shift.getId());
+            Shift shift;
+            if(tableRowNumber == 0){
+                shiftDao.createShiftIfItDoesentExist(4,utilDate,true);
+                shift = shiftDao.getShiftByDateAndIsFirst(utilDate, true);
+                uhsDao.createUhsIfDoesntExist(user.getId(),shift.getId());
+            }else if(tableRowNumber == 1){
+                shiftDao.createShiftIfItDoesentExist(4,utilDate,false);
+                shift = shiftDao.getShiftByDateAndIsFirst(utilDate, false);
+                uhsDao.createUhsIfDoesntExist(user.getId(),shift.getId());
+            }else{
+
+                shiftDao.createShiftIfItDoesentExist(4,utilDate, true);
+                shiftDao.createShiftIfItDoesentExist(4,utilDate, false);
+                shift = shiftDao.getShiftByDateAndIsFirst(utilDate, true);
+                uhsDao.createUhsIfDoesntExist(user.getId(),shift.getId());
+                shift = shiftDao.getShiftByDateAndIsFirst(utilDate,false );
+                uhsDao.createUhsIfDoesntExist(user.getId(),shift.getId());
+        }
     }
 
     @FXML
