@@ -84,13 +84,14 @@ public class LoginController {
         System.out.println("ahoj");
 
         User user = userDao.getUserByLoginAndPassword(enteredUsername, enteredPassword);
+        this.user = user;
         if (user != null && user.isEmployee()) {
+
             openWorkerScene();
         } else if (user != null) {
 //            Alert alert = new Alert(Alert.AlertType.INFORMATION);
 //            alert.setContentText("Login successfull");
 //            alert.show();
-            this.user = user;
             openKlientScene();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);

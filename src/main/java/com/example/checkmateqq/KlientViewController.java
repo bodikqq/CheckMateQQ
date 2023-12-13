@@ -70,33 +70,6 @@ public class KlientViewController {
         if(selectedStationID == -1)return;
         for(TableColumn column : timeTable.getColumns()){
            columnCellFactory(column);
-//            column.setCellFactory(col -> new TableCell<HourMinutes, String>() {
-//                @Override
-//                protected void updateItem(String item, boolean empty) {
-//                    super.updateItem(item, empty);
-//
-//                    if (empty || item == null) {
-//                        setDisable(false);
-//                        setText("");
-//                    } else {
-//                        // Your condition check based on the picked date
-//                        Date utilDate = java.sql.Date.valueOf(pickedDate);
-//                        LocalTime localTime = LocalTime.parse(item);
-//
-//                        boolean is_first = localTime.isBefore(LocalTime.of(13, 0));
-//
-//                        // Customize the appearance of the disabled cell based on your condition
-//                        if (testDao.testsOnTime(time, utilDate) == userDao.workersOnTime(utilDate, selectedStationID, is_first)) {
-//                            setDisable(true);
-//                            setTextFill(Color.GRAY); // Set text color to gray for disabled cells
-//                            // You can also set background color, font, or any other styling as needed
-//                        } else {
-//                            setDisable(false);
-//                            setText(item.toString()); // Set the text normally for non-disabled cells
-//                        }
-//                    }
-//                }
-//            });
         }
     }
     public void setUserId(User user) {

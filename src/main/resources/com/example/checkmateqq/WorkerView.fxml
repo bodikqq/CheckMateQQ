@@ -36,16 +36,16 @@
             </children></AnchorPane>
       <ChoiceBox fx:id="stationChoiceBox" layoutX="42.0" layoutY="103.0" prefWidth="150.0" />
       <DatePicker fx:id="datePicker" layoutX="42.0" layoutY="148.0" onAction="#onDatePicked" prefHeight="21.0" prefWidth="150.0" />
-      <TableView fx:id="isFirstTable" layoutX="42.0" layoutY="199.0" prefHeight="200.0" prefWidth="200.0" />
+      <TableView fx:id="isFirstTable" layoutX="42.0" layoutY="199.0" prefHeight="155.0" prefWidth="201.0" />
       <Label layoutX="418.0" layoutY="107.0" text="Upcoming shifts:" />
       <TableView fx:id="shiftsTable" layoutX="418.0" layoutY="148.0" prefHeight="115.0" prefWidth="281.0" />
       <Label layoutX="42.0" layoutY="75.0" text="Choose a shift:" />
       <Label layoutX="42.0" layoutY="447.0" text="Hours worked in month:" />
       <ChoiceBox fx:id="monthsWorkedBox" layoutX="42.0" layoutY="472.0" prefWidth="150.0" />
       <Label fx:id="hoursWorkedShow" layoutX="42.0" layoutY="511.0" text="Label" />
-      <Button fx:id="confirmButton" layoutX="183.0" layoutY="413.0" mnemonicParsing="false" text="Confirm" />
+      <Button fx:id="confirmButton" layoutX="168.0" layoutY="385.0" mnemonicParsing="false" onAction="#onConfirm" prefHeight="39.0" prefWidth="75.0" text="Confirm" />
       <Label layoutX="418.0" layoutY="364.0" text="Look up a test" />
-      <Button layoutX="519.0" layoutY="360.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="519.0" layoutY="360.0" mnemonicParsing="false" onAction="#openTestByDate" text="Button" />
       <TextArea layoutX="408.0" layoutY="412.0" prefHeight="126.0" prefWidth="185.0" />
     </children>
 </AnchorPane>

@@ -1,5 +1,7 @@
 package com.example.checkmateqq;
 
+import com.example.checkmateqq.triedy.MysqlUhsDao;
+import com.example.checkmateqq.triedy.Uhs;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
@@ -11,6 +13,7 @@ public enum DaoFactory {
     private TestDao testDao;
     private ShiftDao shiftDao;
     private StationDao stationDao;
+    private UhsDao uhsDao;
     private JdbcTemplate jdbcTemplate;
 
     private JdbcTemplate getJdbcTemplate() {
@@ -45,6 +48,11 @@ public enum DaoFactory {
         if (stationDao == null)
             stationDao = (StationDao) new MysqlStationDao(getJdbcTemplate());
         return stationDao;
+    }
+    public UhsDao getUhsDao(){
+        if(uhsDao == null)
+            uhsDao = (UhsDao) new MysqlUhsDao(getJdbcTemplate());
+        return uhsDao;
     }
 
 }

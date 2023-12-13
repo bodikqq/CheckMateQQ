@@ -1,4 +1,5 @@
 package com.example.checkmateqq;
+import com.example.checkmateqq.triedy.Shift;
 import com.example.checkmateqq.triedy.Station;
 import com.example.checkmateqq.triedy.User;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +31,8 @@ public class WorkerViewController {
 
     @FXML
     private TextField codeTextField;
+    @FXML
+    private Button confirmButton;
 
     @FXML
     private ChoiceBox<String> stationChoiceBox;
@@ -55,9 +59,16 @@ public class WorkerViewController {
     private TestDao testDao = DaoFactory.INSTANCE.getTestDao();
     private ShiftDao shiftDao = DaoFactory.INSTANCE.getShiftDao();
     private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
+    private UhsDao uhsDao = DaoFactory.INSTANCE.getUhsDao();
+    LocalDate pickedDate;
 
     @FXML
+    void openTestByDate(ActionEvent event) {
+
+    }
+    @FXML
     private void initialize() throws EntityNotFoundException{
+
         datePicker.setDayCellFactory(picker -> new DisabledPastDatesCalendar.DisabledPastDateCell());
 
         datePicker.setDayCellFactory(picker -> new DisabledPastDatesCalendar.DisabledPastDateCell());
@@ -66,8 +77,6 @@ public class WorkerViewController {
         Map<Integer, String> ourStations = stationsToMap();
         System.out.println("Map Contents: " + ourStations.values());
 
-        List<String> qqq = ourStations.values().stream().collect(Collectors.toList());
-        stationChoiceBox.getItems().addAll(qqq);
         stationChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 // Get the corresponding key from the map based on the selected value
@@ -75,7 +84,16 @@ public class WorkerViewController {
                 //System.out.println("Selected Key: " + selectedKey);
             }
         });
-//        UserNameOnTopBar.setText(user.getName());
+
+
+        List<String> qqq = ourStations.values().stream().collect(Collectors.toList());
+        stationChoiceBox.getItems().addAll(qqq);
+        stationChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                selectedStationID = getKeyByValue(ourStations, newValue);
+            }
+        });
+        UserNameOnTopBar.setText(user.getName());
 
         TableColumn<ShiftForTable, String> column = new TableColumn<ShiftForTable, String> ("Select:");
         column.setCellValueFactory(new PropertyValueFactory<ShiftForTable, String>("isFirst"));
@@ -94,17 +112,29 @@ public class WorkerViewController {
         for (TableColumn tableColumn: isFirstTable.getColumns()) {
             tableColumn.setReorderable(false);
             tableColumn.setSortable(false);
-            //  tableColumn.setResizable(false);
+
         }
 
-//        isFirstTable.setRowFactory(tv -> {
-//            TableRow<ShiftForTable> row = new TableRow<>();
-//            row.prefHeightProperty().bind(isFirstTable.heightProperty().divide(isFirstTable.getItems().size()));
-//            return row;
-//        });
+        isFirstTable.setRowFactory(tv -> {
+            TableRow<ShiftForTable> row = new TableRow<>();
+            row.minHeightProperty().bind(isFirstTable.minHeightProperty());
+            //row.prefHeightProperty().bind(isFirstTable.heightProperty().divide(isFirstTable.getItems().size()));
+            return row;
+        });
+//        TableColumn<ShiftManager,String> stationColumn = new TableColumn<>()
 
 
 
+    }
+
+    @FXML
+    void onConfirm(ActionEvent event) { //vytvarame user_has_shift
+            int tableRowNumber = isFirstTable.getSelectionModel().getSelectedIndex();
+            //int stationId = getKeyByValue()
+            Date utilDate = java.sql.Date.valueOf(pickedDate);
+            shiftDao.createShiftIfItDoesentExist(selectedStationID,utilDate);
+            Shift shift = shiftDao.getShiftByDate(utilDate);
+            uhsDao.createUhsIfDoesntExist(user.getId(),shift.getId());
     }
 
     @FXML
@@ -115,13 +145,8 @@ public class WorkerViewController {
     }
 
     @FXML
-    void onCodeAdded(ActionEvent event) {
-
-    }
-
-    @FXML
     void onDatePicked(ActionEvent event) {
-
+        pickedDate = datePicker.getValue();
     }
     private Map<Integer,String> stationsToMap(){
         Map<Integer,String> stationsToMap = new HashMap<Integer,String>();
