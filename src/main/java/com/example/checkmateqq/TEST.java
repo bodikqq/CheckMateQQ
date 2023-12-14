@@ -1,5 +1,6 @@
 package com.example.checkmateqq;
 
+import com.example.checkmateqq.triedy.Station;
 import com.example.checkmateqq.triedy.Test;
 
 import java.text.ParseException;
@@ -10,6 +11,7 @@ public class TEST {
     static private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
     static private TestDao testDao = DaoFactory.INSTANCE.getTestDao();
     static private ShiftDao shiftDao = DaoFactory.INSTANCE.getShiftDao();
+    static private StationDao stationDao = DaoFactory.INSTANCE.getStationDao();
     static public void testGetById() {
 
         int existingUserId = 10;
@@ -45,6 +47,9 @@ public class TEST {
         testGetById();
 //        System.out.println(userDao.checkIfLoginExist("vangel"));
 //        System.out.println(userDao.checkIfUserExists("ahoj","nic"));
+        for(Station station : stationDao.getAll()){
+            System.out.println(station.toString( ));
+        }
 
     }
 }

@@ -1,7 +1,6 @@
 package com.example.checkmateqq;
 
 import com.example.checkmateqq.triedy.Station;
-import com.example.checkmateqq.triedy.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -36,5 +35,15 @@ public class MysqlStationDao implements StationDao{
     public List<Station> getAll() {
         String sql = "SELECT * from station";
         return jdbcTemplate.query(sql, stationRM());
+    }
+    @Override
+    public Station getStationById(int stationId) {
+        String sql = "SELECT * FROM station WHERE id = ?";
+        List<Station> stations = jdbcTemplate.query(sql, stationRM(), stationId);
+
+        if (stations.isEmpty()) {
+            return null; // No station found with the given ID
+        }
+        return stations.get(0);
     }
 }

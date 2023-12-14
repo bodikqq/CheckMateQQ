@@ -10,4 +10,6 @@ public interface ShiftDao {
 
     void createShiftIfItDoesentExist(int ShiftID, Date date, boolean isFirst);
       Shift getShiftByDateAndIsFirst(Date date, boolean isFirst);
+
+    List<Shift> getFutureShiftsForUser(int userId);
 }

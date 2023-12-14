@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface StationDao {
     List<Station> getAll();
+
+    Station getStationById(int stationId);
 }

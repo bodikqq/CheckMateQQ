@@ -34,4 +34,7 @@ public class Station {
         this.town = town;
         this.address = address;
     }
+    public String toString(){
+        return this.getTown() + ", " + this.getAddress();
+    }
 }
