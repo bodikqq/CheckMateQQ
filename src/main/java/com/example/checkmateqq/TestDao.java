@@ -12,4 +12,8 @@ public interface TestDao {
     List<Test> getAllUserTests(int user_id) throws EntityNotFoundException;
 
     int testsOnTime(Time time, java.util.Date date);
+
+    Test getTestById(long testId);
+
+    void updateTestResultById(long testId, int newResult) throws EntityNotFoundException;
 }

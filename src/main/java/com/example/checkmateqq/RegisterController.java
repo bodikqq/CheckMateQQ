@@ -3,18 +3,17 @@ package com.example.checkmateqq;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
+
 import javafx.scene.input.MouseEvent;
 import com.example.checkmateqq.triedy.User;
 import java.io.IOException;
@@ -99,7 +98,27 @@ public class RegisterController {
             if(userDao.checkIfWorkerCodeIsReal(workerCode.getText())){
                    isEmployee = true;
             }
+            else {
+                Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmationAlert.setTitle("Confirmation Dialog");
+                confirmationAlert.setHeaderText("Worker code you entered is wrong. Do you want to create user account?");
+
+                confirmationAlert.setContentText("");
+                //confirmationAlert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+                AtomicInteger flag = new AtomicInteger(1);
+                confirmationAlert.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.CANCEL) {
+                        flag.set(0);
+                    }
+                });
+                if(flag.get()==0){
+                    System.out.println("return");
+                    return;
+                }
+                }
+
         }
+
         User user = new User(firstName.getText(),lastName.getText(),username.getText(),password.getText(),isEmployee,false);
         userDao.save(user);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

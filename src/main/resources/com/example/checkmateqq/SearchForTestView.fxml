@@ -1,18 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="433.0" prefWidth="571.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="texts" prefHeight="239.0" prefWidth="394.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <TableView fx:id="timeTable" layoutX="54.0" layoutY="75.0" prefHeight="345.0" prefWidth="455.0">
-            <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-            </columnResizePolicy>
-        </TableView>
         <TextField fx:id="TestIdField" layoutX="54.0" layoutY="25.0" onInputMethodTextChanged="#change" prefHeight="30.0" prefWidth="149.0" promptText="Enter test id" />
-        <ImageView fx:id="IconSearch" fitHeight="30.0" fitWidth="30.0" layoutX="203.0" layoutY="25.0" onMouseClicked="#searchForTestByID" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="IconSearch" fitHeight="20.0" fitWidth="20.0" layoutX="207.0" layoutY="30.0" onMouseClicked="#searchForTestByID" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 1px;">
+         <image>
+            <Image url="@searchIcon.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <AnchorPane id="elemetsToHideInTheBegining" fx:id="texts" layoutX="24.0" layoutY="117.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="342.0" style="-fx-background-color: white; -fx-border-color: black;">
+         <children>
+            <Text fx:id="id" layoutX="-3.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="82.87091064453125">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="name" layoutX="72.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="66.87091064453125">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="surname" layoutX="160.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="82.87091064453125">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="type" layoutX="245.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="82.87091064453125">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Text id="elemetsToHideInTheBegining" fx:id="text1" layoutX="54.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text id="elemetsToHideInTheBegining" fx:id="text2" layoutX="109.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text id="elemetsToHideInTheBegining" fx:id="text3" layoutX="195.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surname">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text id="elemetsToHideInTheBegining" fx:id="text4" layoutX="295.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="ThereIsNoTestText" layoutX="52.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There is no test with this ID" visible="false" wrappingWidth="289.21665954589844">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Button id="elemetsToHideInTheBegining" fx:id="submitButton" layoutX="284.0" layoutY="183.0" mnemonicParsing="false" onAction="#submit" text="Submit">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <ChoiceBox id="elemetsToHideInTheBegining" fx:id="testResult" layoutX="53.0" layoutY="184.0" prefWidth="150.0" />
     </children>
 </AnchorPane>

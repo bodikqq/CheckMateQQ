@@ -52,10 +52,6 @@ public class MysqlTestDao implements TestDao{
                 return statement;
             }
         }, keyHolder);
-//        int id = keyHolder.getKey().intValue();
-//        Test saved = test.clone();
-//        saved.setId(id);
-        //return saved;
     }
     @Override
     public List<Test> getAllUserTests(int user_id) {
@@ -67,5 +63,28 @@ public class MysqlTestDao implements TestDao{
         String sql = "SELECT COUNT(*) FROM test WHERE time = ? AND date = ?";
         return jdbcTemplate.queryForObject(sql, Integer.class, time, date);
 }
+    @Override
+
+    public Test getTestById(long testId) {
+        String sql = "SELECT * FROM test WHERE id = ?";
+        List<Test> result = jdbcTemplate.query(sql, testRM(), testId);
+
+        if (result.isEmpty()) {
+            return null;
+        }
+        return result.get(0);
+
+    }
+    @Override
+    public void updateTestResultById(long testId, int newResult) throws EntityNotFoundException {
+        String sql = "UPDATE test SET result = ? WHERE id = ?";
+
+        int rowsAffected = jdbcTemplate.update(sql, newResult, testId);
+
+        if (rowsAffected == 0) {
+            throw new EntityNotFoundException("Test with ID " + testId + " not found.");
+        }
+    }
+
 
 }

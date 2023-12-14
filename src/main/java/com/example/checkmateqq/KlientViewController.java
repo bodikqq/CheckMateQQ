@@ -28,6 +28,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 
 
@@ -185,7 +188,7 @@ public class KlientViewController {
             if(i>=10){
                 HourMinuteString = i+":"+0+"0";
                 HourMinuteString1 = i+":"+1+"0";
-                HourMinuteString2 =i+":"+2+"0";
+                HourMinuteString2 = i+":"+2+"0";
                 HourMinuteString3 = i+":"+3+"0";
                 HourMinuteString4 = i+":"+4+"0";
                 HourMinuteString5 = i+":"+5+"0";
@@ -250,10 +253,11 @@ public class KlientViewController {
 
         } else {
             saveTest();
+            timeTable.getSelectionModel().clearSelection();
             for(TableColumn column : timeTable.getColumns()){
                 columnCellFactory(column);
             }
-            timeTable.getSelectionModel().select(-1);
+
         }
     }
     private void goToLogin(Stage currentStage, LoginController controller) {
@@ -319,6 +323,30 @@ public class KlientViewController {
             }
         });
     }
+    private void cellIteration() {
+        for (int rowIndex = 0; rowIndex < timeTable.getItems().size(); rowIndex++) {
+            // Iterate through columns
+            for (int colIndex = 0; colIndex < timeTable.getColumns().size(); colIndex++) {
+                TableColumn<HourMinutes, String> column = (TableColumn<HourMinutes, String>) timeTable.getColumns().get(colIndex);
+                ObservableValue<String> cellm = column.getCellObservableValue(rowIndex);
+                String cell = cellm.getValue();
+                // Now you have access to the cell, and you can perform any actions you need
+                // For example, you can check the data in the cell
+                Time time = convertStringToTime(cell);
+                LocalTime localTime = time.toLocalTime();
+                Date utilDate = java.sql.Date.valueOf(pickedDate);
+                boolean  is_first = false;
+                if (localTime.isBefore(LocalTime.of(13, 0))) {
+                    is_first = true;
+                }
+                if(testDao.testsOnTime(time, utilDate)==userDao.workersOnTime(utilDate,selectedStationID,is_first)){
+                    /////
+                }
+
+                System.out.println(time);
+            }
+        }
+    }
     private Time convertStringToTime(String timeString) {
         // Parse the string representation of time to LocalTime
         LocalTime localTime = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm"));
@@ -338,8 +366,13 @@ public class KlientViewController {
             }
         }
     }
-    private void columnCellFactory(TableColumn column){
+    private void columnCellFactory(TableColumn column) {
+        Date utilDate = java.sql.Date.valueOf(pickedDate);
+        final int workers_now = userDao.workersOnTime(utilDate, selectedStationID, true);
+
         column.setCellFactory(tc -> new TableCell<HourMinutes, String>() {
+            private final ExecutorService executor = Executors.newFixedThreadPool(5); // Adjust the thread pool size as needed
+
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -351,21 +384,37 @@ public class KlientViewController {
                     // Perform your condition check here
                     Time time = convertStringToTime(item);
                     LocalTime localTime = time.toLocalTime();
-                    Date utilDate = java.sql.Date.valueOf(pickedDate);
-                    boolean is_first = false;
-                    if (localTime.isBefore(LocalTime.of(13, 0))) {
-                        is_first = true;
+
+                    int workersCount = workers_now;
+
+                    if (localTime.equals(LocalTime.of(13, 0))) {
+                        Future<Integer> future = executor.submit(() ->
+                                userDao.workersOnTime(utilDate, selectedStationID, false));
+
+                        try {
+                            workersCount = future.get();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                    if (testDao.testsOnTime(time, utilDate) >= userDao.workersOnTime(utilDate, selectedStationID, is_first)) {
-                        setDisable(true);
-                        setText(item);
-                        // Customize the appearance of the disabled cell if needed
-                        setTextFill(Color.web("#b9b9b9"));
-                        setStyle("-fx-background-color: #eeeeee;");
-                        // You can also set background color, font, or any other styling as needed
-                    } else {
-                        setDisable(false);
-                        setText(item); // Set the text normally for non-disabled cells
+
+                    Future<Integer> testsFuture = executor.submit(() ->
+                            testDao.testsOnTime(time, utilDate));
+
+                    try {
+                        int testsCount = testsFuture.get();
+
+                        if (testsCount >= workersCount) {
+                            setDisable(true);
+                            setText(item);
+                            setTextFill(Color.web("#b9b9b9"));
+                            setStyle("-fx-background-color: #eeeeee;");
+                        } else {
+                            setDisable(false);
+                            setText(item);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }
