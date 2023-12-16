@@ -12,6 +12,7 @@ public class TEST {
     static private TestDao testDao = DaoFactory.INSTANCE.getTestDao();
     static private ShiftDao shiftDao = DaoFactory.INSTANCE.getShiftDao();
     static private StationDao stationDao = DaoFactory.INSTANCE.getStationDao();
+    static private UhsDao uhsDao = DaoFactory.INSTANCE.getUhsDao();
     static public void testGetById() {
 
         int existingUserId = 10;
@@ -47,11 +48,12 @@ public class TEST {
         testGetById();
 //        System.out.println(userDao.checkIfLoginExist("vangel"));
 //        System.out.println(userDao.checkIfUserExists("ahoj","nic"));
-        for(Station station : stationDao.getAll()){
-            System.out.println(station.toString( ));
+//        for(Station station : stationDao.getAll()){
+//            System.out.println(station.toString( ));
+        System.out.println(uhsDao.numberOfShiftsWorked(4));
         }
 
     }
-}
+
 
 

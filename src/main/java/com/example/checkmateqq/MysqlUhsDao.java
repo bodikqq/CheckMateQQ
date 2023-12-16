@@ -1,10 +1,13 @@
-package com.example.checkmateqq.triedy;
+package com.example.checkmateqq;
 
-import com.example.checkmateqq.UhsDao;
+import com.example.checkmateqq.triedy.Uhs;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MysqlUhsDao extends UhsDao {
 
@@ -36,5 +39,28 @@ public class MysqlUhsDao extends UhsDao {
             String insertUhsQuery = "INSERT INTO user_has_shift (user_id, shift_id) VALUES (?, ?)";
             jdbcTemplate.update(insertUhsQuery, userId, shiftId);
         }
+    }
+    @Override
+    public int numberOfShiftsWorked(int userId) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        Date beginningOfMonth = calendar.getTime();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String beginningOfMonthStr = dateFormat.format(beginningOfMonth);
+
+
+        String countShiftsQuery = "SELECT COUNT(*) FROM user_has_shift uhs " +
+                "JOIN shift s ON uhs.shift_id = s.id " +
+                "WHERE uhs.user_id = ? AND s.date >= ? AND s.date <= NOW()";
+
+        // Execute the query and return the result
+        return jdbcTemplate.queryForObject(countShiftsQuery, Integer.class, userId, beginningOfMonthStr);
+    }
+    @Override
+    public Uhs getUhsByShiftId(int shiftId, int userId){
+        String query = "Select * from user_has_shift where shift_id = " + shiftId + " and user_id = " + userId;
+        return jdbcTemplate.queryForObject(query,uhsRM());
+
     }
 }

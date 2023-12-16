@@ -7,6 +7,22 @@ public class ShiftManager {
     String station;
     Date date;
     String time;
+    String isConfirmed;
+
+    public ShiftManager(String station, Date date, String time, String isConfirmed) {
+        this.station = station;
+        this.date = date;
+        this.time = time;
+        this.isConfirmed = isConfirmed;
+    }
+
+    public String getIsConfirmed() {
+        return isConfirmed;
+    }
+
+    public void setIsConfirmed(String isConfirmed) {
+        this.isConfirmed = isConfirmed;
+    }
 
     public String getStation() {
         return station;
