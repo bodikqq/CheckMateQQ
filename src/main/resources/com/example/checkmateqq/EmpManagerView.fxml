@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView id="emp_table" fx:id="employeeTable" layoutX="30.0" layoutY="86.0" prefHeight="238.0" prefWidth="237.0" />
+      <TextField layoutX="30.0" layoutY="35.0" onAction="#onEmployeeLookUp" onInputMethodTextChanged="#change" prefHeight="27.0" prefWidth="187.0" promptText="look up employee" />
+      <ImageView fx:id="IconSearch" fitHeight="20.0" fitWidth="20.0" layoutX="228.0" layoutY="40.0" onMouseClicked="#searchForTestByID" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 1px;">
+         <image>
+            <Image url="@searchIcon.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Button layoutX="195.0" layoutY="350.0" mnemonicParsing="false" onAction="#onDeleteAccount" text="delete account">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label layoutX="307.0" layoutY="78.0" text="Shifts this month:" />
+      <ListView fx:id="pastShiftsList" layoutX="318.0" layoutY="95.0" prefHeight="98.0" prefWidth="237.0" />
+      <Label layoutX="307.0" layoutY="205.0" text="Upcoming:" />
+      <ListView fx:id="upcomingShiftsList" layoutX="318.0" layoutY="226.0" prefHeight="98.0" prefWidth="237.0" />
+      <Button layoutX="471.0" layoutY="350.0" mnemonicParsing="false" onAction="#onCancelShift" prefHeight="25.0" prefWidth="84.0" text="cancel shift">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+   </children>
+</AnchorPane>

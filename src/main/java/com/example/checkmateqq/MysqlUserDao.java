@@ -2,6 +2,7 @@ package com.example.checkmateqq;
 
 import java.sql.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import com.example.checkmateqq.triedy.User;
@@ -29,7 +30,7 @@ public class MysqlUserDao implements UserDao {
                 String login = rs.getString("login");
                 String password = rs.getString("password");
                 boolean isEmployee = rs.getBoolean("isEmployee");
-                boolean isAdmin = rs.getBoolean("isEmployee");
+                boolean isAdmin = rs.getBoolean("isAdmin");
 
 
                 User user = new User(id, name, surname, login, password, isEmployee, isAdmin);
@@ -129,6 +130,35 @@ public boolean checkIfUserExists(String login, String password) {
         Boolean isEmployee = jdbcTemplate.queryForObject(sql, Boolean.class, userId);
 
         return isEmployee != null && isEmployee;
+    }
+    @Override
+    public List<User> returnEmployees() {
+        String sql = "SELECT id, name, surname, login, password, isEmployee, isAdmin FROM user WHERE isEmployee = true AND isAdmin = false";
+        return jdbcTemplate.query(sql, userRM());
+    }
+
+    @Override
+    public void deleteUserById(int userId) throws EntityNotFoundException {
+        // Check if the user exists
+        if (!checkIfUserExistsById(userId)) {
+            throw new EntityNotFoundException("User with ID " + userId + " not found");
+        }
+
+        // Delete user
+        String sql = "DELETE FROM user WHERE id = ?";
+        int count = jdbcTemplate.update(sql, userId);
+
+        if (count == 0) {
+            throw new EntityNotFoundException("Failed to delete user with ID " + userId);
+        }
+    }
+
+    @Override
+    public boolean checkIfUserExistsById(int userId) {
+        String sql = "SELECT COUNT(*) FROM user WHERE id = ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, userId);
+
+        return count > 0;
     }
 
 }

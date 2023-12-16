@@ -11,6 +11,20 @@ public class User {
     boolean isEmployee = false;
     boolean isAdmin = false;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", isEmployee=" + isEmployee +
+                ", isAdmin=" + isAdmin +
+                '}';
+    }
+
+
 
 
     public User(int id, String name, String surname, String login, String password, boolean isEmployee, boolean isAdmin) {

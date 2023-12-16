@@ -3,6 +3,7 @@ package com.example.checkmateqq;
 import com.example.checkmateqq.triedy.User;
 
 import java.util.Date;
+import java.util.List;
 
 public interface UserDao {
 
@@ -18,4 +19,10 @@ public interface UserDao {
     int workersOnTime(Date date,int stationId, boolean isFirst);
 
     boolean isUserEmployee(int userId);
+
+    List<User> returnEmployees();
+
+    void deleteUserById(int userId) throws EntityNotFoundException;
+
+    boolean checkIfUserExistsById(int userId);
 }

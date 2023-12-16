@@ -2,6 +2,7 @@ package com.example.checkmateqq;
 
 import com.example.checkmateqq.triedy.Station;
 import com.example.checkmateqq.triedy.Test;
+import com.example.checkmateqq.triedy.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,6 +52,9 @@ public class TEST {
 //        for(Station station : stationDao.getAll()){
 //            System.out.println(station.toString( ));
         System.out.println(uhsDao.numberOfShiftsWorked(4));
+        for(User user: userDao.returnEmployees()){
+            System.out.println(user.toString());
+        }
         }
 
     }

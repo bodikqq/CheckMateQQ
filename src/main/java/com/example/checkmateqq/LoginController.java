@@ -86,8 +86,11 @@ public class LoginController {
         User user = userDao.getUserByLoginAndPassword(enteredUsername, enteredPassword);
         this.user = user;
         if (user != null && user.isEmployee()) {
-
-            openWorkerScene();
+            if(user.isAdmin()){
+                openAdminScene();
+            }else {
+                openWorkerScene();
+            }
         } else if (user != null) {
 //            Alert alert = new Alert(Alert.AlertType.INFORMATION);
 //            alert.setContentText("Login successfull");
@@ -178,6 +181,26 @@ public class LoginController {
                 e.printStackTrace();
             }
         }
+    private void openAdminScene () {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
+            AdminViewController adminController = new AdminViewController();
+            adminController.setUserId(user);
+            loader.setController(adminController);
+            Scene scene = new Scene(loader.load());
+            scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setTitle("Admin View");
+            stage.show();
+
+            // Zatvorenie aktuálnej scény (prihlasovacej)
+            Stage currentStage = (Stage) loginButton.getScene().getWindow();
+            currentStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     }
 
 
