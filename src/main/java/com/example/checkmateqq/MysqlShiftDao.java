@@ -75,5 +75,11 @@ public class MysqlShiftDao implements ShiftDao {
 
         return futureShifts;
     }
-
+    @Override
+    public Shift getShiftByShiftID(int shiftId) {
+        String sql = "SELECT * FROM shift WHERE id = ?";
+        List<Shift> shift = jdbcTemplate.query(sql, shiftRM(), shiftId);
+        if(shift.isEmpty())return null;
+        return shift.get(0);
+    }
 }

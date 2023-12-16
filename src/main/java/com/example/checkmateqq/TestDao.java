@@ -16,4 +16,8 @@ public interface TestDao {
     Test getTestById(long testId);
 
     void updateTestResultById(long testId, int newResult) throws EntityNotFoundException;
+
+    Test getUsersPCRTest(int userId);
+
+    Test getUsersNAATsTest(int userId);
 }

@@ -17,8 +17,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -33,8 +35,37 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 
-
 public class KlientViewController {
+    @FXML
+    private Text NAATdate;
+
+    @FXML
+    private Pane NAATpane;
+
+    @FXML
+    private Text NAATqq;
+
+    @FXML
+    private Text NAATstation;
+
+    @FXML
+    private Text NAATtime;
+
+    @FXML
+    private Text PCRdate;
+
+    @FXML
+    private Pane PCRpane;
+
+    @FXML
+    private Text PCRqq;
+
+    @FXML
+    private Text PCRstation;
+
+    @FXML
+    private Text PCRtime;
+
     @FXML
     private Label UserNameOnTopBar;
     @FXML
@@ -59,7 +90,7 @@ public class KlientViewController {
     //static private StationDao stationDao = DaoFactory.INSTANCE.getStationDao();
     private List<Station> stations = stationDao.getAll();
     String cellData;
-    LocalDate pickedDate;
+    LocalDate pickedDate = null;
 
     @FXML
     void logOut(MouseEvent event) {
@@ -67,17 +98,21 @@ public class KlientViewController {
         Stage stage = (Stage) selectTerm.getScene().getWindow();
         goToLogin(stage, loginController);
     }
+
     @FXML
     void pickDate(ActionEvent event) {
         pickedDate = date.getValue();
-        if(selectedStationID == -1)return;
-        for(TableColumn column : timeTable.getColumns()){
-           columnCellFactory(column);
+        if (selectedStationID == -1) return;
+        for (TableColumn column : timeTable.getColumns()) {
+            columnCellFactory(column);
         }
+        unselectCell();
     }
+
     public void setUserId(User user) {
         this.user = user;
     }
+
     private int getKeyByValue(Map<Integer, String> map, String value) {
         for (Map.Entry<Integer, String> entry : map.entrySet()) {
             if (entry.getValue().equals(value)) {
@@ -88,6 +123,8 @@ public class KlientViewController {
     }
 
     public void initialize() throws EntityNotFoundException {
+        setPCRtest();
+        setNAATtest();
         date.setDayCellFactory(picker -> new DisabledPastDatesCalendar.DisabledPastDateCell());
         station.setValue("Choose the station");
         Map<Integer, String> ourStations = stationsToMap();
@@ -99,7 +136,12 @@ public class KlientViewController {
             if (newValue != null) {
                 // Get the corresponding key from the map based on the selected value
                 selectedStationID = getKeyByValue(ourStations, newValue);
-                //System.out.println("Selected Key: " + selectedKey);
+                unselectCell();
+                if(pickedDate!= null){
+                    for (TableColumn column : timeTable.getColumns()) {
+                        columnCellFactory(column);
+                    }
+                }
             }
         });
 
@@ -107,7 +149,7 @@ public class KlientViewController {
         UserNameOnTopBar.setText(user.getName());
 
         typeOfTestChoiceBox.setValue("Test type");
-        typeOfTestChoiceBox.getItems().setAll("PCR","NAATs");
+        typeOfTestChoiceBox.getItems().setAll("PCR", "NAATs");
 
         changeColorBack(station);
         changeColorBack(typeOfTestChoiceBox);
@@ -117,20 +159,20 @@ public class KlientViewController {
         testTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 
-        TableColumn<ForTestTable, Date> testDateColumn = new TableColumn<ForTestTable, Date> ("Date");
+        TableColumn<ForTestTable, Date> testDateColumn = new TableColumn<ForTestTable, Date>("Date");
         testDateColumn.setCellValueFactory(new PropertyValueFactory<ForTestTable, Date>("date"));
 
-        TableColumn<ForTestTable, String> testResultColumn = new TableColumn<ForTestTable, String> ("Result");
+        TableColumn<ForTestTable, String> testResultColumn = new TableColumn<ForTestTable, String>("Result");
         testResultColumn.setCellValueFactory(new PropertyValueFactory<ForTestTable, String>("result"));
 
-        TableColumn<ForTestTable, String> testTypeColumn = new TableColumn<ForTestTable, String> ("Test type");
+        TableColumn<ForTestTable, String> testTypeColumn = new TableColumn<ForTestTable, String>("Test type");
         testTypeColumn.setCellValueFactory(new PropertyValueFactory<ForTestTable, String>("test_type"));
 
         testTable.getColumns().add(testDateColumn);
         testTable.getColumns().add(testTypeColumn);
         testTable.getColumns().add(testResultColumn);
 
-        for(TableColumn tableColumn: testTable.getColumns()){
+        for (TableColumn tableColumn : testTable.getColumns()) {
             tableColumn.setReorderable(false);
             tableColumn.setSortable(false);
 //            tableColumn.setResizable(false);
@@ -138,16 +180,16 @@ public class KlientViewController {
         List<Test> tests = getTestData(user.getId());
         Test testForSortHaha = new Test();
         tests = testForSortHaha.sortByTime(tests);
-        for (Test test:tests
-             ) {
+        for (Test test : tests
+        ) {
             String result = "Not ready yet";
             if (test.getResult() == 1) result = "positive";
             else if (test.getResult() == 2) result = "negative";
             String type = "PCR";
 
             int test_type = test.getTest_type();
-            if(test_type == 1)type = "NAATs";
-            ForTestTable qq = new ForTestTable(test.getDate(), result,type);
+            if (test_type == 1) type = "NAATs";
+            ForTestTable qq = new ForTestTable(test.getDate(), result, type);
             //System.out.println(qq.getDate());
             testTable.getItems().add(qq);
         }
@@ -171,11 +213,11 @@ public class KlientViewController {
         TableColumn<HourMinutes, String> time5 = new TableColumn<HourMinutes, String>();
         time5.setCellValueFactory(new PropertyValueFactory<HourMinutes, String>("time5"));
 
-        timeTable.getColumns().addAll(time0,time1,time2,time3,time4,time5);
-        for (TableColumn tableColumn: timeTable.getColumns()) {
+        timeTable.getColumns().addAll(time0, time1, time2, time3, time4, time5);
+        for (TableColumn tableColumn : timeTable.getColumns()) {
             tableColumn.setReorderable(false);
             tableColumn.setSortable(false);
-          //  tableColumn.setResizable(false);
+            //  tableColumn.setResizable(false);
         }
 
         for (int i = 7; i < 19; i++) {
@@ -185,15 +227,15 @@ public class KlientViewController {
             String HourMinuteString3 = "0" + i + ":" + 3 + "0";
             String HourMinuteString4 = "0" + i + ":" + 4 + "0";
             String HourMinuteString5 = "0" + i + ":" + 5 + "0";
-            if(i>=10){
-                HourMinuteString = i+":"+0+"0";
-                HourMinuteString1 = i+":"+1+"0";
-                HourMinuteString2 = i+":"+2+"0";
-                HourMinuteString3 = i+":"+3+"0";
-                HourMinuteString4 = i+":"+4+"0";
-                HourMinuteString5 = i+":"+5+"0";
+            if (i >= 10) {
+                HourMinuteString = i + ":" + 0 + "0";
+                HourMinuteString1 = i + ":" + 1 + "0";
+                HourMinuteString2 = i + ":" + 2 + "0";
+                HourMinuteString3 = i + ":" + 3 + "0";
+                HourMinuteString4 = i + ":" + 4 + "0";
+                HourMinuteString5 = i + ":" + 5 + "0";
             }
-            HourMinutes hourminutes = new HourMinutes(HourMinuteString,HourMinuteString1,HourMinuteString2,HourMinuteString3,HourMinuteString4,HourMinuteString5);
+            HourMinutes hourminutes = new HourMinutes(HourMinuteString, HourMinuteString1, HourMinuteString2, HourMinuteString3, HourMinuteString4, HourMinuteString5);
             //System.out.println(hourminutes.toString());
             timeTable.getItems().add(hourminutes);
         }
@@ -209,16 +251,11 @@ public class KlientViewController {
                 TableColumn<HourMinutes, String> column = (TableColumn<HourMinutes, String>) selectedCell.getTableColumn();
                 int rowIndex = selectedCell.getRow();
                 cellData = column.getCellObservableValue(rowIndex).getValue();
-
-                // You can now use 'data' which represents the value in the selected cell
-
             }
         });
 
 
     }
-
-    // Other methods
 
     private List<Test> getTestData(int user_id) throws EntityNotFoundException {
         List<Test> result = testDao.getAllUserTests(user_id);
@@ -229,9 +266,13 @@ public class KlientViewController {
     void saveTestTerm(ActionEvent event) throws EntityNotFoundException {
         String testType = typeOfTestChoiceBox.getValue();
         Integer chosenTestType = null;
-        if(testType.equals("PCR")){chosenTestType = 0;}else if(testType.equals("NAATs")){chosenTestType=1;}
+        if (testType.equals("PCR")) {
+            chosenTestType = 0;
+        } else if (testType.equals("NAATs")) {
+            chosenTestType = 1;
+        }
         System.out.println(cellData + pickedDate + chosenTestType + station.getValue());
-        if (cellData == null || pickedDate == null || selectedStationID == -1 || chosenTestType==null) {
+        if (cellData == null || pickedDate == null || selectedStationID == -1 || chosenTestType == null) {
             // Set error styles for controls that are not selected
             if (cellData == null) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -242,7 +283,7 @@ public class KlientViewController {
             if (pickedDate == null) {
                 date.getStyleClass().add("error-date-picker");
             }
-            //System.out.println(station.getValue());
+
             if (selectedStationID == -1) {
                 station.getStyleClass().add("error-choice-box");
             }
@@ -253,13 +294,16 @@ public class KlientViewController {
 
         } else {
             saveTest();
+            unselectCell();
+            setPCRtest();
             timeTable.getSelectionModel().clearSelection();
-            for(TableColumn column : timeTable.getColumns()){
+            for (TableColumn column : timeTable.getColumns()) {
                 columnCellFactory(column);
             }
 
         }
     }
+
     private void goToLogin(Stage currentStage, LoginController controller) {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -280,15 +324,17 @@ public class KlientViewController {
             e.printStackTrace();
         }
     }
-    private Map<Integer,String> stationsToMap(){
-        Map<Integer,String> stationsToMap = new HashMap<Integer,String>();
-        for(Station station: stations){
+
+    private Map<Integer, String> stationsToMap() {
+        Map<Integer, String> stationsToMap = new HashMap<Integer, String>();
+        for (Station station : stations) {
             String town = station.getTown();
             String address = station.getAddress();
-            stationsToMap.put(station.getId(),town + ", " + address);
+            stationsToMap.put(station.getId(), town + ", " + address);
         }
         return stationsToMap;
     }
+
     private void saveTest() throws EntityNotFoundException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime localTime = LocalTime.parse(cellData, formatter);
@@ -296,15 +342,24 @@ public class KlientViewController {
         Time utilTime = java.sql.Time.valueOf(localTime);
         String testType = typeOfTestChoiceBox.getValue();
         Integer chosenTestType = null;
-        if(testType.equals("PCR")){chosenTestType = 0;}else if(testType.equals("NAATs")){chosenTestType=1;}
-        Test test = new Test(utilDate, user.getId(),utilTime,chosenTestType);
-//        shiftDao.createShiftIfItDoesentExist(selectedStationID,utilDate);
-//        Shift shift;
-//        shift = shiftDao.getShiftByDate(utilDate);
-//        test.setShift_id(shift.getId());
+        if (testType.equals("PCR")) {
+            chosenTestType = 0;
+        } else if (testType.equals("NAATs")) {
+            chosenTestType = 1;
+        }
+        Test test = new Test(utilDate, user.getId(), utilTime, chosenTestType);
+//        shiftDao.createShiftIfItDoesentExist(selectedStationID,utilDate,0);
+//        shiftDao.createShiftIfItDoesentExist(selectedStationID,utilDate,1);
+        Shift shift;
+        Boolean isFirst = true;
+        LocalTime mmm = LocalTime.parse("12:55", formatter);
+        if (localTime.isAfter(mmm)) isFirst = false;
+        shift = shiftDao.getShiftByDateAndIsFirst(utilDate, isFirst);
+        test.setShift_id(shift.getId());
         testDao.save(test);
     }
-    private void changeColorBack(ChoiceBox choiceBox){
+
+    private void changeColorBack(ChoiceBox choiceBox) {
         choiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (!"Choose the station".equals(newValue)) {
                 choiceBox.getStyleClass().remove("error-choice-box");
@@ -312,7 +367,8 @@ public class KlientViewController {
             }
         });
     }
-    private void dateColorBack(DatePicker datePicker){
+
+    private void dateColorBack(DatePicker datePicker) {
 //        datePicker.setPromptText("Choose the date");
 
         // Add a listener to the DatePicker to detect changes in the selected date
@@ -323,6 +379,7 @@ public class KlientViewController {
             }
         });
     }
+
     private void cellIteration() {
         for (int rowIndex = 0; rowIndex < timeTable.getItems().size(); rowIndex++) {
             // Iterate through columns
@@ -335,11 +392,11 @@ public class KlientViewController {
                 Time time = convertStringToTime(cell);
                 LocalTime localTime = time.toLocalTime();
                 Date utilDate = java.sql.Date.valueOf(pickedDate);
-                boolean  is_first = false;
+                boolean is_first = false;
                 if (localTime.isBefore(LocalTime.of(13, 0))) {
                     is_first = true;
                 }
-                if(testDao.testsOnTime(time, utilDate)==userDao.workersOnTime(utilDate,selectedStationID,is_first)){
+                if (testDao.testsOnTime(time, utilDate) == userDao.workersOnTime(utilDate, selectedStationID, is_first)) {
                     /////
                 }
 
@@ -347,6 +404,7 @@ public class KlientViewController {
             }
         }
     }
+
     private Time convertStringToTime(String timeString) {
         // Parse the string representation of time to LocalTime
         LocalTime localTime = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm"));
@@ -366,6 +424,7 @@ public class KlientViewController {
             }
         }
     }
+
     private void columnCellFactory(TableColumn column) {
         Date utilDate = java.sql.Date.valueOf(pickedDate);
         final int workers_now = userDao.workersOnTime(utilDate, selectedStationID, true);
@@ -385,39 +444,81 @@ public class KlientViewController {
                     Time time = convertStringToTime(item);
                     LocalTime localTime = time.toLocalTime();
 
-                    int workersCount = workers_now;
+                    // Check if the time in the cell is before the current time
+                    if (localTime.isBefore(LocalTime.now())) {
+                        setDisable(true);
+                        setText(item);
+                        setTextFill(Color.web("#b9b9b9"));
+                        setStyle("-fx-background-color: #eeeeee;");
+                    } else {
+                        int workersCount = workers_now;
 
-                    if (localTime.equals(LocalTime.of(13, 0))) {
-                        Future<Integer> future = executor.submit(() ->
-                                userDao.workersOnTime(utilDate, selectedStationID, false));
+                        if (localTime.equals(LocalTime.of(13, 0))) {
+                            Future<Integer> future = executor.submit(() ->
+                                    userDao.workersOnTime(utilDate, selectedStationID, false));
+
+                            try {
+                                workersCount = future.get();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        Future<Integer> testsFuture = executor.submit(() ->
+                                testDao.testsOnTime(time, utilDate));
 
                         try {
-                            workersCount = future.get();
+                            int testsCount = testsFuture.get();
+
+                            if (testsCount >= workersCount) {
+                                setDisable(true);
+                                setTextFill(Color.web("#b9b9b9"));
+                                setStyle("-fx-background-color: #eeeeee;");
+                            } else {
+                                setDisable(false);
+                            }
+
+                            setText(item);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
-
-                    Future<Integer> testsFuture = executor.submit(() ->
-                            testDao.testsOnTime(time, utilDate));
-
-                    try {
-                        int testsCount = testsFuture.get();
-
-                        if (testsCount >= workersCount) {
-                            setDisable(true);
-                            setText(item);
-                            setTextFill(Color.web("#b9b9b9"));
-                            setStyle("-fx-background-color: #eeeeee;");
-                        } else {
-                            setDisable(false);
-                            setText(item);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 }
             }
         });
+    }
+
+
+    private void setPCRtest() {
+        Test PCRtest = testDao.getUsersPCRTest(user.getId());
+        if (PCRtest == null) return;
+        int shift_id = PCRtest.getShift_id();
+        Shift shift = shiftDao.getShiftByShiftID(shift_id);
+        int station_id = shift.getStation_id();
+        Station stationQQ = stationDao.getStationById(station_id);
+        String stationName = stationQQ.toString();
+        PCRdate.setText(PCRtest.getDate().toString());
+        PCRtime.setText(PCRtest.getTime().toString());
+        PCRstation.setText(stationName);
+        PCRpane.setVisible(true);
+        PCRqq.setVisible(true);
+    }
+    private void setNAATtest() {
+        Test NAATtest = testDao.getUsersNAATsTest(user.getId());
+        if (NAATtest == null) return;
+        int shift_id = NAATtest.getShift_id();
+        Shift shift = shiftDao.getShiftByShiftID(shift_id);
+        int station_id = shift.getStation_id();
+        Station stationQQ = stationDao.getStationById(station_id);
+        String stationName = stationQQ.toString();
+        NAATdate.setText(NAATtest.getDate().toString());
+        NAATtime.setText(NAATtest.getTime().toString());
+        NAATstation.setText(stationName);
+        NAATpane.setVisible(true);
+        NAATqq.setVisible(true);
+    }
+
+    private void unselectCell() {
+        timeTable.getSelectionModel().clearSelection();
     }
 }

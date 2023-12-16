@@ -12,4 +12,6 @@ public interface ShiftDao {
       Shift getShiftByDateAndIsFirst(Date date, boolean isFirst);
 
     List<Shift> getFutureShiftsForUser(int userId);
+
+    Shift getShiftByShiftID(int shiftId);
 }

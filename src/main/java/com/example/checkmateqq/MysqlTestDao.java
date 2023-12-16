@@ -86,5 +86,18 @@ public class MysqlTestDao implements TestDao{
         }
     }
 
+    @Override
+    public Test getUsersPCRTest(int userId) {
+        String sql = "SELECT * FROM test WHERE pacient_id = ? AND test_type = 0 LIMIT 1";
+        List<Test> result = jdbcTemplate.query(sql, testRM(), userId);
 
+        return result.isEmpty() ? null : result.get(0);
+    }
+    @Override
+    public Test getUsersNAATsTest(int userId) {
+        String sql = "SELECT * FROM test WHERE pacient_id = ? AND test_type = 1 LIMIT 1";
+        List<Test> result = jdbcTemplate.query(sql, testRM(), userId);
+
+        return result.isEmpty() ? null : result.get(0);
+    }
 }
