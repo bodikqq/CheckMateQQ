@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="598.0" prefWidth="778.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane accessibleRole="CONTEXT_MENU" prefHeight="58.0" prefWidth="785.0" style="-fx-background-color: #404040;" styleClass="border">
+            <children>
+                <Label layoutX="14.0" layoutY="9.0" text="CheckMate" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="27.0" />
+                    </font>
+                </Label>
+            <Label fx:id="UserNameOnTopBar" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="447.0" layoutY="15.0" prefHeight="26.0" prefWidth="175.0" text="ADMIN" textAlignment="RIGHT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Text fill="WHITE" fontSmoothingType="LCD" layoutX="671.0" layoutY="34.0" onMouseClicked="#logOut" strokeType="OUTSIDE" strokeWidth="0.0" text="log out" wrappingWidth="60.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
+            </children></AnchorPane>
+      <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" onAction="#generateEmployeeCode" prefHeight="27.0" prefWidth="101.0" style="-fx-background-color: #404040; -fx-text-fill: #f0f0f0;" text="Employee code" />
+      <Text layoutX="587.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2W4knfu7WFWF87f9Fuf" visible="false" wrappingWidth="151.2000732421875">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Pane layoutX="75.0" layoutY="157.0" prefHeight="226.0" prefWidth="368.0" style="-fx-background-color: white;">
+         <children>
+            <CheckBox layoutX="30.0" layoutY="29.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="293.0" text="First shift 24.08.2024 Kosice, Medicka 6" />
+         </children>
+      </Pane>
+      <Button layoutX="75.0" layoutY="481.0" mnemonicParsing="false" style="-fx-background-color: #404040; -fx-text-fill: #f0f0f0;" text="Button" />
+    </children>
+</AnchorPane>
