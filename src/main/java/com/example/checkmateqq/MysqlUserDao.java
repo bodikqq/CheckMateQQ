@@ -160,5 +160,20 @@ public boolean checkIfUserExists(String login, String password) {
 
         return count > 0;
     }
+    @Override
+    public boolean hasUpcomingShifts(int userId) {
+        // Get the current date
+        java.util.Date currentDate = new java.util.Date();
+        Date today = new Date(currentDate.getTime());
+
+        // Query to check if the user has any upcoming shifts
+        String sql = "SELECT COUNT(*) FROM shift s " +
+                "JOIN user_has_shift uhs ON s.id = uhs.shift_id " +
+                "WHERE uhs.user_id = ? AND s.date >= ?";
+
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, userId, today);
+
+        return count > 0;
+    }
 
 }

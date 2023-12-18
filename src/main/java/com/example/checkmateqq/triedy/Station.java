@@ -37,4 +37,7 @@ public class Station {
     public String toString(){
         return this.getTown() + ", " + this.getAddress();
     }
+    public String toString2(){
+        return this.getTown() + " " + this.getAddress();
+    }
 }

@@ -63,4 +63,9 @@ public class MysqlUhsDao extends UhsDao {
         return jdbcTemplate.queryForObject(query,uhsRM());
 
     }
+    @Override
+    public void deleteUhsByShiftIdAndUserId(int shiftId, int userId) {
+        String deleteUhsQuery = "DELETE FROM user_has_shift WHERE shift_id = ? AND user_id = ?";
+        jdbcTemplate.update(deleteUhsQuery, shiftId, userId);
+    }
 }

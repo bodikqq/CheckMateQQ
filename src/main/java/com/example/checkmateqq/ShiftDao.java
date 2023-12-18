@@ -13,5 +13,7 @@ public interface ShiftDao {
 
     List<Shift> getFutureShiftsForUser(int userId);
 
+    List<Shift> getPastShiftsForUser(int userId);
+
     Shift getShiftByShiftID(int shiftId);
 }

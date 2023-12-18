@@ -25,4 +25,6 @@ public interface UserDao {
     void deleteUserById(int userId) throws EntityNotFoundException;
 
     boolean checkIfUserExistsById(int userId);
+
+    boolean hasUpcomingShifts(int userId);
 }

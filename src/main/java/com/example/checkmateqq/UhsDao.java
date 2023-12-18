@@ -8,4 +8,6 @@ public abstract class UhsDao {
     public abstract int numberOfShiftsWorked(int userId);
 
     public abstract Uhs getUhsByShiftId(int shiftId, int userId);
+
+    public abstract void deleteUhsByShiftIdAndUserId(int shiftId, int userId);
 }
