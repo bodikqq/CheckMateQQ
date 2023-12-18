@@ -164,9 +164,13 @@ public class EmpManagerViewController {
     }
 
     private void fillPastShiftsList() {
+        pastShiftsList.getItems().clear();
         List<String> pastShiftsData = new ArrayList<>();
         List<Shift> shifts = shiftDao.getPastShiftsForUser(selectedId);
-        if(shifts == null)return;
+        if(shifts == null){
+
+            return;
+        }
         for (Shift shift : shifts) {
             String cas = "";
             if (shift.isFirst()) {
@@ -182,7 +186,7 @@ public class EmpManagerViewController {
 
 
     private void fillUpcomingShiftsList() {
-
+        upcomingShiftsList.getItems().clear();
         upcomingShiftsMap.clear();
         List<String> upcomingShiftsData = new ArrayList<>();
         List<Shift> upcShifts = shiftDao.getFutureShiftsForUser(selectedId);
