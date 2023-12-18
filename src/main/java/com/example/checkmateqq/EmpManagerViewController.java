@@ -6,6 +6,10 @@ import com.example.checkmateqq.triedy.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
@@ -28,6 +32,8 @@ public class EmpManagerViewController {
     private ListView<String> pastShiftsList;
 
     @FXML
+    private TextField searchText;
+    @FXML
     private ListView<String> upcomingShiftsList;
     private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
     private ShiftDao shiftDao = DaoFactory.INSTANCE.getShiftDao();
@@ -40,7 +46,9 @@ public class EmpManagerViewController {
     private void initialize() throws EntityNotFoundException {
         employeeTableColumns();
         fillEmployeeTable();
-
+        searchText.textProperty().addListener((observable, oldValue, newValue) -> {
+            fillSearchedEmployeeTable(newValue);
+        });
         employeeTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue != null) {
@@ -109,12 +117,13 @@ public class EmpManagerViewController {
 
     @FXML
     void onEmployeeLookUp(ActionEvent event) {
+        fillSearchedEmployeeTable(searchText.getText());
 
     }
 
     @FXML
     void searchForTestByID(MouseEvent event) {
-
+        fillSearchedEmployeeTable(searchText.getText());
     }
 
     public void setUserId(User user) {
@@ -128,6 +137,17 @@ public class EmpManagerViewController {
             employeeTable.getItems().add(employee);
         }
 
+    }
+    private void fillSearchedEmployeeTable(String searchString){
+        employeeTable.getItems().clear();
+        List<User> workers = userDao.searchUserByNameSurnameOrId(searchString);
+        if(workers == null)return;
+        for(User user: workers){
+            Integer id = user.getId();
+            String fullName = user.getName() + " " + user.getSurname();
+            EmployeeForTable employee = new EmployeeForTable(id,fullName);
+            employeeTable.getItems().add(employee);
+        }
     }
 
     private void employeeTableColumns() {
@@ -145,7 +165,9 @@ public class EmpManagerViewController {
 
     private void fillPastShiftsList() {
         List<String> pastShiftsData = new ArrayList<>();
-        for (Shift shift : shiftDao.getFutureShiftsForUser(selectedId)) {
+        List<Shift> shifts = shiftDao.getPastShiftsForUser(selectedId);
+        if(shifts == null)return;
+        for (Shift shift : shifts) {
             String cas = "";
             if (shift.isFirst()) {
                 cas = "first";
@@ -160,9 +182,12 @@ public class EmpManagerViewController {
 
 
     private void fillUpcomingShiftsList() {
+
         upcomingShiftsMap.clear();
         List<String> upcomingShiftsData = new ArrayList<>();
-        for (Shift shift : shiftDao.getFutureShiftsForUser(selectedId)) {
+        List<Shift> upcShifts = shiftDao.getFutureShiftsForUser(selectedId);
+        if(upcShifts == null)return;
+        for (Shift shift : upcShifts) {
             String cas = "";
             if (shift.isFirst()) {
                 cas = "7:00  - 13:00";
@@ -173,6 +198,8 @@ public class EmpManagerViewController {
             upcomingShiftsMap.put(shift.getId(), shiftString);
             upcomingShiftsData.add(shiftString);
         }
+        if(upcomingShiftsData.isEmpty() || upcomingShiftsData == null)return;
+        upcomingShiftsMap.forEach((key, value) -> System.out.println(key + ":" + value));
         upcomingShiftsList.getItems().setAll(upcomingShiftsData);
     }
 }

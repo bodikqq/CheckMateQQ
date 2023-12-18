@@ -26,5 +26,7 @@ public interface UserDao {
 
     boolean checkIfUserExistsById(int userId);
 
+    List<User> searchUserByNameSurnameOrId(String nameSurnameOrId);
+
     boolean hasUpcomingShifts(int userId);
 }

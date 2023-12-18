@@ -175,5 +175,21 @@ public boolean checkIfUserExists(String login, String password) {
 
         return count > 0;
     }
+    @Override
+    public List<User> searchUserByNameSurnameOrId(String nameSurnameOrId) {
+        String sql = "SELECT * " +
+                "FROM user " +
+                "WHERE (CONCAT(name, ' ', surname) LIKE ? OR CONCAT(surname, ' ', name) LIKE ? OR id = ?) " +
+                "AND isEmployee = true AND isAdmin = false";
+
+        String nameSurnameOrIdMod = "%" + nameSurnameOrId + "%";
+
+        try {
+            int userId = Integer.parseInt(nameSurnameOrId);
+            return jdbcTemplate.query(sql, userRM(), nameSurnameOrIdMod, nameSurnameOrIdMod, userId);
+        } catch (NumberFormatException e) {
+            return jdbcTemplate.query(sql, userRM(), nameSurnameOrIdMod, nameSurnameOrIdMod, nameSurnameOrId);
+        }
+    }
 
 }

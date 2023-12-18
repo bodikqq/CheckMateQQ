@@ -72,7 +72,7 @@ public class MysqlShiftDao implements ShiftDao {
                 "WHERE uhs.user_id = ? AND s.date >= CURDATE()";
 
         List<Shift> futureShifts = jdbcTemplate.query(sql, shiftRM(), userId);
-
+        if(futureShifts.isEmpty())return null;
         return futureShifts;
     }
     @Override
@@ -82,7 +82,7 @@ public class MysqlShiftDao implements ShiftDao {
                 "WHERE uhs.user_id = ? AND s.date < CURDATE()";
 
         List<Shift> pastShifts = jdbcTemplate.query(sql, shiftRM(), userId);
-
+        if(pastShifts.isEmpty())return null;
         return pastShifts;
     }
     @Override
