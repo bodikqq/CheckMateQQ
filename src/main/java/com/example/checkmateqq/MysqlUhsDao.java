@@ -8,6 +8,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class MysqlUhsDao extends UhsDao {
 
@@ -67,5 +68,10 @@ public class MysqlUhsDao extends UhsDao {
     public void deleteUhsByShiftIdAndUserId(int shiftId, int userId) {
         String deleteUhsQuery = "DELETE FROM user_has_shift WHERE shift_id = ? AND user_id = ?";
         jdbcTemplate.update(deleteUhsQuery, shiftId, userId);
+    }
+    @Override
+    public List<Uhs> getAllUhs() {
+        String query = "SELECT * FROM user_has_shift";
+        return jdbcTemplate.query(query, uhsRM());
     }
 }

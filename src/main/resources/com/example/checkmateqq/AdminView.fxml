@@ -2,8 +2,8 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -38,11 +38,13 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Pane layoutX="75.0" layoutY="157.0" prefHeight="226.0" prefWidth="368.0" style="-fx-background-color: white;">
+      <Pane layoutX="47.0" layoutY="97.0" prefHeight="263.0" prefWidth="446.0" style="-fx-background-color: #404040;">
          <children>
-            <CheckBox layoutX="30.0" layoutY="29.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="293.0" text="First shift 24.08.2024 Kosice, Medicka 6" />
+            <TableView fx:id="shiftsToConfirmTable" layoutX="12.0" layoutY="27.0" prefHeight="225.0" prefWidth="426.0" />
+            <Label layoutX="14.0" layoutY="6.0" style="-fx-text-fill: white;" text="shifts to confirm" />
          </children>
       </Pane>
       <Button fx:id="openEmpManagerButton" layoutX="75.0" layoutY="481.0" mnemonicParsing="false" onAction="#openEmpManager" style="-fx-background-color: #404040; -fx-text-fill: #f0f0f0;" text="Button" />
+      <Button fx:id="confirmButton" layoutX="365.0" layoutY="368.0" mnemonicParsing="false" onAction="#onShiftConfirm" style="-fx-background-color: white; -fx-text-fill: #404040;" text="Confirm" />
     </children>
 </AnchorPane>

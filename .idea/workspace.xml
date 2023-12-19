@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60839104-69e3-4b87-8810-6a6d5f32398b" name="Changes" comment="+ search">
+    <list default="true" id="60839104-69e3-4b87-8810-6a6d5f32398b" name="Changes" comment="version 2">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/ShiftsForAdmin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/EmpManagerViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/EmpManagerViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/AdminViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/AdminViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/DaoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUhsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUhsDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/UhsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/UhsDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/AdminView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/AdminView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,10 +29,17 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="mm" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
