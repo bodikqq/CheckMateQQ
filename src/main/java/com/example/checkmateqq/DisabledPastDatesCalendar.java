@@ -31,7 +31,7 @@ public class DisabledPastDatesCalendar extends Application {
         public void updateItem(LocalDate item, boolean empty) {
             super.updateItem(item, empty);
 
-            if (item.isBefore(LocalDate.now())) {
+            if (item.isBefore(LocalDate.now().plusDays(1))) {
                 setDisable(true);
                 setStyle("-fx-background-color: #eeeeee;"); // Change the background color for disabled dates
             }

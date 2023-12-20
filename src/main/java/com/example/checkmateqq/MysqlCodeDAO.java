@@ -12,7 +12,7 @@ public class MysqlCodeDAO implements CodeDAO{
     public MysqlCodeDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    private RowMapper<Code> CodeRM() {
+    RowMapper<Code> CodeRM() {
         return new RowMapper<Code>() {
 
             @Override

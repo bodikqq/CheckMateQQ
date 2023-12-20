@@ -115,7 +115,9 @@ public boolean checkIfUserExists(String login, String password) {
             return null;
         }
         String sql = "SELECT * FROM user WHERE login = ? AND password = ?";
-            return jdbcTemplate.queryForObject(sql, userRM(), login, password);
+        List<User> list = jdbcTemplate.query(sql, userRM(), login, password);
+        if(list.isEmpty())return null;
+        else return list.get(0);
     }
     @Override
     public int workersOnTime(Date date, int stationId, boolean isFirst) {
@@ -156,8 +158,10 @@ public boolean checkIfUserExists(String login, String password) {
     @Override
     public boolean checkIfUserExistsById(int userId) {
         String sql = "SELECT COUNT(*) FROM user WHERE id = ?";
-        int count = jdbcTemplate.queryForObject(sql, Integer.class, userId);
-
+            Integer count = jdbcTemplate.queryForObject(sql, Integer.class, userId);
+            if(count == null) {
+                return false;
+            }
         return count > 0;
     }
     @Override

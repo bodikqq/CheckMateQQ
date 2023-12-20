@@ -34,4 +34,13 @@ public class Code {
     public void setIs_active(Boolean is_active) {
         this.is_active = is_active;
     }
+
+    @Override
+    public String toString() {
+        return "Code{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", is_active=" + is_active +
+                '}';
+    }
 }

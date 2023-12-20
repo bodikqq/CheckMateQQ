@@ -17,7 +17,7 @@ public class MysqlCardDao implements CardDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private RowMapper<Card> cardRM() {
+    RowMapper<Card> cardRM() {
         return (rs, rowNum) -> {
             int id = rs.getInt("id");
             String cardNumber = rs.getString("cardNumber");

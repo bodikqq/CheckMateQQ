@@ -288,7 +288,7 @@ public class WorkerViewController {
 //        Station station = stationDao.getStationById(selectedStationID);
 //        ShiftManager shiftManager = new ShiftManager(station.toString(), shift.getDate(), timeOfShift);
 //        shiftsTable.getItems().add(shiftManager);
-
+        shiftsTable.getItems().clear();
         fillShiftsTable();
     }
 

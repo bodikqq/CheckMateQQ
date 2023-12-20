@@ -132,5 +132,4 @@ public class User {
         isAdmin = admin;
     }
 
-
 }

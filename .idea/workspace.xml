@@ -4,7 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60839104-69e3-4b87-8810-6a6d5f32398b" name="Changes" comment="+ search v2" />
+    <list default="true" id="60839104-69e3-4b87-8810-6a6d5f32398b" name="Changes" comment="version 2">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlCardDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlCodeDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlShiftDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlStationDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlTestDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlUhsDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlUserDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/SearchForTestViewControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/DaoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/DisabledPastDatesCalendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/DisabledPastDatesCalendar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlCardDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlCardDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlCodeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlCodeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/WorkerViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/WorkerViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/Code.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/Code.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/User.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +34,7 @@
       <list>
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -42,60 +62,54 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;qq&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/bohdan/java drivers/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "qq",
+    "jdk.selected.JAVA_MODULE": "openjdk-21",
+    "last_opened_file_path": "C:/Users/bohdan/java drivers/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.example.checkmateqq" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.checkmateqq" />
     </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.example.checkmateqq" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.MainScene">
-    <configuration name="LoginPage" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.HelloApplication" />
-      <module name="CheckMateQQ" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.checkmateqq.triedy.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MainScene" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.MainScene" />
+  <component name="RunManager" selected="JUnit.SearchForTestViewControllerTest">
+    <configuration name="MysqlCardDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CheckMateQQ" />
       <extension name="coverage">
         <pattern>
@@ -103,12 +117,14 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.example.checkmateqq" />
+      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.MysqlCardDaoTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RegisterPage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.RegisterPage" />
+    <configuration name="MysqlCodeDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CheckMateQQ" />
       <extension name="coverage">
         <pattern>
@@ -116,12 +132,14 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.example.checkmateqq" />
+      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.MysqlCodeDAOTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TEST" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.TEST" />
+    <configuration name="MysqlCodeDAOTest.testCodeRM" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CheckMateQQ" />
       <extension name="coverage">
         <pattern>
@@ -129,12 +147,15 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.example.checkmateqq" />
+      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.MysqlCodeDAOTest" />
+      <option name="METHOD_NAME" value="testCodeRM" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.example.checkmateqq.LoginPage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.LoginPage" />
+    <configuration name="SearchForTestViewControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CheckMateQQ" />
       <extension name="coverage">
         <pattern>
@@ -142,17 +163,36 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.example.checkmateqq" />
+      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.SearchForTestViewControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SearchForTestViewControllerTest.testSearchForTestById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CheckMateQQ" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.checkmateqq.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.checkmateqq" />
+      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.SearchForTestViewControllerTest" />
+      <option name="METHOD_NAME" value="testSearchForTestById(org.testfx.api.FxRobot)" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainScene" />
-        <item itemvalue="Application.TEST" />
-        <item itemvalue="Application.RegisterPage" />
-        <item itemvalue="Application.LoginPage" />
-        <item itemvalue="Application.com.example.checkmateqq.LoginPage" />
+        <item itemvalue="JUnit.SearchForTestViewControllerTest" />
+        <item itemvalue="JUnit.SearchForTestViewControllerTest.testSearchForTestById" />
+        <item itemvalue="JUnit.MysqlCodeDAOTest.testCodeRM" />
+        <item itemvalue="JUnit.MysqlCardDaoTest" />
+        <item itemvalue="JUnit.MysqlCodeDAOTest" />
       </list>
     </recent_temporary>
   </component>
@@ -268,15 +308,7 @@
       <option name="project" value="LOCAL" />
       <updated>1702915773253</updated>
     </task>
-    <task id="LOCAL-00012" summary="+ search v2">
-      <option name="closed" value="true" />
-      <created>1703096365047</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1703096365047</updated>
-    </task>
-    <option name="localTasksCounter" value="13" />
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,7 +365,22 @@
     <MESSAGE value="zafarbovanie buniek" />
     <MESSAGE value="WorkerView kinda" />
     <MESSAGE value="+ search" />
-    <MESSAGE value="+ search v2" />
-    <option name="LAST_COMMIT_MESSAGE" value="+ search v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ search" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlCardDaoTest.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/example/checkmateqq/SearchForTestViewControllerTest.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
