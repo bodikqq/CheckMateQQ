@@ -12,13 +12,14 @@ public enum DaoFactory {
     private ShiftDao shiftDao;
     private StationDao stationDao;
     private UhsDao uhsDao;
+    private CodeDAO codeDao;
     private JdbcTemplate jdbcTemplate;
 
     private JdbcTemplate getJdbcTemplate() {
         if (jdbcTemplate == null) {
             MysqlDataSource dataSource = new MysqlDataSource();
             dataSource.setUser("root");
-            dataSource.setPassword("heslo");
+            dataSource.setPassword("qq");
             dataSource.setUrl("jdbc:mysql://localhost:3306/checkmate");
             jdbcTemplate = new JdbcTemplate(dataSource);
         }
@@ -52,5 +53,9 @@ public enum DaoFactory {
             uhsDao = (UhsDao) new MysqlUhsDao(getJdbcTemplate());
         return uhsDao;
     }
-
+    public CodeDAO getCodeDao(){
+        if(codeDao == null)
+            codeDao = (CodeDAO) new MysqlCodeDAO(getJdbcTemplate());
+        return codeDao;
+    }
 }

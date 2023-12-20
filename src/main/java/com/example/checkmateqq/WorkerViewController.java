@@ -316,6 +316,7 @@ public class WorkerViewController {
     private void fillShiftsTable() {
         String timeOfShift = "";
         List<Shift> upcomingShifts = shiftDao.getFutureShiftsForUser(user.getId());
+        if(upcomingShifts == null)return;
         for (Shift shift : upcomingShifts) {
             Station station = stationDao.getStationById(shift.getStation_id());
             String stationString = station.toString();

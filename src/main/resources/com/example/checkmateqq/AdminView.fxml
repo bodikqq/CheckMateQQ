@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="598.0" prefWidth="778.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="598.0" prefWidth="778.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane accessibleRole="CONTEXT_MENU" prefHeight="58.0" prefWidth="785.0" style="-fx-background-color: #404040;" styleClass="border">
             <children>
@@ -36,7 +36,7 @@
             </Text>
             </children></AnchorPane>
       <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" onAction="#generateEmployeeCode" prefHeight="27.0" prefWidth="101.0" style="-fx-background-color: #404040; -fx-text-fill: #f0f0f0;" text="Employee code" />
-      <Text layoutX="587.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2W4knfu7WFWF87f9Fuf" visible="false" wrappingWidth="151.2000732421875">
+      <Text fx:id="worker_code" layoutX="557.0" layoutY="534.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2W4knfu7WFWF87f9Fuf" textAlignment="CENTER" visible="false" wrappingWidth="210.40008544921875">
          <font>
             <Font size="14.0" />
          </font>

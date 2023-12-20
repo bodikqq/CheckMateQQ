@@ -10,6 +10,36 @@ public class User {
     String password;
     boolean isEmployee = false;
     boolean isAdmin = false;
+    int card_id;
+    double balance;
+
+    public User(int id, String name, String surname, String login, String password, boolean isEmployee, boolean isAdmin, int card_id, double balance) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.password = password;
+        this.isEmployee = isEmployee;
+        this.isAdmin = isAdmin;
+        this.card_id = card_id;
+        this.balance = balance;
+    }
+
+    public int getCard_id() {
+        return card_id;
+    }
+
+    public void setCard_id(int card_id) {
+        this.card_id = card_id;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 
     @Override
     public String toString() {

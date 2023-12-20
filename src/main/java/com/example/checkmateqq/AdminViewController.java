@@ -17,6 +17,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.*;
 
 public class AdminViewController {
@@ -39,6 +43,9 @@ public class AdminViewController {
     private Button addStationButton;
     @FXML
     private Button deleteStationButton;
+
+    @FXML
+    private Text worker_code;
     private UhsDao uhsDao = DaoFactory.INSTANCE.getUhsDao();
     private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
     private ShiftDao shiftDao = DaoFactory.INSTANCE.getShiftDao();
@@ -46,20 +53,37 @@ public class AdminViewController {
     private Map<Integer, String> stationMap = new HashMap<>();
     private User user;
 
+    private CodeDAO codeDAO = DaoFactory.INSTANCE.getCodeDao();
+
     public void initialize() throws EntityNotFoundException {
+        System.out.println("Initializing AdminViewController");
+        shiftsToConfirmTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         shiftsToConfirmTableColumns();
         fillShiftsToConfirmTable();
         fillStationList();
+
     }
 
     @FXML
     void generateEmployeeCode(ActionEvent event) {
+        String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        SecureRandom random = new SecureRandom();
+        StringBuilder code = new StringBuilder(15);
 
+        for (int i = 0; i < 15; i++) {
+            int randomIndex = random.nextInt(CHARACTERS.length());
+            code.append(CHARACTERS.charAt(randomIndex));
+        }
+        worker_code.setText(code.toString());
+        worker_code.setVisible(true);
+        codeDAO.addNewWorkerCode(code.toString());
     }
 
     @FXML
     void logOut(MouseEvent event) {
-
+        LoginController loginController = new LoginController();
+        Stage stage = (Stage) confirmButton.getScene().getWindow();
+        goToLogin(stage, loginController);
     }
 
     @FXML
@@ -92,6 +116,26 @@ public class AdminViewController {
             searchStage.initModality(Modality.APPLICATION_MODAL);
             searchStage.initOwner(currentStage);
             searchStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void goToLogin(Stage currentStage, LoginController controller) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("LoginPage.fxml"));
+            loader.setController(controller);
+            Parent parent = loader.load();
+
+            // Set the new content in the current stage
+            Scene scene = new Scene(parent);
+            currentStage.setScene(scene);
+
+            // Set the title (if needed)
+            currentStage.setTitle("qq");
+
+            // Optionally, show the stage (if it's not already showing)
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -147,7 +191,7 @@ public class AdminViewController {
             }
             User user = userDao.getById(uhs.getUser_id());
             String employee = user.getName() + " " + user.getSurname();
-            ShiftsForAdmin shiftsForAdmin = new ShiftsForAdmin(shiftId, stationString,date,time,employee);
+            ShiftsForAdmin shiftsForAdmin = new ShiftsForAdmin(shiftId,stationString,date,time,employee);
             shiftsToConfirmTable.getItems().add(shiftsForAdmin);
 
         }
@@ -220,7 +264,8 @@ public class AdminViewController {
 
             // Check the user's response
             if (confirmationAlert.getResult() == ButtonType.OK) {
-                System.out.println("User clicked OK");
+                System.out.println("User clicked OK" + stationId);
+
                 stationDao.deleteStation(stationId);
                 stationListVIew.getItems().remove(selectedStationString);
             } else {

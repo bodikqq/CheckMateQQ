@@ -21,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -325,6 +326,26 @@ public class KlientViewController {
         }
     }
 
+    private void goToBalance(Stage currentStage, CardViewController controller) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("CardView.fxml"));
+            loader.setController(controller);
+            Parent parent = loader.load();
+            Stage searchStage = new Stage();
+            searchStage.setTitle("Search For Test");
+            searchStage.setScene(new Scene(parent));
+
+            // Add the stylesheet to the scene
+            searchStage.getScene().getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+            searchStage.initModality(Modality.APPLICATION_MODAL);
+            searchStage.initOwner(currentStage);
+            searchStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private Map<Integer, String> stationsToMap() {
         Map<Integer, String> stationsToMap = new HashMap<Integer, String>();
         for (Station station : stations) {
@@ -425,6 +446,12 @@ public class KlientViewController {
         }
     }
 
+    @FXML
+    void addBalance(MouseEvent event) {
+        CardViewController controller = new CardViewController();
+        Stage stage = (Stage) selectTerm.getScene().getWindow();
+        goToBalance(stage,controller);
+    }
     private void columnCellFactory(TableColumn column) {
         Date utilDate = java.sql.Date.valueOf(pickedDate);
         final int workers_now = userDao.workersOnTime(utilDate, selectedStationID, true);

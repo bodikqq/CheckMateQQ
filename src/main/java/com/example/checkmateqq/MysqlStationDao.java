@@ -54,6 +54,7 @@ public class MysqlStationDao implements StationDao{
     @Override
     public void deleteStation(int stationId) {
         String sql = "DELETE FROM station WHERE id = ?";
+        System.out.println("qqqq");
         jdbcTemplate.update(sql, stationId);
     }
 

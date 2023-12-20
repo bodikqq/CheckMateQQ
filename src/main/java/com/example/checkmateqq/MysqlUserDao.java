@@ -31,9 +31,9 @@ public class MysqlUserDao implements UserDao {
                 String password = rs.getString("password");
                 boolean isEmployee = rs.getBoolean("isEmployee");
                 boolean isAdmin = rs.getBoolean("isAdmin");
-
-
-                User user = new User(id, name, surname, login, password, isEmployee, isAdmin);
+                double balance = rs.getDouble("balance");
+                int card_id = rs.getInt("card_id");
+                User user = new User(id, name, surname, login, password, isEmployee, isAdmin,card_id,balance);
                 return user;
             }
         };
@@ -41,7 +41,7 @@ public class MysqlUserDao implements UserDao {
 
     @Override
     public User getById(int id) throws EntityNotFoundException {
-        String sql = "SELECT id, name, surname, login, password, isEmployee, isAdmin FROM user WHERE id = " + id;
+        String sql = "SELECT * FROM user WHERE id = " + id;
         return jdbcTemplate.queryForObject(sql, userRM());
     }
 
@@ -114,7 +114,7 @@ public boolean checkIfUserExists(String login, String password) {
         if(!checkIfUserExists(login,password)){
             return null;
         }
-        String sql = "SELECT id, name, surname, login, password, isEmployee, isAdmin FROM user WHERE login = ? AND password = ?";
+        String sql = "SELECT * FROM user WHERE login = ? AND password = ?";
             return jdbcTemplate.queryForObject(sql, userRM(), login, password);
     }
     @Override
@@ -133,7 +133,7 @@ public boolean checkIfUserExists(String login, String password) {
     }
     @Override
     public List<User> returnEmployees() {
-        String sql = "SELECT id, name, surname, login, password, isEmployee, isAdmin FROM user WHERE isEmployee = true AND isAdmin = false";
+        String sql = "SELECT * FROM user WHERE isEmployee = true AND isAdmin = false";
         return jdbcTemplate.query(sql, userRM());
     }
 

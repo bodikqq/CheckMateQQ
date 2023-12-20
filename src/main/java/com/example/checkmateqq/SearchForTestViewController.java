@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 
 public class SearchForTestViewController {
     TestDao testDao = DaoFactory.INSTANCE.getTestDao();
+    UserDao userDao = DaoFactory.INSTANCE.getUserDao();
     User user = null;
     Test currentTest;
     @FXML
@@ -89,8 +90,9 @@ public class SearchForTestViewController {
             }
             currentTest = test;
             this.id.setText(test_id);
-            name.setText(user.getName());
-            surname.setText(user.getSurname());
+            User patient = userDao.getById(currentTest.getPatient_id());
+            name.setText(patient.getName());
+            surname.setText(patient.getSurname());
             type.setText("PCR");
             if(test.getTest_type() == 1)type.setText("NAATs");
             showAll();
@@ -102,6 +104,8 @@ public class SearchForTestViewController {
             hideAll();
             ThereIsNoTestText.setVisible(true);
             return;
+        } catch (EntityNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
     @FXML
