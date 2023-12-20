@@ -46,5 +46,16 @@ public class MysqlStationDao implements StationDao{
         }
         return stations.get(0);
     }
+    @Override
+    public void createStation(Station station) {
+        String sql = "INSERT INTO station (town, address) VALUES (?, ?)";
+        jdbcTemplate.update(sql, station.getTown(), station.getAddress());
+    }
+    @Override
+    public void deleteStation(int stationId) {
+        String sql = "DELETE FROM station WHERE id = ?";
+        jdbcTemplate.update(sql, stationId);
+    }
+
 
 }

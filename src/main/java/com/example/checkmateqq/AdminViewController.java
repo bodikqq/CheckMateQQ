@@ -17,9 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class AdminViewController {
 
@@ -33,15 +31,25 @@ public class AdminViewController {
     private Button confirmButton;
     @FXML
     private Button openEmpManagerButton;
+    @FXML
+    private ListView<String> stationListVIew;
+    @FXML
+    private TextField addStationTextField;
+    @FXML
+    private Button addStationButton;
+    @FXML
+    private Button deleteStationButton;
     private UhsDao uhsDao = DaoFactory.INSTANCE.getUhsDao();
     private UserDao userDao = DaoFactory.INSTANCE.getUserDao();
     private ShiftDao shiftDao = DaoFactory.INSTANCE.getShiftDao();
     private StationDao stationDao = DaoFactory.INSTANCE.getStationDao();
+    private Map<Integer, String> stationMap = new HashMap<>();
     private User user;
 
     public void initialize() throws EntityNotFoundException {
         shiftsToConfirmTableColumns();
         fillShiftsToConfirmTable();
+        fillStationList();
     }
 
     @FXML
@@ -91,7 +99,14 @@ public class AdminViewController {
 
     @FXML
     void onShiftConfirm(ActionEvent event) {
+        List<ShiftsForAdmin> shifts = (List<ShiftsForAdmin>) shiftsToConfirmTable.getSelectionModel().getSelectedItems();
+        for (ShiftsForAdmin shiftsForAdmin :shifts) {
+            System.out.println(shiftsForAdmin.getId());
+            uhsDao.updateIsConfirmed(user.getId(), shiftsForAdmin.getId(), true);
 
+        }
+        shiftsToConfirmTable.getItems().removeAll(shifts);
+        //uhsDao.updateIsConfirmed(user.getId(), shift.getId(), true);
     }
 
     private void shiftsToConfirmTableColumns() {
@@ -119,6 +134,7 @@ public class AdminViewController {
     private void fillShiftsToConfirmTable() throws EntityNotFoundException {
         List<Uhs> uhsList = uhsDao.getAllUhs();
         for (Uhs uhs:uhsList) {
+            int shiftId = uhs.getShift_id();
             Shift shift = shiftDao.getShiftByShiftID(uhs.getShift_id());
             Station station = stationDao.getStationById(shift.getStation_id());
             String stationString = station.toString2();
@@ -131,7 +147,7 @@ public class AdminViewController {
             }
             User user = userDao.getById(uhs.getUser_id());
             String employee = user.getName() + " " + user.getSurname();
-            ShiftsForAdmin shiftsForAdmin = new ShiftsForAdmin(stationString,date,time,employee);
+            ShiftsForAdmin shiftsForAdmin = new ShiftsForAdmin(shiftId, stationString,date,time,employee);
             shiftsToConfirmTable.getItems().add(shiftsForAdmin);
 
         }
@@ -139,6 +155,115 @@ public class AdminViewController {
                 SelectionMode.MULTIPLE
         );
 
+    }
+    @FXML
+    void onAddStation(ActionEvent event) {
+        String stationToAdd = addStationTextField.getText();
+
+        if (isValidStationFormat(stationToAdd)) {
+            // Split the station string into town, street, and street number
+            String[] stationParts = stationToAdd.split(",\\s");
+
+            if (stationParts.length == 3) {
+                String town = stationParts[0];
+                String street = stationParts[1];
+                String streetNumber = stationParts[2];
+
+                // Create a new Station object
+                Station newStation = new Station(0, town, street + " " + streetNumber);
+
+                // Add the new station to the database
+                stationDao.createStation(newStation);
+
+                // Add the new station to the ListView
+                stationListVIew.getItems().add(newStation.toString());
+            } else {
+                showAlert("Invalid Format", "Please enter the station in the format: 'Town, Street, Street Number'");
+            }
+        } else {
+            showAlert("Invalid Format", "Please enter the station in the format: 'Town, Street, Street Number'");
+        }
+    }
+    private boolean isValidStationFormat(String stationString) {
+        return stationString.matches("^\\w+,\\s\\w+,\\s\\w+$");
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    @FXML
+    void onDeleteStation(ActionEvent event) {
+        String selectedStationString = stationListVIew.getSelectionModel().getSelectedItem();
+
+        if (selectedStationString != null) {
+            int stationId = 0;
+            for (Map.Entry<Integer, String> entry : stationMap.entrySet()) {
+                int key = entry.getKey();
+                String value = entry.getValue();
+                if(value.equals(selectedStationString)){
+                    stationId = key;
+                }
+            }
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Confirmation Dialog");
+            confirmationAlert.setHeaderText("Are you sure you want to proceed?");
+
+            // Add OK and Cancel buttons
+            confirmationAlert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+
+            // Show the confirmation alert and wait for the user's response
+            confirmationAlert.showAndWait();
+
+            // Check the user's response
+            if (confirmationAlert.getResult() == ButtonType.OK) {
+                System.out.println("User clicked OK");
+                stationDao.deleteStation(stationId);
+                stationListVIew.getItems().remove(selectedStationString);
+            } else {
+                System.out.println("User clicked Cancel");
+                confirmationAlert.close();
+            }
+
+        } else {
+            showAlert("No Station Selected", "Please select a station to delete.");
+        }
+    }
+
+    private void fillStationList() {
+        //if (stationListVIew != null) {  // Check if stationListVIew is not null
+            stationListVIew.getItems().clear();  // Clear existing items before adding new ones
+
+            for (Station station : stationDao.getAll()) {
+                String stationString = station.toString();
+                stationMap.put(station.getId(),stationString);
+                stationListVIew.getItems().add(stationString);
+            }
+
+    }
+    private void showConfirmationAlert() {
+        // Create a confirmation alert
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Confirmation Dialog");
+        confirmationAlert.setHeaderText("Are you sure you want to proceed?");
+
+        // Add OK and Cancel buttons
+        confirmationAlert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+
+        // Show the confirmation alert and wait for the user's response
+        confirmationAlert.showAndWait();
+
+        // Check the user's response
+        if (confirmationAlert.getResult() == ButtonType.OK) {
+            System.out.println("User clicked OK");
+            // Perform the action you want to take when the user clicks OK
+        } else {
+            System.out.println("User clicked Cancel");
+            // Perform the action you want to take when the user clicks Cancel
+        }
     }
 }
 

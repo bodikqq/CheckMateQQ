@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -44,7 +47,13 @@
             <Label layoutX="14.0" layoutY="6.0" style="-fx-text-fill: white;" text="shifts to confirm" />
          </children>
       </Pane>
-      <Button fx:id="openEmpManagerButton" layoutX="75.0" layoutY="481.0" mnemonicParsing="false" onAction="#openEmpManager" style="-fx-background-color: #404040; -fx-text-fill: #f0f0f0;" text="Button" />
-      <Button fx:id="confirmButton" layoutX="365.0" layoutY="368.0" mnemonicParsing="false" onAction="#onShiftConfirm" style="-fx-background-color: white; -fx-text-fill: #404040;" text="Confirm" />
+      <Button fx:id="openEmpManagerButton" layoutX="75.0" layoutY="481.0" mnemonicParsing="false" onAction="#openEmpManager" style="-fx-background-color: #404040; -fx-text-fill: #f0f0f0;" text="Manage shifts and employees" />
+      <Button fx:id="confirmButton" layoutX="434.0" layoutY="371.0" mnemonicParsing="false" onAction="#onShiftConfirm" style="-fx-background-color: white; -fx-text-fill: #404040;" text="Confirm" />
+      <Accordion layoutX="561.0" layoutY="97.0" />
+      <ListView fx:id="stationListVIew" layoutX="538.0" layoutY="124.0" prefHeight="116.0" prefWidth="200.0" />
+      <Label layoutX="538.0" layoutY="97.0" text="Stations" />
+      <TextField fx:id="addStationTextField" layoutX="538.0" layoutY="257.0" />
+      <Button fx:id="addStationButton" layoutX="687.0" layoutY="257.0" mnemonicParsing="false" onAction="#onAddStation" prefHeight="21.0" prefWidth="51.0" text="add" />
+      <Button fx:id="deleteStationButton" layoutX="687.0" layoutY="287.0" mnemonicParsing="false" onAction="#onDeleteStation" text="delete" />
     </children>
 </AnchorPane>

@@ -74,4 +74,9 @@ public class MysqlUhsDao extends UhsDao {
         String query = "SELECT * FROM user_has_shift";
         return jdbcTemplate.query(query, uhsRM());
     }
+    @Override
+    public void updateIsConfirmed(int userId, int shiftId, boolean isConfirmed) {
+        String updateIsConfirmedQuery = "UPDATE user_has_shift SET isConfirmed = ? WHERE user_id = ? AND shift_id = ?";
+        jdbcTemplate.update(updateIsConfirmedQuery, isConfirmed, userId, shiftId);
+    }
 }

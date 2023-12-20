@@ -55,6 +55,9 @@ public class TEST {
         for(User user: userDao.returnEmployees()){
             System.out.println(user.toString());
         }
+        for(Station station: stationDao.getAll()){
+            System.out.println(station.toString());
+        }
         }
 
     }

@@ -14,4 +14,6 @@ public abstract class UhsDao {
     public abstract void deleteUhsByShiftIdAndUserId(int shiftId, int userId);
 
     public abstract List<Uhs> getAllUhs();
+
+    public abstract void updateIsConfirmed(int userId, int shiftId, boolean isConfirmed);
 }

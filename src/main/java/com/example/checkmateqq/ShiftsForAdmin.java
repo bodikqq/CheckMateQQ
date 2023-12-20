@@ -3,18 +3,26 @@ package com.example.checkmateqq;
 import java.util.Date;
 
 public class ShiftsForAdmin {
+    int id;
     String station;
     Date date;
     String time;
     String employee;
-    String numberOfEmployeesYet;
 
-    public ShiftsForAdmin(String station,Date date, String time, String employee, String numberOfEmployeesYet) {
+    public ShiftsForAdmin(int id, String station, Date date, String time, String employee) {
+        this.id = id;
         this.station = station;
         this.date = date;
         this.time = time;
         this.employee = employee;
-        this.numberOfEmployeesYet = numberOfEmployeesYet;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStation() {
@@ -33,13 +41,6 @@ public class ShiftsForAdmin {
         this.date = date;
     }
 
-    public ShiftsForAdmin(String station, Date date, String time, String employee) {
-        this.station = station;
-        this.date = date;
-        this.time = time;
-        this.employee = employee;
-    }
-
     public String getTime() {
         return time;
     }
@@ -54,13 +55,5 @@ public class ShiftsForAdmin {
 
     public void setEmployee(String employee) {
         this.employee = employee;
-    }
-
-    public String getNumberOfEmployeesYet() {
-        return numberOfEmployeesYet;
-    }
-
-    public void setNumberOfEmployeesYet(String numberOfEmployeesYet) {
-        this.numberOfEmployeesYet = numberOfEmployeesYet;
     }
 }

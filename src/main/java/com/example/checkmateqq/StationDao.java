@@ -8,4 +8,8 @@ public interface StationDao {
     List<Station> getAll();
 
     Station getStationById(int stationId);
+
+    void createStation(Station station);
+
+    void deleteStation(int stationId);
 }
