@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60839104-69e3-4b87-8810-6a6d5f32398b" name="Changes" comment="version 2">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/CardDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/CardViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/CodeDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlCardDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlCodeDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/Card.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/Code.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/AdminViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/AdminViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/DaoFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/KlientViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/KlientViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/SearchForTestViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/SearchForTestViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/WorkerViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/WorkerViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/AdminView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/AdminView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/KlientView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/KlientView.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="60839104-69e3-4b87-8810-6a6d5f32398b" name="Changes" comment="+ search v2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -286,7 +268,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702915773253</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="+ search v2">
+      <option name="closed" value="true" />
+      <created>1703096365047</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1703096365047</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,6 +333,7 @@
     <MESSAGE value="zafarbovanie buniek" />
     <MESSAGE value="WorkerView kinda" />
     <MESSAGE value="+ search" />
-    <option name="LAST_COMMIT_MESSAGE" value="+ search" />
+    <MESSAGE value="+ search v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ search v2" />
   </component>
 </project>
