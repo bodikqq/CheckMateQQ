@@ -20,7 +20,7 @@ public class MysqlShiftDao implements ShiftDao {
     private RowMapper<Shift> shiftRM() {
         return new RowMapper<Shift>() {
 
-            @Override
+            @Override 
             public Shift mapRow(ResultSet rs, int rowNum) throws SQLException {
                 int id = rs.getInt("id");
                 int station_id = rs.getInt("station_id");

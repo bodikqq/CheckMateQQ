@@ -24,7 +24,8 @@ public class MysqlUhsDao extends UhsDao {
             public Uhs mapRow(ResultSet rs, int rowNum) throws SQLException {
                 int user_id = rs.getInt("user_id");
                 int shift_id = rs.getInt("shift_id");
-                Uhs uhs = new Uhs(user_id,shift_id);
+                boolean isConfirmed = rs.getBoolean("isConfirmed");
+                Uhs uhs = new Uhs(user_id,shift_id,isConfirmed);
                 return uhs;
             }
         };
@@ -71,7 +72,7 @@ public class MysqlUhsDao extends UhsDao {
     }
     @Override
     public List<Uhs> getAllUhs() {
-        String query = "SELECT * FROM user_has_shift";
+        String query = "SELECT * FROM user_has_shift where isConfirmed = false";
         return jdbcTemplate.query(query, uhsRM());
     }
     @Override

@@ -146,7 +146,8 @@ public class AdminViewController {
         List<ShiftsForAdmin> shifts = (List<ShiftsForAdmin>) shiftsToConfirmTable.getSelectionModel().getSelectedItems();
         for (ShiftsForAdmin shiftsForAdmin :shifts) {
             System.out.println(shiftsForAdmin.getId());
-            uhsDao.updateIsConfirmed(user.getId(), shiftsForAdmin.getId(), true);
+            uhsDao.updateIsConfirmed(shiftsForAdmin.getEmployeeId(), shiftsForAdmin.getId(), true);
+            System.out.println(user.getId());
 
         }
         shiftsToConfirmTable.getItems().removeAll(shifts);
@@ -190,8 +191,9 @@ public class AdminViewController {
                 time = "13:00 - 19:00";
             }
             User user = userDao.getById(uhs.getUser_id());
+            int employeeId = uhs.getUser_id();
             String employee = user.getName() + " " + user.getSurname();
-            ShiftsForAdmin shiftsForAdmin = new ShiftsForAdmin(shiftId,stationString,date,time,employee);
+            ShiftsForAdmin shiftsForAdmin = new ShiftsForAdmin(shiftId,stationString,date,time,employee,employeeId);
             shiftsToConfirmTable.getItems().add(shiftsForAdmin);
 
         }

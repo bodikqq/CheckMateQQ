@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="598.0" prefWidth="778.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="508.0" prefWidth="785.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane accessibleRole="CONTEXT_MENU" prefHeight="58.0" prefWidth="785.0" style="-fx-background-color: #404040;" styleClass="border">
             <children>
@@ -39,12 +39,12 @@
       <Label layoutX="353.0" layoutY="107.0" text="Upcoming shifts:" />
       <TableView fx:id="shiftsTable" layoutX="353.0" layoutY="148.0" prefHeight="115.0" prefWidth="380.0" />
       <Label layoutX="42.0" layoutY="75.0" text="Choose a shift:" />
-      <Label layoutX="41.0" layoutY="458.0" text="Shifts worked this month:" />
-      <Label fx:id="hoursWorkedShow" layoutX="188.0" layoutY="456.0" prefHeight="10.0" prefWidth="0.0" text="1">
+      <Label layoutX="42.0" layoutY="458.0" text="Number of shifts worked this month:" />
+      <Label fx:id="hoursWorkedShow" layoutX="244.0" layoutY="457.0" prefHeight="10.0" prefWidth="0.0" text="1">
          <font>
             <Font size="15.0" />
          </font></Label>
       <Button fx:id="confirmButton" layoutX="168.0" layoutY="385.0" mnemonicParsing="false" onAction="#onConfirm" prefHeight="39.0" prefWidth="75.0" text="Confirm" />
-      <Button layoutX="473.0" layoutY="373.0" mnemonicParsing="false" onAction="#openTestByDate" text="document test result" />
+      <Button layoutX="480.0" layoutY="454.0" mnemonicParsing="false" onAction="#openTestByDate" text="document test result" />
     </children>
 </AnchorPane>

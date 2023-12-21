@@ -58,6 +58,7 @@ public class TEST {
         for(Station station: stationDao.getAll()){
             System.out.println(station.toString());
         }
+        uhsDao.updateIsConfirmed(2,10,true);
         }
 
     }

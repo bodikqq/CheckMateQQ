@@ -75,8 +75,9 @@ public class WorkerViewController {
 
     @FXML
     private void initialize() throws EntityNotFoundException {
+        stationChoiceBox.getStyleClass().add("normal-choice-box");
         hoursWorkedShow.setText(Integer.toString(uhsDao.numberOfShiftsWorked(user.getId())));
-        hoursWorkedShow.setFont(new Font(20));
+        hoursWorkedShow.setFont(new Font(15));
 
         datePicker.setDayCellFactory(picker -> new DisabledPastDatesCalendar.DisabledPastDateCell());
 

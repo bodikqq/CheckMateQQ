@@ -9,12 +9,32 @@ public class ShiftsForAdmin {
     String time;
     String employee;
 
+    int employeeId;
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public ShiftsForAdmin(int id, String station, Date date, String time, String employee, int employeeId) {
+        this.id = id;
+        this.station = station;
+        this.date = date;
+        this.time = time;
+        this.employee = employee;
+        this.employeeId = employeeId;
+    }
+
     public ShiftsForAdmin(int id, String station, Date date, String time, String employee) {
         this.id = id;
         this.station = station;
         this.date = date;
         this.time = time;
         this.employee = employee;
+
     }
 
     public int getId() {
