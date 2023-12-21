@@ -13,12 +13,12 @@
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #404040;" BorderPane.alignment="CENTER">
             <children>
-                <Text fill="WHITE" layoutX="12.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CheckMate" wrappingWidth="263.51171875">
+                <Text fill="WHITE" layoutX="18.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CheckMate" wrappingWidth="263.51171875">
                     <font>
                         <Font name="System Bold" size="50.0" />
                     </font>
                 </Text>
-                <Text fill="WHITE" layoutX="20.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Move for a Safer Tomorrow">
+                <Text fill="WHITE" layoutX="20.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Move for a Safer Tomorrow">
                     <font>
                         <Font size="18.0" />
                     </font>
