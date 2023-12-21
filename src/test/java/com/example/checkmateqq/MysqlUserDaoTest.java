@@ -95,11 +95,9 @@ public class MysqlUserDaoTest {
         String login = "john.doe";
         String password = "password";
 
-        // Mocking the queryForObject method to return null
         when(jdbcTemplate.query(anyString(), any(RowMapper.class), eq(login), eq(password)))
                 .thenReturn(null);
 
-        // Test
         User user = userDao.getUserByLoginAndPassword(login, password);
 
         // Verify

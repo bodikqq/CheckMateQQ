@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="60839104-69e3-4b87-8810-6a6d5f32398b" name="Changes" comment="version 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/LoginPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/LoginPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/WorkerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/WorkerView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlUserDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlUserDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/SearchForTestViewControllerTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +109,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MysqlCodeDAOTest.testCodeRM" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MysqlUserDaoTest2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CheckMateQQ" />
       <extension name="coverage">
         <pattern>
@@ -115,25 +118,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.example.checkmateqq" />
-      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.MysqlCodeDAOTest" />
-      <option name="METHOD_NAME" value="testCodeRM" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MysqlCodeDAOTest.testCodeRMWithNullValues" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CheckMateQQ" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.checkmateqq.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.checkmateqq" />
-      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.MysqlCodeDAOTest" />
-      <option name="METHOD_NAME" value="testCodeRMWithNullValues" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.MysqlUserDaoTest2" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -170,13 +156,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="checkmateqq in CheckMateQQ" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CheckMateQQ" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/com/example/checkmateqq" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainScene" />
-        <item itemvalue="JUnit.MysqlUserDaoTest.testDeleteUserById" />
+        <item itemvalue="JUnit.MysqlUserDaoTest2" />
+        <item itemvalue="JUnit.checkmateqq in CheckMateQQ" />
         <item itemvalue="JUnit.MysqlUserDaoTest.testGetUserByLoginAndPassword" />
-        <item itemvalue="JUnit.MysqlCodeDAOTest.testCodeRM" />
-        <item itemvalue="JUnit.MysqlCodeDAOTest.testCodeRMWithNullValues" />
+        <item itemvalue="JUnit.MysqlUserDaoTest.testDeleteUserById" />
       </list>
     </recent_temporary>
   </component>
@@ -316,7 +310,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703156484960</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="version 2">
+      <option name="closed" value="true" />
+      <created>1703158677784</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1703158677784</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,16 +376,5 @@
     <MESSAGE value="+ search" />
     <MESSAGE value="version 2" />
     <option name="LAST_COMMIT_MESSAGE" value="version 2" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlCardDaoTest.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

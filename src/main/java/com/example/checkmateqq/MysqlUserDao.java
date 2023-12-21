@@ -19,7 +19,7 @@ public class MysqlUserDao implements UserDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private RowMapper<User> userRM() {
+    RowMapper<User> userRM() {
         return new RowMapper<User>() {
 
             @Override
