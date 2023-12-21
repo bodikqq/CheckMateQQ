@@ -174,9 +174,9 @@ public class EmpManagerViewController {
         for (Shift shift : shifts) {
             String cas = "";
             if (shift.isFirst()) {
-                cas = "first";
+                cas = "7:00  - 13:00";
             } else if (!shift.isFirst()) {
-                cas = "second";
+                cas = "13:00 - 19:00";
             }
             String shiftString = shift.getDate() + ", " + cas + ", " + (stationDao.getStationById(shift.getStation_id()).toString2());
             pastShiftsData.add(shiftString);

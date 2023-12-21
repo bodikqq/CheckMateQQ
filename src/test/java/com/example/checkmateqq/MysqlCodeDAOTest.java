@@ -62,7 +62,7 @@ public class MysqlCodeDAOTest {
 
         assertNotNull(code);
         assertEquals(1, code.getId());
-        assertEquals("123", code.toString());
+        assertEquals("123", code.getCode());
         assertTrue(code.getIs_active());
     }
 
@@ -78,7 +78,7 @@ public class MysqlCodeDAOTest {
 
         assertNotNull(code);
         assertEquals(1, code.getId());
-        assertNull(code.toString());
+        assertNull(code.getCode());
         assertFalse(code.getIs_active());
     }
 

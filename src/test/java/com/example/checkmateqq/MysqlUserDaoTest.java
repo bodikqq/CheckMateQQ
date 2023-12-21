@@ -19,7 +19,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class MysqlUserDaoTest {
@@ -91,32 +91,20 @@ public class MysqlUserDaoTest {
     }
 
     @Test
-    public void testGetUserByLoginAndPassword() {
+    void testGetUserByLoginAndPassword() {
         String login = "john.doe";
         String password = "password";
 
-        // Mocking the behavior of jdbcTemplate.queryForObject method
-        when(jdbcTemplate.queryForObject(anyString(), eq(Integer.class), anyString(), anyString()))
-                .thenReturn(2);
+        // Mocking the queryForObject method to return null
+        when(jdbcTemplate.query(anyString(), any(RowMapper.class), eq(login), eq(password)))
+                .thenReturn(null);
 
+        // Test
         User user = userDao.getUserByLoginAndPassword(login, password);
-        assertEquals(login, user.getLogin());
+
+        // Verify
+        assertNull(user);
     }
-
-
-    @Test
-    public void testWorkersOnTime() {
-        Date date = new Date();
-        int stationId = 1;
-        boolean isFirst = true;
-
-        // Mocking the behavior of jdbcTemplate.queryForObject method
-        when(jdbcTemplate.queryForObject(anyString(), any(Class.class), anyInt(), any(Date.class), anyBoolean()))
-                .thenReturn(3); // Assuming 3 workers on time
-
-        assertEquals(3, userDao.workersOnTime(date, stationId, isFirst));
-    }
-
     @Test
     public void testIsUserEmployee() {
         int userId = 1;

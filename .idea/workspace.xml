@@ -7,12 +7,15 @@
     <list default="true" id="60839104-69e3-4b87-8810-6a6d5f32398b" name="Changes" comment="version 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/AdminViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/AdminViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlShiftDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlShiftDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUhsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlUhsDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/ShiftsForAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/ShiftsForAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/TEST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/TEST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/WorkerViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/WorkerViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/WorkerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/WorkerView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/EmpManagerViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/EmpManagerViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/KlientViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/KlientViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlTestDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/MysqlTestDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/TestDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/TestDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/checkmateqq/triedy/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/AdminView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/AdminView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/EmpManagerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/checkmateqq/EmpManagerView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlCodeDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlCodeDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlUserDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlUserDaoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,22 +101,9 @@
       <recent name="com.example.checkmateqq" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SearchForTestViewControllerTest">
+  <component name="RunManager" selected="Application.MainScene">
     <configuration name="MainScene" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.MainScene" />
-      <module name="CheckMateQQ" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.checkmateqq.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TEST" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.TEST" />
       <module name="CheckMateQQ" />
       <extension name="coverage">
         <pattern>
@@ -141,6 +131,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MysqlCodeDAOTest.testCodeRMWithNullValues" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CheckMateQQ" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.checkmateqq.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.checkmateqq" />
+      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.MysqlCodeDAOTest" />
+      <option name="METHOD_NAME" value="testCodeRMWithNullValues" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MysqlUserDaoTest.testGetUserByLoginAndPassword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CheckMateQQ" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.checkmateqq.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.checkmateqq" />
+      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.MysqlUserDaoTest" />
+      <option name="METHOD_NAME" value="testGetUserByLoginAndPassword" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SearchForTestViewControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CheckMateQQ" />
       <extension name="coverage">
@@ -156,29 +178,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SearchForTestViewControllerTest.testSearchForTestById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CheckMateQQ" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.checkmateqq.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.checkmateqq" />
-      <option name="MAIN_CLASS_NAME" value="com.example.checkmateqq.SearchForTestViewControllerTest" />
-      <option name="METHOD_NAME" value="testSearchForTestById(org.testfx.api.FxRobot)" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SearchForTestViewControllerTest" />
         <item itemvalue="Application.MainScene" />
-        <item itemvalue="Application.TEST" />
-        <item itemvalue="JUnit.SearchForTestViewControllerTest.testSearchForTestById" />
+        <item itemvalue="JUnit.MysqlUserDaoTest.testGetUserByLoginAndPassword" />
         <item itemvalue="JUnit.MysqlCodeDAOTest.testCodeRM" />
+        <item itemvalue="JUnit.MysqlCodeDAOTest.testCodeRMWithNullValues" />
+        <item itemvalue="JUnit.SearchForTestViewControllerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -302,7 +308,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703115902741</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="version 2">
+      <option name="closed" value="true" />
+      <created>1703119216341</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1703119216341</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,11 +382,6 @@
           <url>file://$PROJECT_DIR$/src/test/java/com/example/checkmateqq/MysqlCardDaoTest.java</url>
           <line>24</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/example/checkmateqq/SearchForTestViewControllerTest.java</url>
-          <line>14</line>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert.AlertType;
 
 import java.io.IOException;
 import java.sql.Time;
@@ -178,7 +179,7 @@ public class KlientViewController {
             tableColumn.setSortable(false);
 //            tableColumn.setResizable(false);
         }
-        List<Test> tests = getTestData(user.getId());
+        List<Test> tests = testDao.getTestsOlderThanTenMinutes(user.getId());
         Test testForSortHaha = new Test();
         tests = testForSortHaha.sortByTime(tests);
         for (Test test : tests
@@ -294,12 +295,40 @@ public class KlientViewController {
             }
 
         } else {
-            saveTest();
-            unselectCell();
-            setPCRtest();
-            timeTable.getSelectionModel().clearSelection();
-            for (TableColumn column : timeTable.getColumns()) {
-                columnCellFactory(column);
+            Test NAATtest = testDao.getUsersNAATsTest(user.getId());
+            Test PCRtest = testDao.getUsersPCRTest(user.getId());
+            if (NAATtest == null) {
+                saveTest();
+                unselectCell();
+                setNAATtest();
+                timeTable.getSelectionModel().clearSelection();
+                for (TableColumn column : timeTable.getColumns()) {
+                    columnCellFactory(column);
+                }
+            } else if(PCRtest == null){
+                saveTest();
+                unselectCell();
+                setPCRtest();
+                timeTable.getSelectionModel().clearSelection();
+                for (TableColumn column : timeTable.getColumns()) {
+                    columnCellFactory(column);
+                }
+            }else {
+                if(NAATtest != null && chosenTestType == 1){
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("");
+                    alert.setHeaderText(null); // No header text
+                    alert.setContentText("NAAT test already scheduled");
+                    alert.showAndWait();
+                }
+                System.out.println(PCRtest);
+                if(PCRtest != null && chosenTestType == 0){
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("");
+                    alert.setHeaderText(null); // No header text
+                    alert.setContentText("PCR test already scheduled");
+                    alert.showAndWait();
+                }
             }
 
         }

@@ -107,7 +107,7 @@ public class AdminViewController {
 
             // Set the new content in the current stage
             Stage searchStage = new Stage();
-            searchStage.setTitle("Search For Test");
+            searchStage.setTitle("Employee manager");
             searchStage.setScene(new Scene(parent));
 
             // Add the stylesheet to the scene
@@ -158,22 +158,22 @@ public class AdminViewController {
         TableColumn<ShiftsForAdmin, String> stationColumn = new TableColumn<ShiftsForAdmin, String>("place");
         stationColumn.setCellValueFactory(new PropertyValueFactory<ShiftsForAdmin, String>("station"));
         shiftsToConfirmTable.getColumns().add(stationColumn);
-        stationColumn.setPrefWidth(106);
+        stationColumn.setPrefWidth(114);
 
         TableColumn<ShiftsForAdmin, Date> dateColumn = new TableColumn<ShiftsForAdmin, Date>("date");
         dateColumn.setCellValueFactory(new PropertyValueFactory<ShiftsForAdmin, Date>("date"));
         shiftsToConfirmTable.getColumns().add(dateColumn);
-        dateColumn.setPrefWidth(106);
+        dateColumn.setPrefWidth(114);
 
         TableColumn<ShiftsForAdmin, String> timeColumn = new TableColumn<ShiftsForAdmin, String>("time");
         timeColumn.setCellValueFactory(new PropertyValueFactory<ShiftsForAdmin, String>("time"));
         shiftsToConfirmTable.getColumns().add(timeColumn);
-        timeColumn.setPrefWidth(106);
+        timeColumn.setPrefWidth(114);
 
         TableColumn<ShiftsForAdmin, String> employeeColumn = new TableColumn<ShiftsForAdmin, String>("employee");
         employeeColumn.setCellValueFactory(new PropertyValueFactory<ShiftsForAdmin, String>("employee"));
         shiftsToConfirmTable.getColumns().add(employeeColumn);
-        employeeColumn.setPrefWidth(106);
+        employeeColumn.setPrefWidth(114);
         //426
     }
     private void fillShiftsToConfirmTable() throws EntityNotFoundException {

@@ -20,4 +20,6 @@ public interface TestDao {
     Test getUsersPCRTest(int userId);
 
     Test getUsersNAATsTest(int userId);
+
+    List<Test> getTestsOlderThanTenMinutes(int userId);
 }

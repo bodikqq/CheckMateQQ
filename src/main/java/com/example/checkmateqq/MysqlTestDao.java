@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import java.sql.*;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -88,16 +89,27 @@ public class MysqlTestDao implements TestDao{
 
     @Override
     public Test getUsersPCRTest(int userId) {
-        String sql = "SELECT * FROM test WHERE pacient_id = ? AND test_type = 0 LIMIT 1";
+        String sql = "SELECT * FROM test WHERE pacient_id = ? AND test_type = 0 AND date >= CURDATE() order by date desc LIMIT 1";
         List<Test> result = jdbcTemplate.query(sql, testRM(), userId);
 
         return result.isEmpty() ? null : result.get(0);
     }
     @Override
     public Test getUsersNAATsTest(int userId) {
-        String sql = "SELECT * FROM test WHERE pacient_id = ? AND test_type = 1 LIMIT 1";
+        String sql = "SELECT * FROM test WHERE pacient_id = ? AND test_type = 1 AND date >= CURDATE() order by date desc LIMIT 1";
         List<Test> result = jdbcTemplate.query(sql, testRM(), userId);
 
         return result.isEmpty() ? null : result.get(0);
     }
+    @Override
+    public List<Test> getTestsOlderThanTenMinutes(int userId) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MINUTE, -10);
+
+        Time tenMinutesAgo = new Time(calendar.getTimeInMillis());
+
+        String sql = "SELECT * FROM test WHERE pacient_id = ? AND time < ? AND date <= ?";
+        return jdbcTemplate.query(sql, testRM(), userId, tenMinutesAgo, new Date());
+    }
+
 }

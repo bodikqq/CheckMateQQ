@@ -66,7 +66,14 @@ public class User {
         this.isEmployee = isEmployee;
         this.isAdmin = isAdmin;
     }
-    public User( String name, String surname, String login, String password, boolean isEmployee, boolean isAdmin) {
+
+    public User(int id, String login, String password) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+    }
+
+    public User(String name, String surname, String login, String password, boolean isEmployee, boolean isAdmin) {
         this.name = name;
         this.surname = surname;
         this.login = login;
