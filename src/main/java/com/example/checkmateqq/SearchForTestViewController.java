@@ -30,27 +30,27 @@ public class SearchForTestViewController {
     private ImageView IconSearch;
 
     @FXML
-    private TextField TestIdField;
+    TextField TestIdField;
 
     @FXML
-    private Text ThereIsNoTestText;
+    Text ThereIsNoTestText;
 
     @FXML
-    private Text id;
+    Text id;
 
     @FXML
-    private Text name;
+    Text name;
 
     @FXML
     private Button submitButton;
 
     @FXML
-    private Text surname;
+    Text surname;
     @FXML
     private AnchorPane texts;
 
     @FXML
-    private ChoiceBox<String> testResult;
+    ChoiceBox<String> testResult;
 
     @FXML
     private Text type;
@@ -76,7 +76,7 @@ public class SearchForTestViewController {
     void searchForTestByID(MouseEvent event) {
         searchForTest();
     }
-    private void searchForTest(){
+    void searchForTest(){
         String test_id = TestIdField.getText();
         long id;
         try {

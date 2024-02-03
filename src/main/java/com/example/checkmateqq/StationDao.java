@@ -12,4 +12,6 @@ public interface StationDao {
     void createStation(Station station);
 
     void deleteStation(int stationId);
+
+    boolean hasShifts(int stationId);
 }

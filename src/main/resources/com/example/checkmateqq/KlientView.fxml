@@ -35,7 +35,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Text>
-            <Text fill="WHITE" layoutX="587.0" layoutY="35.0" onMouseClicked="#addBalance" strokeType="OUTSIDE" strokeWidth="0.0" text="15.00$">
+            <Text fx:id="yourBalance" fill="WHITE" layoutX="587.0" layoutY="35.0" onMouseClicked="#addBalance" strokeType="OUTSIDE" strokeWidth="0.0" text="15.00$">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>

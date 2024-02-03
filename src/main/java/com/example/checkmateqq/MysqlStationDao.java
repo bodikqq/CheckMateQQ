@@ -42,7 +42,7 @@ public class MysqlStationDao implements StationDao{
         List<Station> stations = jdbcTemplate.query(sql, stationRM(), stationId);
 
         if (stations.isEmpty()) {
-            return null; // No station found with the given ID
+            return null;
         }
         return stations.get(0);
     }
@@ -56,6 +56,13 @@ public class MysqlStationDao implements StationDao{
         String sql = "DELETE FROM station WHERE id = ?";
         System.out.println("qqqq");
         jdbcTemplate.update(sql, stationId);
+    }
+    @Override
+    public boolean hasShifts(int stationId) {
+        String sql = "SELECT COUNT(*) FROM shift WHERE station_id = ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, stationId);
+
+        return count > 0;
     }
 
 

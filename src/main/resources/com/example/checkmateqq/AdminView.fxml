@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="598.0" prefWidth="778.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="598.0" prefWidth="778.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane accessibleRole="CONTEXT_MENU" prefHeight="58.0" prefWidth="785.0" style="-fx-background-color: #404040;" styleClass="border">
             <children>
@@ -35,10 +35,13 @@
             </Text>
             </children></AnchorPane>
       <Button layoutX="593.0" layoutY="480.0" mnemonicParsing="false" onAction="#generateEmployeeCode" prefHeight="27.0" prefWidth="101.0" style="-fx-background-color: #404040; -fx-text-fill: #f0f0f0;" text="Employee code" />
-      <Text fx:id="worker_code" layoutX="557.0" layoutY="534.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2W4knfu7WFWF87f9Fuf" textAlignment="CENTER" visible="false" wrappingWidth="210.40008544921875">
+      <Text fx:id="worker_code" layoutX="525.0" layoutY="533.0" onMouseClicked="#copyClipboard" strokeType="OUTSIDE" strokeWidth="0.0" text="2W4knfu7WFWF87f9Fuf" textAlignment="CENTER" visible="false" wrappingWidth="236.00006103515625">
          <font>
             <Font size="14.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
       <Button fx:id="openEmpManagerButton" layoutX="556.0" layoutY="440.0" mnemonicParsing="false" onAction="#openEmpManager" style="-fx-background-color: #404040; -fx-text-fill: #f0f0f0;" text="Manage shifts and employees" />
       <Button fx:id="confirmButton" layoutX="427.0" layoutY="481.0" mnemonicParsing="false" onAction="#onShiftConfirm" style="-fx-background-color: white; -fx-text-fill: #404040;" text="Confirm" />
@@ -48,7 +51,7 @@
       <TextField fx:id="addStationTextField" layoutX="538.0" layoutY="287.0" promptText="town, street, number" />
       <Button fx:id="addStationButton" layoutX="697.0" layoutY="287.0" mnemonicParsing="false" onAction="#onAddStation" prefHeight="21.0" prefWidth="51.0" style="-fx-background-color: white;" text="add" />
       <Button fx:id="deleteStationButton" layoutX="698.0" layoutY="254.0" mnemonicParsing="false" onAction="#onDeleteStation" style="-fx-background-color: white;" text="delete" />
-      <TableView fx:id="shiftsToConfirmTable" layoutX="36.0" layoutY="128.0" prefHeight="337.0" prefWidth="456.0" />
+      <TableView fx:id="shiftsToConfirmTable" layoutX="36.0" layoutY="128.0" prefHeight="338.0" prefWidth="463.0" />
       <Label layoutX="36.0" layoutY="104.0" text="Shifts to conrifm" />
     </children>
 </AnchorPane>

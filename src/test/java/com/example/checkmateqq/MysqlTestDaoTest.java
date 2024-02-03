@@ -41,7 +41,7 @@ class MysqlTestDaoTest {
         com.example.checkmateqq.triedy.Test test = new com.example.checkmateqq.triedy.Test(1, 1, Date.valueOf("2023-01-01"), 0, 1, Time.valueOf("12:00:00"),2);
 
         when(jdbcTemplate.update(any(PreparedStatementCreator.class), any(GeneratedKeyHolder.class)))
-                .thenReturn(1); // Assuming one row was affected
+                .thenReturn(1);
 
         assertDoesNotThrow(() -> testDao.save(test));
     }

@@ -29,4 +29,10 @@ public interface UserDao {
     List<User> searchUserByNameSurnameOrId(String nameSurnameOrId);
 
     boolean hasUpcomingShifts(int userId);
+
+    void updateBalance(int userId, double amountToAdd) throws EntityNotFoundException;
+
+    int deductFromBalance(int userId, double amountToDeduct) throws EntityNotFoundException;
+
+    void setCardId(int userId, int cardId) throws EntityNotFoundException;
 }

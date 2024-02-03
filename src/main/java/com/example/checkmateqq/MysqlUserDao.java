@@ -67,6 +67,7 @@ public class MysqlUserDao implements UserDao {
                     statement.setString(4, user.getPassword());
                     statement.setBoolean(5, user.isEmployee());
                     statement.setBoolean(6, user.isAdmin());
+
                     return statement;
                 }
             }, keyHolder);
@@ -94,15 +95,6 @@ public class MysqlUserDao implements UserDao {
         }
         return true;
     }
-//    @Override
-//    public void delete(long id) throws EntityNotFoundException {
-//        String query = "DELETE FROM student WHERE id = ?";
-//        int count = jdbcTemplate.update(query, id);
-//        if (count == 0) {
-//            throw new EntityNotFoundException(
-//                    "Student with id " + id + " not found");
-//        }
-//    }
 public boolean checkIfUserExists(String login, String password) {
     String sql = "SELECT COUNT(*) FROM user WHERE login = ? AND password = ?";
     int count = jdbcTemplate.queryForObject(sql, Integer.class, login, password);
@@ -193,6 +185,53 @@ public boolean checkIfUserExists(String login, String password) {
             return jdbcTemplate.query(sql, userRM(), nameSurnameOrIdMod, nameSurnameOrIdMod, userId);
         } catch (NumberFormatException e) {
             return jdbcTemplate.query(sql, userRM(), nameSurnameOrIdMod, nameSurnameOrIdMod, nameSurnameOrId);
+        }
+    }
+    @Override
+    public void updateBalance(int userId, double amountToAdd) throws EntityNotFoundException {
+        // Check if the user exists
+        if (!checkIfUserExistsById(userId)) {
+            throw new EntityNotFoundException("User with ID " + userId + " not found");
+        }
+
+        // Update the balance
+        String sql = "UPDATE user SET balance = balance + ? WHERE id = ?";
+        int count = jdbcTemplate.update(sql, amountToAdd, userId);
+
+        if (count == 0) {
+            throw new EntityNotFoundException("Failed to update balance for user with ID " + userId);
+        }
+    }
+    @Override
+    public int deductFromBalance(int userId, double amountToDeduct) throws EntityNotFoundException {
+
+        if (!checkIfUserExistsById(userId)) {
+            throw new EntityNotFoundException("User with ID " + userId + " not found");
+        }
+        String checkBalanceSql = "SELECT balance FROM user WHERE id = ?";
+        Double currentBalance = jdbcTemplate.queryForObject(checkBalanceSql, Double.class, userId);
+
+        if (currentBalance == null || currentBalance < amountToDeduct) {
+            return -1;
+        }
+        String sql = "UPDATE user SET balance = balance - ? WHERE id = ?";
+        int count = jdbcTemplate.update(sql, amountToDeduct, userId);
+
+        if (count == 0) {
+            return -2;
+        }
+        return 0;
+    }
+    @Override
+    public void setCardId(int userId, int cardId) throws EntityNotFoundException {
+        if (!checkIfUserExistsById(userId)) {
+            throw new EntityNotFoundException("User with ID " + userId + " not found");
+        }
+        String sql = "UPDATE user SET card_id = ? WHERE id = ?";
+        int count = jdbcTemplate.update(sql, cardId, userId);
+
+        if (count == 0) {
+            throw new EntityNotFoundException("Failed to set card_id for user with ID " + userId);
         }
     }
 

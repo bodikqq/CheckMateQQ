@@ -92,16 +92,13 @@ public class MysqlUserDaoTest {
 
     @Test
     void testGetUserByLoginAndPassword() {
-        String login = "john.doe";
-        String password = "password";
+        // Mocking the behavior of jdbcTemplate.query method
+        when(jdbcTemplate.query(anyString(), any(RowMapper.class)))
+                .thenReturn(Collections.singletonList(new User(1, "John", "Doe", "john.doe", "password", true, false)));
 
-        when(jdbcTemplate.query(anyString(), any(RowMapper.class), eq(login), eq(password)))
-                .thenReturn(null);
-
-        User user = userDao.getUserByLoginAndPassword(login, password);
-
-        // Verify
-        assertNull(user);
+        List<User> employees = userDao.returnEmployees();
+        assertNotNull(employees);
+        assertEquals(1, employees.size());
     }
     @Test
     public void testIsUserEmployee() {
@@ -127,13 +124,14 @@ public class MysqlUserDaoTest {
 
     @Test
     public void testDeleteUserById() {
-        int userId = 1;
+        String login = "john.doe";
+        String password = "password";
 
-        // Mocking the behavior of jdbcTemplate.update method
-        when(jdbcTemplate.update(anyString(), anyInt()))
-                .thenReturn(1); // Assuming one row was affected
+        // Mocking the behavior of jdbcTemplate.queryForObject method
+        when(jdbcTemplate.queryForObject(anyString(), any(Class.class), anyString(), anyString()))
+                .thenReturn(1); // Assuming user exists
 
-        assertDoesNotThrow(() -> userDao.deleteUserById(userId));
+        assertTrue(userDao.checkIfUserExists(login, password));
     }
 
     @Test

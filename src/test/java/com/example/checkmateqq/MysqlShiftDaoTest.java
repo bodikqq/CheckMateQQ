@@ -42,7 +42,7 @@ class MysqlShiftDaoTest {
         boolean isFirst = true;
 
         when(jdbcTemplate.queryForObject(anyString(), any(Class.class), any(Date.class), anyBoolean()))
-                .thenReturn(0); // Assuming no shift exists
+                .thenReturn(0);
 
         assertDoesNotThrow(() -> shiftDao.createShiftIfItDoesentExist(shiftId, date, isFirst));
 

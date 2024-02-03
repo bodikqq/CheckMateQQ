@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import java.sql.*;
-import java.util.Objects;
+import java.util.List;
 
 public class MysqlCardDao implements CardDao {
 
@@ -30,14 +30,18 @@ public class MysqlCardDao implements CardDao {
     @Override
     public Card getCardById(int id) throws EntityNotFoundException {
         String sql = "SELECT * FROM card WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, cardRM(), id);
+        List<Card> cards = jdbcTemplate.query(sql, cardRM(), id);
+        if (cards.isEmpty()) {
+            return null;
+        }
+        return cards.get(0);
     }
 
     @Override
-    public void saveCard(Card card) throws EntityNotFoundException {
-        //Objects.requireNonNull(card, "Card cannot be null");
+    public int saveCard(Card card) throws EntityNotFoundException {
         String query = "INSERT INTO card (cardNumber, cvv, date) VALUES (?,?,?)";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+
         jdbcTemplate.update((PreparedStatementCreator) con -> {
             PreparedStatement statement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, card.getCardNumber());
@@ -45,5 +49,24 @@ public class MysqlCardDao implements CardDao {
             statement.setInt(3, card.getDate());
             return statement;
         }, keyHolder);
+
+        // Retrieve the generated key
+        Number key = keyHolder.getKey();
+        if (key == null) {
+            throw new EntityNotFoundException("Failed to retrieve generated key");
+        }
+
+        // The key could be a Long or an Integer, depending on the database
+        // Convert it to an int, assuming it's an Integer for simplicity
+        return key.intValue();
     }
+//    @Override
+//    public Card getCardByUserId(int id) throws EntityNotFoundException {
+//        String sql = "SELECT * FROM card WHERE id = ?";
+//        List<Card> cards = jdbcTemplate.query(sql, cardRM(), id);
+//        if (cards.isEmpty()) {
+//            return null;
+//        }
+//        return cards.get(0);
+//    }
 }

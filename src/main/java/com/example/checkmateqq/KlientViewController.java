@@ -82,6 +82,8 @@ public class KlientViewController {
     private TableView<ForTestTable> testTable;
     @FXML
     private ChoiceBox<String> typeOfTestChoiceBox;
+    @FXML
+    private Text yourBalance;
 
     private User user;
     private int selectedStationID = -1;
@@ -125,6 +127,7 @@ public class KlientViewController {
     }
 
     public void initialize() throws EntityNotFoundException {
+        yourBalance.setText(user.getBalance() + "$");
         setPCRtest();
         setNAATtest();
         date.setDayCellFactory(picker -> new DisabledPastDatesCalendar.DisabledPastDateCell());
@@ -139,7 +142,7 @@ public class KlientViewController {
                 // Get the corresponding key from the map based on the selected value
                 selectedStationID = getKeyByValue(ourStations, newValue);
                 unselectCell();
-                if(pickedDate!= null){
+                if (pickedDate != null) {
                     for (TableColumn column : timeTable.getColumns()) {
                         columnCellFactory(column);
                     }
@@ -274,7 +277,7 @@ public class KlientViewController {
             chosenTestType = 1;
         }
         System.out.println(cellData + pickedDate + chosenTestType + station.getValue());
-        if (cellData == null || pickedDate == null || selectedStationID == -1 || chosenTestType == null) {
+        if (cellData == null  || pickedDate == null ||  selectedStationID == -1 || chosenTestType == null) {
             // Set error styles for controls that are not selected
             if (cellData == null) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -297,16 +300,91 @@ public class KlientViewController {
         } else {
             Test NAATtest = testDao.getUsersNAATsTest(user.getId());
             Test PCRtest = testDao.getUsersPCRTest(user.getId());
+            if(NAATtest != null && chosenTestType == 1){
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("");
+                alert.setHeaderText(null); // No header text
+                alert.setContentText("NAAT test already scheduled");
+                alert.showAndWait();
+                return;
+            }
+            System.out.println(PCRtest);
+            if(PCRtest != null && chosenTestType == 0){
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("");
+                alert.setHeaderText(null); // No header text
+                alert.setContentText("PCR test already scheduled");
+                alert.showAndWait();
+                return;
+            }
             if (NAATtest == null) {
-                saveTest();
+                Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmationAlert.setHeaderText("Are you sure you want to order this test for 10$");
+                confirmationAlert.setContentText("Click OK to proceed, or Cancel to abort.");
+                confirmationAlert.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.OK) {
+                        try {
+                           if(0== userDao.deductFromBalance(user.getId(), 10)){
+                               saveTest();
+                               setNAATtest();
+                               Alert alert = new Alert(AlertType.INFORMATION);
+                               alert.setTitle("");
+                               alert.setHeaderText(null);
+                               alert.setContentText("Success, thank you");
+                               alert.showAndWait();
+                           }else{
+                               Alert alert = new Alert(AlertType.INFORMATION);
+                               alert.setTitle("");
+                               alert.setHeaderText(null); // No header text
+                               alert.setContentText("You dont have enough money");
+                               alert.showAndWait();
+                           }
+
+                        } catch (EntityNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else if (response == ButtonType.CANCEL) {
+                        System.out.println("User clicked Cancel. Aborting...");
+                        confirmationAlert.close();
+                    }
+                });
                 unselectCell();
-                setNAATtest();
+
                 timeTable.getSelectionModel().clearSelection();
                 for (TableColumn column : timeTable.getColumns()) {
                     columnCellFactory(column);
                 }
-            } else if(PCRtest == null){
-                saveTest();
+            } if(PCRtest == null){
+                Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmationAlert.setHeaderText("Are you sure you want to order this test for 10$");
+                confirmationAlert.setContentText("Click OK to proceed, or Cancel to abort.");
+                confirmationAlert.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.OK) {
+                        try {
+                            if(0== userDao.deductFromBalance(user.getId(), 10)){
+                                saveTest();
+                                setPCRtest();
+                                Alert alert = new Alert(AlertType.INFORMATION);
+                                alert.setTitle("");
+                                alert.setHeaderText(null);
+                                alert.setContentText("Success, thank you");
+                                alert.showAndWait();
+                            }else{
+                                Alert alert = new Alert(AlertType.INFORMATION);
+                                alert.setTitle("");
+                                alert.setHeaderText(null);
+                                alert.setContentText("You dont have enough money");
+                                alert.showAndWait();
+                            }
+
+                        } catch (EntityNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else if (response == ButtonType.CANCEL) {
+                        System.out.println("User clicked Cancel. Aborting...");
+                        confirmationAlert.close();
+                    }
+                });
                 unselectCell();
                 setPCRtest();
                 timeTable.getSelectionModel().clearSelection();
@@ -330,9 +408,18 @@ public class KlientViewController {
                     alert.showAndWait();
                 }
             }
+            this.user = userDao.getById(user.getId());
+            yourBalance.setText(String.valueOf(user.getBalance()) + "$");
 
         }
-    }
+            timeTable.getSelectionModel().clearSelection();
+
+            for (TableColumn column : timeTable.getColumns()) {
+                columnCellFactory(column);
+            }
+            setPCRtest();
+        }
+
 
     private void goToLogin(Stage currentStage, LoginController controller) {
         try {
@@ -371,10 +458,13 @@ public class KlientViewController {
             searchStage.initModality(Modality.APPLICATION_MODAL);
             searchStage.initOwner(currentStage);
             searchStage.showAndWait();
+                yourBalance.setText(user.getBalance() + "$");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     private Map<Integer, String> stationsToMap() {
         Map<Integer, String> stationsToMap = new HashMap<Integer, String>();
         for (Station station : stations) {
@@ -479,8 +569,11 @@ public class KlientViewController {
     void addBalance(MouseEvent event) {
         CardViewController controller = new CardViewController();
         Stage stage = (Stage) selectTerm.getScene().getWindow();
-        goToBalance(stage,controller);
+        controller.setUser(user);
+        goToBalance(stage, controller);
+
     }
+
     private void columnCellFactory(TableColumn column) {
         Date utilDate = java.sql.Date.valueOf(pickedDate);
         final int workers_now = userDao.workersOnTime(utilDate, selectedStationID, true);
@@ -501,44 +594,39 @@ public class KlientViewController {
                     LocalTime localTime = time.toLocalTime();
 
                     // Check if the time in the cell is before the current time
-                    if (localTime.isBefore(LocalTime.now())) {
-                        setDisable(true);
-                        setText(item);
-                        setTextFill(Color.web("#b9b9b9"));
-                        setStyle("-fx-background-color: #eeeeee;");
-                    } else {
-                        int workersCount = workers_now;
 
-                        if (localTime.equals(LocalTime.of(13, 0))) {
-                            Future<Integer> future = executor.submit(() ->
-                                    userDao.workersOnTime(utilDate, selectedStationID, false));
+                    int workersCount = workers_now;
 
-                            try {
-                                workersCount = future.get();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        Future<Integer> testsFuture = executor.submit(() ->
-                                testDao.testsOnTime(time, utilDate));
+                    if (localTime.equals(LocalTime.of(13, 0))) {
+                        Future<Integer> future = executor.submit(() ->
+                                userDao.workersOnTime(utilDate, selectedStationID, false));
 
                         try {
-                            int testsCount = testsFuture.get();
-
-                            if (testsCount >= workersCount) {
-                                setDisable(true);
-                                setTextFill(Color.web("#b9b9b9"));
-                                setStyle("-fx-background-color: #eeeeee;");
-                            } else {
-                                setDisable(false);
-                            }
-
-                            setText(item);
+                            workersCount = future.get();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
+
+                    Future<Integer> testsFuture = executor.submit(() ->
+                            testDao.testsOnTime(time, utilDate));
+
+                    try {
+                        int testsCount = testsFuture.get();
+
+                        if (testsCount >= workersCount) {
+                            setDisable(true);
+                            setTextFill(Color.web("#b9b9b9"));
+                            setStyle("-fx-background-color: #eeeeee;");
+                        } else {
+                            setDisable(false);
+                        }
+
+                        setText(item);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
         });
@@ -559,6 +647,7 @@ public class KlientViewController {
         PCRpane.setVisible(true);
         PCRqq.setVisible(true);
     }
+
     private void setNAATtest() {
         Test NAATtest = testDao.getUsersNAATsTest(user.getId());
         if (NAATtest == null) return;
@@ -577,4 +666,6 @@ public class KlientViewController {
     private void unselectCell() {
         timeTable.getSelectionModel().clearSelection();
     }
+
 }
+

@@ -10,6 +10,12 @@ public class Card {
         this.date = date;
     }
 
+    public Card(String cardNumber, int cvv, int date) {
+        this.cardNumber = cardNumber;
+        this.cvv = cvv;
+        this.date = date;
+    }
+
     public int getId() {
         return id;
     }

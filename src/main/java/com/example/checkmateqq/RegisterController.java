@@ -44,6 +44,7 @@ public class RegisterController {
 
     @FXML
     private TextField username;
+    CodeDAO codeDAO = DaoFactory.INSTANCE.getCodeDao();
 
     UnaryOperator<TextFormatter.Change> filter = change -> {
         String newText = change.getControlNewText();
@@ -97,7 +98,7 @@ public class RegisterController {
         if(workerCode.getText().length() != 0){
             if(userDao.checkIfWorkerCodeIsReal(workerCode.getText())){
                    isEmployee = true;
-            }
+                   codeDAO.disableWorkerCode(workerCode.getText());}
             else {
                 Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
                 confirmationAlert.setTitle("Confirmation Dialog");

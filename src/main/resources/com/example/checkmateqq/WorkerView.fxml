@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="508.0" prefWidth="785.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="508.0" prefWidth="785.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane accessibleRole="CONTEXT_MENU" prefHeight="58.0" prefWidth="785.0" style="-fx-background-color: #404040;" styleClass="border">
             <children>
@@ -44,7 +44,13 @@
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Button fx:id="confirmButton" layoutX="168.0" layoutY="385.0" mnemonicParsing="false" onAction="#onConfirm" prefHeight="39.0" prefWidth="75.0" style="-fx-background-color: white;" text="Confirm" />
-      <Button layoutX="480.0" layoutY="392.0" mnemonicParsing="false" onAction="#openTestByDate" style="-fx-background-color: #404040; -fx-text-fill: #f0f0f0;" text="document test result" />
+      <Button fx:id="confirmButton" layoutX="168.0" layoutY="385.0" mnemonicParsing="false" onAction="#onConfirm" prefHeight="39.0" prefWidth="75.0" style="-fx-background-color: white;" text="Confirm">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button layoutX="480.0" layoutY="392.0" mnemonicParsing="false" onAction="#openTestByDate" style="-fx-background-color: #404040; -fx-text-fill: #f0f0f0;" text="document test result">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
     </children>
 </AnchorPane>

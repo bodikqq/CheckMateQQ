@@ -16,6 +16,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -62,6 +64,13 @@ public class AdminViewController {
         fillShiftsToConfirmTable();
         fillStationList();
 
+    }
+    @FXML
+    void copyClipboard(MouseEvent event) {
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(worker_code.getText().toString());
+        clipboard.setContent(content);
     }
 
     @FXML
@@ -158,22 +167,22 @@ public class AdminViewController {
         TableColumn<ShiftsForAdmin, String> stationColumn = new TableColumn<ShiftsForAdmin, String>("place");
         stationColumn.setCellValueFactory(new PropertyValueFactory<ShiftsForAdmin, String>("station"));
         shiftsToConfirmTable.getColumns().add(stationColumn);
-        stationColumn.setPrefWidth(114);
+        stationColumn.setPrefWidth(115);
 
         TableColumn<ShiftsForAdmin, Date> dateColumn = new TableColumn<ShiftsForAdmin, Date>("date");
         dateColumn.setCellValueFactory(new PropertyValueFactory<ShiftsForAdmin, Date>("date"));
         shiftsToConfirmTable.getColumns().add(dateColumn);
-        dateColumn.setPrefWidth(114);
+        dateColumn.setPrefWidth(115);
 
         TableColumn<ShiftsForAdmin, String> timeColumn = new TableColumn<ShiftsForAdmin, String>("time");
         timeColumn.setCellValueFactory(new PropertyValueFactory<ShiftsForAdmin, String>("time"));
         shiftsToConfirmTable.getColumns().add(timeColumn);
-        timeColumn.setPrefWidth(114);
+        timeColumn.setPrefWidth(115);
 
         TableColumn<ShiftsForAdmin, String> employeeColumn = new TableColumn<ShiftsForAdmin, String>("employee");
         employeeColumn.setCellValueFactory(new PropertyValueFactory<ShiftsForAdmin, String>("employee"));
         shiftsToConfirmTable.getColumns().add(employeeColumn);
-        employeeColumn.setPrefWidth(114);
+        employeeColumn.setPrefWidth(115);
         //426
     }
     private void fillShiftsToConfirmTable() throws EntityNotFoundException {
@@ -250,32 +259,39 @@ public class AdminViewController {
             for (Map.Entry<Integer, String> entry : stationMap.entrySet()) {
                 int key = entry.getKey();
                 String value = entry.getValue();
-                if(value.equals(selectedStationString)){
+                if (value.equals(selectedStationString)) {
                     stationId = key;
                 }
             }
-            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmationAlert.setTitle("Confirmation Dialog");
-            confirmationAlert.setHeaderText("Are you sure you want to proceed?");
+            if (!stationDao.hasShifts(stationId)) {
+                Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmationAlert.setTitle("Confirmation Dialog");
+                confirmationAlert.setHeaderText("Are you sure you want to proceed?");
 
-            // Add OK and Cancel buttons
-            confirmationAlert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+                // Add OK and Cancel buttons
+                confirmationAlert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
 
-            // Show the confirmation alert and wait for the user's response
-            confirmationAlert.showAndWait();
+                // Show the confirmation alert and wait for the user's response
+                confirmationAlert.showAndWait();
 
-            // Check the user's response
-            if (confirmationAlert.getResult() == ButtonType.OK) {
-                System.out.println("User clicked OK" + stationId);
+                // Check the user's response
+                if (confirmationAlert.getResult() == ButtonType.OK) {
+                    System.out.println("User clicked OK" + stationId);
 
-                stationDao.deleteStation(stationId);
-                stationListVIew.getItems().remove(selectedStationString);
+                    stationDao.deleteStation(stationId);
+                    stationListVIew.getItems().remove(selectedStationString);
+                } else {
+                    System.out.println("User clicked Cancel");
+                    confirmationAlert.close();
+                }
+
             } else {
-                System.out.println("User clicked Cancel");
-                confirmationAlert.close();
+                Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmationAlert.setTitle("");
+                confirmationAlert.setHeaderText("The Station is still active.");
+                confirmationAlert.show();
             }
-
-        } else {
+        }else{
             showAlert("No Station Selected", "Please select a station to delete.");
         }
     }

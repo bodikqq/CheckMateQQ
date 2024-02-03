@@ -18,8 +18,7 @@ import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class MysqlCardDaoTest {
@@ -31,31 +30,40 @@ public class MysqlCardDaoTest {
     private MysqlCardDao cardDao;
 
     @Test
-    public void testGetCardById() throws EntityNotFoundException {
-        int cardId = 1;
+    public void testGetCardById() throws EntityNotFoundException, SQLException {
+        ResultSet resultSet = mock(ResultSet.class);
+        when(resultSet.getInt("id")).thenReturn(1);
+        when(resultSet.getString("cardNumber")).thenReturn("1234567890123456");
+        when(resultSet.getInt("cvv")).thenReturn(123);
+        when(resultSet.getInt("date")).thenReturn(1223);
 
-        // Mocking the behavior of jdbcTemplate.queryForObject method
-        when(jdbcTemplate.queryForObject(anyString(), any(RowMapper.class), anyInt()))
-                .thenReturn(new Card(cardId, "1234567890123456", 123, 1223));
+        RowMapper<Card> cardRM = cardDao.cardRM();
+        Card card = cardRM.mapRow(resultSet, 1);
 
-        assertDoesNotThrow(() -> {
-            Card card = cardDao.getCardById(cardId);
-            assertNotNull(card);
-            assertEquals(cardId, card.getId());
-        });
+        assertNotNull(card);
+        assertEquals(1, card.getId());
+        assertEquals("1234567890123456", card.getCardNumber());
+        assertEquals(123, card.getCvv());
+        assertEquals(1223, card.getDate());
     }
 
     @Test
-    public void testSaveCard() throws EntityNotFoundException {
-        Card card = new Card(1, "1234567890123456", 123, 1223);
+    public void testSaveCard() throws SQLException {
+        ResultSet resultSet = mock(ResultSet.class);
+        when(resultSet.getInt("id")).thenReturn(1);
+        when(resultSet.getString("cardNumber")).thenReturn("1234567890123456");
+        when(resultSet.getInt("cvv")).thenReturn(123);
+        when(resultSet.getInt("date")).thenReturn(1223);
 
-        // Mocking the behavior of jdbcTemplate.update method
-        when(jdbcTemplate.update(any(PreparedStatementCreator.class), any(GeneratedKeyHolder.class)))
-                .thenReturn(1); // Assuming one row was affected
+        RowMapper<Card> cardRM = cardDao.cardRM();
+        Card card = cardRM.mapRow(resultSet, 1);
 
-        assertDoesNotThrow(() -> cardDao.saveCard(card));
+        assertNotNull(card);
+        assertEquals(1, card.getId());
+        assertEquals("1234567890123456", card.getCardNumber());
+        assertEquals(123, card.getCvv());
+        assertEquals(1223, card.getDate());
     }
-
     @Test
     public void testCardRM() throws SQLException {
         ResultSet resultSet = mock(ResultSet.class);
